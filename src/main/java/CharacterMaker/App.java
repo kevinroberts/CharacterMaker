@@ -45,7 +45,7 @@ public class App {
         int quit = 1;
 
         do {
-            if (quit == 5)
+            if (quit == 7)
                 break;
             System.out.println("\nThank you for using this application. " +
                     "Here is what I can do for you now:\n " +
@@ -53,7 +53,9 @@ public class App {
                     "2. Health totals\n " +
                     "3. Stat totals\n " +
                     "4. Reset total health\n " +
-                    "5. Quit the application");
+                    "5. Train Barbarian 1\n " +
+                    "6. Train Barbarian 2\n " +
+                    "7. Quit the application");
             quit = console.nextInt();
             switch (quit) {
                 case 1: // '\001'
@@ -69,12 +71,14 @@ public class App {
                     System.out.println("Your chosen barbarians stats are");
                     System.out.println("Barbarian 1 - " + barbarian1.getName() + "\nBattles won: " + barbarian1.getBattlesWon());
                     System.out.println("Experience points: " + barbarian1.getExperiencePoints());
+                    System.out.println("Level: " + barbarian1.getLevel());
                     for (Attribute attribute : barbarian1.getAttributes()) {
                         System.out.println(attribute);
                     }
                     System.out.println(" ");
                     System.out.println("Barbarian 2 - " + barbarian2.getName() + "\nBattles won: " + barbarian2.getBattlesWon());
                     System.out.println("Experience points: " + barbarian2.getExperiencePoints());
+                    System.out.println("Level: " + barbarian2.getLevel());
                     for (Attribute attribute : barbarian2.getAttributes()) {
                         System.out.println(attribute);
                     }
@@ -85,6 +89,14 @@ public class App {
                     barbarian2.setHealth(100);
                     break;
                 case 5:
+                    System.out.println("Training Barbarian 1 - " + barbarian1.getName());
+                    barbarian1.train();
+                    break;
+                case 6:
+                    System.out.println("Training Barbarian 2 - " + barbarian2.getName());
+                    barbarian2.train();
+                    break;
+                case 7:
                     System.out.println("Goodbye");
                     break;
             }

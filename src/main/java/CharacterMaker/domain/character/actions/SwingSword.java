@@ -11,11 +11,11 @@ import CharacterMaker.domain.character.barbarian.Barbarian;
 
 public class SwingSword extends Action {
 
-	public SwingSword(String name, String description, int damage) {
-		super(name, description, damage);
-	}
+    public SwingSword(String name, String description, int experienceGainedFromUse, int damage) {
+        super(name, description, experienceGainedFromUse, damage);
+    }
 
-	public int calculateTotalDomage(Barbarian barbarian) {
+    public int calculateTotalDomage(Barbarian barbarian) {
 		int totalDamage = this.getDamage();
 		int strength = 0;
 		int dexterity = 0;

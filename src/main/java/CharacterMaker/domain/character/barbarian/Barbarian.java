@@ -10,6 +10,8 @@ import com.google.common.collect.Multiset;
 
 public class Barbarian implements Character {
 
+    public static final int STRENGTH_MULTIPLIER = 2;
+
 	private int health;
 
 	private String name;
@@ -51,7 +53,7 @@ public class Barbarian implements Character {
 						totalDamageDealtFrom1 = swingSword.calculateTotalDomage(barbarian1);
 						System.out.print(" and hits for " + totalDamageDealtFrom1 + " damage\n");
 						char2.setHealth(char2.getHealth() - totalDamageDealtFrom1);
-						char2.setExperiencePoints(char2.getExperiencePoints() + 1);
+						char2.setExperiencePoints(char2.getExperiencePoints() + swingSword.getExperienceGainedFromUse());
 						if (barbarian2.getHealth() < 0) {
 							System.out.println(barbarian2.getName() + " collapses and dies from his injuries.");
 						}
@@ -78,7 +80,7 @@ public class Barbarian implements Character {
 						totalDamageDealtFrom2 = swingSword.calculateTotalDomage(barbarian2);
 						System.out.print(" and hits for " + totalDamageDealtFrom2 + " damage\n");
 						this.setHealth(this.getHealth() - totalDamageDealtFrom2);
-						this.setExperiencePoints(this.getExperiencePoints() + 1);
+						this.setExperiencePoints(this.getExperiencePoints() + swingSword.getExperienceGainedFromUse());
 						if (this.getHealth() <= 0) {
 							System.out.println(this.getName() + " collapses and dies from his injuries.");
 						}
@@ -95,7 +97,7 @@ public class Barbarian implements Character {
 				// award bonus experience if the characters are near the same
 				// skill level
 				if (Math.abs(this.getLevel() - char2.getLevel()) < 2) {
-					this.setExperiencePoints(this.getExperiencePoints() + 2);
+					this.setExperiencePoints(this.getExperiencePoints() + CharacterUtils.XP_FROM_BATTLE_VICTORY);
 				}
 
 				return barbarian1;
@@ -103,7 +105,7 @@ public class Barbarian implements Character {
 				System.out.println(barbarian2.getName() + " wins the fight.");
 				char2.setBattlesWon(char2.getBattlesWon() + 1);
 				if (Math.abs(this.getLevel() - char2.getLevel()) < 2) {
-					char2.setExperiencePoints(barbarian2.getExperiencePoints() + 2);
+					char2.setExperiencePoints(barbarian2.getExperiencePoints() + CharacterUtils.XP_FROM_BATTLE_VICTORY);
 				}
 				return barbarian2;
 			} else {
@@ -117,12 +119,13 @@ public class Barbarian implements Character {
 
 	@Override
 	public void train() {
-
+        CharacterUtils.incrementAttributeStats(this);
+        this.setExperiencePoints(this.getExperiencePoints() + CharacterUtils.XP_FROM_TRAINING);
 	}
 
 	@Override
 	public void levelUp() {
-
+        CharacterUtils.levelUpCharacter(this);
 	}
 
 	public int getHealth() {
@@ -192,6 +195,11 @@ public class Barbarian implements Character {
 	@Override
 	public void setExperiencePoints(int experiencePoints) {
 		this.experiencePoints = experiencePoints;
+        // call to level up on all experience gains
+        if (CharacterUtils.isAtLevelUp(this)) {
+            this.levelUp();
+        }
+
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class BarbarianFactory implements CharacterFactory {
 		barbarian.setHealth(100);
 		barbarian.setLevel(1);
 		barbarian.setBattlesWon(0);
-		barbarian.setExperiencePoints(0);
+        barbarian.setExperiencePoints(0);
 		Random random = new Random();
 
 		// Define Base Attributes for a new Barbarian
@@ -48,7 +48,7 @@ public class BarbarianFactory implements CharacterFactory {
 		Multiset<Action> actions = HashMultiset.create();
 
 		actions
-			.add(new SwingSword("Barbarian Blade", "The barbarian swings his mighty blade", 10 + random.nextInt(10)));
+			.add(new SwingSword("Barbarian Blade", "The barbarian swings his mighty blade", 3, 10 + random.nextInt(10)));
 
 		barbarian.setActions(actions);
 
