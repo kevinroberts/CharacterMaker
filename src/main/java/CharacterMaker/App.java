@@ -57,7 +57,7 @@ public class App {
             quit = console.nextInt();
             switch (quit) {
                 case 1: // '\001'
-                    barbarian1.fight(barbarian1, barbarian2);
+                    barbarian1.fight(barbarian2);
                     System.out.println("health report is:\n1: " + barbarian1.getName() + " - " + barbarian1.getHealth() + "\n2: "
                             + barbarian2.getName() + " - " + barbarian2.getHealth());
                     break;
