@@ -27,7 +27,7 @@ public class App {
             barbarians.add(barbarianFactory.createCharacter());
         }
 
-        Stopwatch timer = new Stopwatch().start();
+        Stopwatch timer = Stopwatch.createStarted();
         Multiset<Barbarian> barbarianDupes = CharacterUtils.findDuplicateNames(barbarians);
         barbarians.removeAll(barbarianDupes);
         timer.stop();

@@ -39,26 +39,34 @@ public class CharacterUtils {
 	}
 
 	public static boolean hitSuccessCheck(Character character) {
+		// give a character a 50/50 chance of hitting opposing character by
+		// default
 		Random random = new Random();
 		Boolean chance = random.nextBoolean();
 
 		for (Attribute attribute : character.getAttributes()) {
+			// use the character's luck attribute as a gauge of how successful
+			// the attempt will be
 			if (attribute instanceof Luck) {
 
 				int chances = attribute.getBattleLevel();
 				if (chances > 5) {
-					// they get an extra chance
-					int prob = random.nextInt(10) + 2;
-					prob += chances;
-					if (prob > 10) {
+					int prob = random.nextInt(100) + 70;
+					if (prob >= 100) {
 						return true;
 					} else {
 						return false;
 					}
 				} else if (chances > 7 && chances < 10) {
-					int prob = random.nextInt(10);
-					prob += chances;
-					if (prob > 10) {
+					int prob = random.nextInt(100) + 80;
+					if (prob >= 100) {
+						return true;
+					} else {
+						return false;
+					}
+				} else if (chances > 10) {
+					int prob = random.nextInt(100) + 90;
+					if (prob >= 100) {
 						return true;
 					} else {
 						return false;
