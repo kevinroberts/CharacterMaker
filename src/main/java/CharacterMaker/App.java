@@ -45,17 +45,18 @@ public class App {
         int quit = 1;
 
         do {
-            if (quit == 7)
+            if (quit == 8)
                 break;
-            System.out.println("\nThank you for using this application. " +
-                    "Here is what I can do for you now:\n " +
+            System.out.println(
+                    "\nHere is what I can do for you now:\n " +
                     "1. Battle two barbarians\n " +
                     "2. Health totals\n " +
                     "3. Stat totals\n " +
                     "4. Reset total health\n " +
                     "5. Train Barbarian 1\n " +
                     "6. Train Barbarian 2\n " +
-                    "7. Quit the application");
+                    "7. Royal RUMBBLLEEE!!!\n " +
+                    "8. Quit the application");
             quit = console.nextInt();
             switch (quit) {
                 case 1: // '\001'
@@ -73,20 +74,36 @@ public class App {
                     System.out.println("Experience points: " + barbarian1.getExperiencePoints());
                     System.out.println("Level: " + barbarian1.getLevel());
                     for (Attribute attribute : barbarian1.getAttributes()) {
-                        System.out.println(attribute);
+                        int spaces = 14;
+                        int length = attribute.getName().length();
+                        spaces = spaces - length;
+
+                        System.out.print(attribute.getName() + " - level:");
+                        for (int i = 1; i < spaces; spaces--){
+                            System.out.print(" ");
+                        }
+                        System.out.print(attribute.getBattleLevel() + "\n");
                     }
                     System.out.println(" ");
                     System.out.println("Barbarian 2 - " + barbarian2.getName() + "\nBattles won: " + barbarian2.getBattlesWon());
                     System.out.println("Experience points: " + barbarian2.getExperiencePoints());
                     System.out.println("Level: " + barbarian2.getLevel());
                     for (Attribute attribute : barbarian2.getAttributes()) {
-                        System.out.println(attribute);
+                        int spaces = 14;
+                        int length = attribute.getName().length();
+                        spaces = spaces - length;
+
+                        System.out.print(attribute.getName() + " - level:");
+                        for (int i = 1; i < spaces; spaces--){
+                            System.out.print(" ");
+                        }
+                        System.out.print(attribute.getBattleLevel() + "\n");
                     }
                     break;
                 case 4:
                     System.out.println("Health reset");
-                    barbarian1.setHealth(100);
-                    barbarian2.setHealth(100);
+                    CharacterUtils.resetHealthForCharacter(barbarian1);
+                    CharacterUtils.resetHealthForCharacter(barbarian2);
                     break;
                 case 5:
                     System.out.println("Training Barbarian 1 - " + barbarian1.getName());
@@ -97,6 +114,10 @@ public class App {
                     barbarian2.train();
                     break;
                 case 7:
+                    System.out.println("Training Barbarian 2 - " + barbarian2.getName());
+                    barbarian2.train();
+                    break;
+                case 8:
                     System.out.println("Goodbye");
                     break;
             }

@@ -119,8 +119,19 @@ public class CharacterUtils {
 			character.setLevel(character.getLevel() + 1);
 			CharacterUtils.incrementAttributeStats(character);
             // restore health and get bonus
-            character.setHealth(100 + character.getLevel());
+            Double healthBonus = Math.pow(character.getLevel(), 2);
+            character.setHealth(character.getHealth() + healthBonus.intValue());
 			System.out.println(character.getName() + " has just leveled up! Current level: " + character.getLevel());
 	}
+
+    public static void resetHealthForCharacter(Character character) {
+        if (character.getLevel() > 1) {
+            Double healthBonus = Math.pow(character.getLevel(), 2);
+            character.setHealth(100 + healthBonus.intValue());
+        } else {
+            character.setHealth(100);
+        }
+
+    }
 
 }
