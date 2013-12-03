@@ -8,6 +8,11 @@
     <packaging>jar</packaging>
 
     <name>CharacterMaker</name>
+    <contributors>
+        <contributor>
+            <name>Kevin Roberts</name>
+        </contributor>
+    </contributors>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -44,6 +49,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

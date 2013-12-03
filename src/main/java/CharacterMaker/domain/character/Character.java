@@ -1,41 +1,104 @@
 package CharacterMaker.domain.character;
 
+import CharacterMaker.domain.character.fighting.Fight;
 import com.google.common.collect.Multiset;
 
-public interface Character {
+public abstract class Character {
 
-	public Character fight(Character otherCharacter);
+    private int health;
 
-	public void train();
+    private String name;
 
-	public void levelUp();
+    private Multiset<Attribute> attributes;
 
-	public String getName();
+    private Multiset<Action> actions;
 
-	public void setName(String name);
+    private int level;
 
-	public void setHealth(int health);
+    private int battlesWon;
 
-	public int getHealth();
+    private int experiencePoints;
 
-	public int getLevel();
+	public Character fight(Character otherCharacter) {
+        return Fight.fight(this, otherCharacter);
+    }
 
-	public void setLevel(int level);
+	public abstract void train();
 
-	public int getExperiencePoints();
+	public void levelUp() {
+        CharacterUtils.levelUpCharacter(this);
+    }
 
-	public void setExperiencePoints(int points);
+    public String getName() {
+        return name;
+    }
 
-	public int getBattlesWon();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setBattlesWon(int battlesWon);
+    public int getHealth() {
+        return health;
+    }
 
-	public Multiset<Attribute> getAttributes();
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
-	public void setAttributes(Multiset<Attribute> attributes);
+    public int getLevel() {
+        return level;
+    }
 
-	public void setActions(Multiset<Action> actions);
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-	public Multiset<Action> getActions();
+    public int getExperiencePoints() {
+        return experiencePoints;
+    }
 
+    public void setExperiencePoints(int experiencePoints) {
+        this.experiencePoints = experiencePoints;
+        // call to level up on all experience gains
+        if (CharacterUtils.isAtLevelUp(this)) {
+            this.levelUp();
+        }
+    }
+
+    public int getBattlesWon() {
+        return battlesWon;
+    }
+
+    public void setBattlesWon(int battlesWon) {
+        this.battlesWon = battlesWon;
+    }
+
+    public Multiset<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Multiset<Attribute> attributes) {
+        this.attributes = attributes;
+    }
+
+    public Multiset<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Multiset<Action> actions) {
+        this.actions = actions;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "health=" + health +
+                ", name='" + name + '\'' +
+                ", attributes=" + attributes +
+                ", actions=" + actions +
+                ", level=" + level +
+                ", battlesWon=" + battlesWon +
+                ", experiencePoints=" + experiencePoints +
+                '}';
+    }
 }

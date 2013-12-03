@@ -1,6 +1,7 @@
 package CharacterMaker.domain.character.actions;
 
 import CharacterMaker.domain.character.Action;
+import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.attributes.Dexterity;
 import CharacterMaker.domain.character.attributes.Strength;
@@ -12,7 +13,7 @@ public class SwingSword extends Action {
         super(name, description, experienceGainedFromUse, damage);
     }
 
-    public int calculateTotalDomage(Barbarian barbarian) {
+    public int calculateTotalDamage(Character barbarian) {
         int totalDamage = this.getDamage();
         int strength = 0;
         int dexterity = 0;

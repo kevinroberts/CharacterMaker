@@ -5,6 +5,8 @@ import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterUtils;
 import CharacterMaker.domain.character.barbarian.BarbarianFactory;
+import CharacterMaker.domain.character.ork.Ork;
+import CharacterMaker.domain.character.ork.OrkFactory;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -19,6 +21,7 @@ public class App {
         System.out.println("Starting Character Generator!");
 
         BarbarianFactory barbarianFactory = new BarbarianFactory();
+        OrkFactory orkFactory = new OrkFactory();
 
         Multiset<Barbarian> barbarians = HashMultiset.create();
 
@@ -38,7 +41,8 @@ public class App {
 
         Barbarian barbarian1 = (Barbarian) barbarians.toArray()[0];
         Barbarian barbarian2 = (Barbarian) barbarians.toArray()[1];
-        System.out.println("Your chosen barbarians are:\n1: " + barbarian1 + "\n2: " + barbarian2);
+        Ork ork = (Ork)orkFactory.createCharacter();
+        System.out.println("Your chosen barbarians and ork are:\n1: " + barbarian1 + "\n2: " + barbarian2 + "\n3: " + ork);
 
         Scanner console = new Scanner(System.in);
 
@@ -53,9 +57,9 @@ public class App {
                     "2. Health totals\n " +
                     "3. Stat totals\n " +
                     "4. Reset total health\n " +
-                    "5. Train Barbarian 1\n " +
-                    "6. Train Barbarian 2\n " +
-                    "7. Royal RUMBBLLEEE!!!\n " +
+                    "5. Train Barbarian 1, " + barbarian1.getName() + " \n " +
+                    "6. Train Barbarian 2, " + barbarian2.getName() + " \n " +
+                    "7. Battle Barbarian 1 and Ork, " + ork.getName() + "!\n " +
                     "8. Quit the application");
             quit = console.nextInt();
             switch (quit) {
@@ -65,8 +69,8 @@ public class App {
                             + barbarian2.getName() + " - " + barbarian2.getHealth());
                     break;
                 case 2: // '\002'
-                    System.out.println("Your chosen barbarians health are:\n1: " + barbarian1.getName() + " - " + barbarian1.getHealth() + "\n2: "
-                            + barbarian2.getName() + " - " + barbarian2.getHealth());
+                    System.out.println("\n1: " + barbarian1.getName() + " - " + barbarian1.getHealth() + "\n2: "
+                            + barbarian2.getName() + " - " + barbarian2.getHealth() + "\n3: " + ork.getName() + " - " + ork.getHealth());
                     break;
                 case 3: // '\003'
                     System.out.println("Your chosen barbarians stats are");
@@ -104,6 +108,7 @@ public class App {
                     System.out.println("Health reset");
                     CharacterUtils.resetHealthForCharacter(barbarian1);
                     CharacterUtils.resetHealthForCharacter(barbarian2);
+                    CharacterUtils.resetHealthForCharacter(ork);
                     break;
                 case 5:
                     System.out.println("Training Barbarian 1 - " + barbarian1.getName());
@@ -114,7 +119,9 @@ public class App {
                     barbarian2.train();
                     break;
                 case 7:
-                    System.out.println("Training Barbarian 2 - " + barbarian2.getName());
+                    barbarian1.fight(ork);
+                    System.out.println("health report is:\n1: " + barbarian1.getName() + " - " + barbarian1.getHealth() + "\n2: "
+                            + ork.getName() + " - " + ork.getHealth());
                     barbarian2.train();
                     break;
                 case 8:
