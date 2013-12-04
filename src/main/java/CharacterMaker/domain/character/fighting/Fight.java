@@ -15,8 +15,10 @@ public abstract class Fight {
 	public static Character fight(Character character1, Character character2) {
 		if (character1 instanceof Barbarian && character2 instanceof Barbarian) {
 			return BarbarianVsBarbarian.fight((Barbarian) character1, (Barbarian) character2);
-		} else if (character1 instanceof Barbarian && character2 instanceof Ork) {
+		} else if (character1 instanceof Barbarian && character2 instanceof Ork ) {
 			return BarbarianVsOrk.fight((Barbarian) character1, (Ork) character2);
+		} else if (character1 instanceof Ork && character2 instanceof Barbarian) {
+			return BarbarianVsOrk.fight((Barbarian) character2, (Ork) character1);
 		} else {
 			return null;
 		}

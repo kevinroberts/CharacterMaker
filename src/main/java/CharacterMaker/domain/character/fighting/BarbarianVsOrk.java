@@ -95,4 +95,5 @@ public class BarbarianVsOrk extends Fight {
 			return null;
 		}
 	}
+
 }
