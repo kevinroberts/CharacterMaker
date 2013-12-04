@@ -4,7 +4,7 @@ import CharacterMaker.domain.character.Attribute;
 
 public class Dexterity extends Attribute {
 
-    public Dexterity(String name, String description, int battleLevel) {
-        super(name, description, battleLevel);
-    }
+	public Dexterity(String name, String description, int battleLevel) {
+		super(name, description, battleLevel);
+	}
 }

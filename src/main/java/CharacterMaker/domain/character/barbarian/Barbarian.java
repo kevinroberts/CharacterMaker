@@ -11,18 +11,18 @@ import com.google.common.collect.Multiset;
 
 public class Barbarian extends Character {
 
-    public static final int STRENGTH_MULTIPLIER = 2;
+	public static final int STRENGTH_MULTIPLIER = 2;
 
 	@Override
 	public void train() {
-        CharacterUtils.incrementAttributeStats(this);
-        this.setExperiencePoints(this.getExperiencePoints() + CharacterUtils.XP_FROM_TRAINING);
+		CharacterUtils.incrementAttributeStats(this);
+		this.setExperiencePoints(this.getExperiencePoints() + CharacterUtils.XP_FROM_TRAINING);
 	}
 
 	@Override
 	public String toString() {
-		return "Barbarian{" + "health=" + this.getHealth() + ", name='" + this.getName() + '\'' + ", attributes=" + this.getAttributes()
-			+ ", actions=" + this.getActions() + ", level=" + this.getLevel() + ", battlesWon=" + this.getBattlesWon() + ", experiencePoints="
-			+ this.getExperiencePoints() + '}';
+		return "Barbarian{" + "health=" + this.getHealth() + ", name='" + this.getName() + '\'' + ", attributes="
+			+ this.getAttributes() + ", actions=" + this.getActions() + ", level=" + this.getLevel() + ", battlesWon="
+			+ this.getBattlesWon() + ", experiencePoints=" + this.getExperiencePoints() + '}';
 	}
 }

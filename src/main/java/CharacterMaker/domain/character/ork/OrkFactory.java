@@ -11,51 +11,52 @@ import java.util.Random;
 
 /**
  * CharacterMaker.domain.character.ork
- *
- * @author Kevin Roberts
- *         Date: 12/02/2013
+ * 
+ * @author Kevin Roberts Date: 12/02/2013
  */
 
 public class OrkFactory implements CharacterFactory {
 
-    @Override
-    public CharacterMaker.domain.character.Character createCharacter() {
-        Ork ork = new Ork();
-        CharacterNameService nameService = CharacterNameService.getInstance();
-        ork.setName(nameService.generateName(ork));
-        ork.setHealth(100);
-        ork.setLevel(1);
-        ork.setExperiencePoints(0);
-        ork.setBattlesWon(0);
-        Random random = new Random();
-        
-        // Define Base Attributes for a new Ork
-        Charisma charisma = new Charisma("Charisma", "Ork Charisma", random.nextInt(5) + 2);
-        Luck luck = new Luck("Luck", "Ork Luck", random.nextInt(4) + 3);
-        Dexterity dexterity = new Dexterity("Dexterity", "Ork dexterity", random.nextInt(5) + 5);
-        Intelligence intelligence = new Intelligence("Intelligence", "Orks are not known for their intelligence. \"Durr I haz beeg shield and er club and i gonna smack you upside dee head\"", random.nextInt(1) + 3);
-        Stamina stamina = new Stamina("Stamina", "Ork Stamina", random.nextInt(10) + 5);
-        Strength strength = new Strength("Strength", "Ork Strength", random.nextInt(5) + 5);
+	@Override
+	public CharacterMaker.domain.character.Character createCharacter() {
+		Ork ork = new Ork();
+		CharacterNameService nameService = CharacterNameService.getInstance();
+		ork.setName(nameService.generateName(ork));
+		ork.setHealth(100);
+		ork.setLevel(1);
+		ork.setExperiencePoints(0);
+		ork.setBattlesWon(0);
+		Random random = new Random();
 
-        Multiset<Attribute> attributes = HashMultiset.create();
+		// Define Base Attributes for a new Ork
+		Charisma charisma = new Charisma("Charisma", "Ork Charisma", random.nextInt(5) + 2);
+		Luck luck = new Luck("Luck", "Ork Luck", random.nextInt(4) + 3);
+		Dexterity dexterity = new Dexterity("Dexterity", "Ork dexterity", random.nextInt(5) + 5);
+		Intelligence intelligence = new Intelligence(
+			"Intelligence",
+			"Orks are not known for their intelligence. \"Durr I haz beeg shield and er club and i gonna smack you upside dee head\"",
+			random.nextInt(1) + 3);
+		Stamina stamina = new Stamina("Stamina", "Ork Stamina", random.nextInt(10) + 5);
+		Strength strength = new Strength("Strength", "Ork Strength", random.nextInt(5) + 5);
 
-        attributes.add(charisma);
-        attributes.add(strength);
-        attributes.add(luck);
-        attributes.add(dexterity);
-        attributes.add(intelligence);
-        attributes.add(stamina);
+		Multiset<Attribute> attributes = HashMultiset.create();
 
-        ork.setAttributes(attributes);
+		attributes.add(charisma);
+		attributes.add(strength);
+		attributes.add(luck);
+		attributes.add(dexterity);
+		attributes.add(intelligence);
+		attributes.add(stamina);
 
-        // Define Base Actions for a new Barbarian
-        Multiset<Action> actions = HashMultiset.create();
+		ork.setAttributes(attributes);
 
-        actions
-                .add(new SwingSword("Ork Blade", "The ork swings his mighty blade", 3, 8 + random.nextInt(9)));
+		// Define Base Actions for a new Barbarian
+		Multiset<Action> actions = HashMultiset.create();
 
-        ork.setActions(actions);
+		actions.add(new SwingSword("Ork Blade", "The ork swings his mighty blade", 3, 8 + random.nextInt(9)));
 
-        return ork;
-    }
+		ork.setActions(actions);
+
+		return ork;
+	}
 }
