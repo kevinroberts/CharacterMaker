@@ -7,6 +7,8 @@ import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterUtils;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.barbarian.BarbarianFactory;
+import CharacterMaker.domain.character.monster.Monster;
+import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.domain.character.ork.Ork;
 import CharacterMaker.domain.character.ork.OrkFactory;
 
@@ -21,27 +23,15 @@ public class App {
 
 		BarbarianFactory barbarianFactory = new BarbarianFactory();
 		OrkFactory orkFactory = new OrkFactory();
+		MonsterFactory monsterFactory = new MonsterFactory();
 
-		Multiset<Barbarian> barbarians = HashMultiset.create();
+		Barbarian barbarian1 = barbarianFactory.createCharacter();
+		Barbarian barbarian2 = barbarianFactory.createCharacter();
+		Ork ork = orkFactory.createCharacter();
+		Monster monster = monsterFactory.createCharacter();
 
-		for (int i = 0; i < 50; i++) {
-			barbarians.add(barbarianFactory.createCharacter());
-		}
-
-		Stopwatch timer = Stopwatch.createStarted();
-		Multiset<Barbarian> barbarianDupes = CharacterUtils.findDuplicateNames(barbarians);
-		barbarians.removeAll(barbarianDupes);
-		timer.stop();
-
-		System.out.println("Dupes: " + barbarianDupes.size());
-		System.out.println("Uniques: " + barbarians.size());
-		System.out.println("Execution time: " + timer.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
-
-		Barbarian barbarian1 = (Barbarian) barbarians.toArray()[0];
-		Barbarian barbarian2 = (Barbarian) barbarians.toArray()[1];
-		Ork ork = (Ork) orkFactory.createCharacter();
-		System.out.println("Your chosen barbarians and ork are:\n1: " + barbarian1 + "\n2: " + barbarian2 + "\n3: "
-			+ ork);
+		System.out.println("Your chosen characters are:\n1: " + barbarian1 + "\n2: " + barbarian2 + "\n3: "
+			+ ork + "\n4: " + monster);
 
 		Scanner console = new Scanner(System.in);
 

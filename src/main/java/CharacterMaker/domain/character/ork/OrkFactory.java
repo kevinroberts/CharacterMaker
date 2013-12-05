@@ -18,7 +18,7 @@ import java.util.Random;
 public class OrkFactory implements CharacterFactory {
 
 	@Override
-	public CharacterMaker.domain.character.Character createCharacter() {
+	public Ork createCharacter() {
 		Ork ork = new Ork();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		ork.setName(nameService.generateName(ork));

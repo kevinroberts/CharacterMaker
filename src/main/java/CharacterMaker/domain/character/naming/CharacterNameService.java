@@ -2,6 +2,7 @@ package CharacterMaker.domain.character.naming;
 
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.ork.Ork;
 import org.apache.commons.lang3.StringUtils;
 
@@ -94,6 +95,10 @@ public class CharacterNameService {
 			String randomLastName = orkSurnames.get(r.nextInt(orkSurnames.size()));
 
 			name = randomFirstName + " " + randomLastName;
+		} else if (character instanceof Monster) {
+			Random r = new Random();
+			String[] monsterNames = {"Goblin", "Ogre", "Wolf", "Zombie", "Armored Bear"};
+			return monsterNames[r.nextInt(monsterNames.length-1)];
 		}
 
 		return name;
