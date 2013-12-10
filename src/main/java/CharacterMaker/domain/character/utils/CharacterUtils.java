@@ -1,21 +1,22 @@
-package CharacterMaker.domain.character;
+package CharacterMaker.domain.character.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import CharacterMaker.domain.character.Attribute;
+import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
-
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 
 public class CharacterUtils {
 
 	public CharacterUtils() {
 	}
 
-	public static Multiset<Barbarian> findDuplicateNames(Multiset<Barbarian> barbarianMultiset) {
-		Multiset<Barbarian> barbarianDupes = HashMultiset.create();
+	public static List<Barbarian> findDuplicateNames(List<Barbarian> barbarianMultiset) {
+		List<Barbarian> barbarianDupes = new ArrayList<Barbarian>();
 
 		for (int i = 0; i < barbarianMultiset.size(); i++) {
 			Barbarian barbarian1 = (Barbarian) barbarianMultiset.toArray()[i];
@@ -33,13 +34,13 @@ public class CharacterUtils {
 		return barbarianDupes;
 	}
 
-	public static void printCharactersByName(Multiset<Barbarian> characters) {
+	public static void printCharactersByNameAndStrength(List<Barbarian> characters) {
 		for (Barbarian character : characters) {
-			System.out.println(character.getName());
+			System.out.println(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character) );
 		}
 	}
 
-	public static boolean hitSuccessCheck(Character character) {
+	public static boolean hitSuccessCheck(CharacterMaker.domain.character.Character character) {
 		// give a character a 50/50 chance of hitting opposing character by
 		// default
 		Random random = new Random();
@@ -141,6 +142,16 @@ public class CharacterUtils {
 			}
 		}
 		return luckLevel;
+	}
+
+	public static int getStrengthLevelForCharacter(Character character) {
+		int strengthLevel = 0;
+		for (Attribute attribute : character.getAttributes()) {
+			if (attribute instanceof Strength) {
+				strengthLevel = attribute.getBattleLevel();
+			}
+		}
+		return strengthLevel;
 	}
 
 }

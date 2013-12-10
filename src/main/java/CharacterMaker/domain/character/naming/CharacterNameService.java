@@ -28,6 +28,7 @@ public class CharacterNameService {
 	private List<String> orkFirstNames = new ArrayList<String>();
 	private List<String> orkSurnames = new ArrayList<String>();
 	private List<String> fantasySurnames = new ArrayList<String>();
+	private List<String> monsterNames = new ArrayList<String>();
 
 	public static CharacterNameService getInstance() {
 		return ourInstance;
@@ -49,11 +50,13 @@ public class CharacterNameService {
 			BufferedReader reader2 = new BufferedReader(new FileReader("FantasySurnames.txt"));
 			BufferedReader reader3 = new BufferedReader(new FileReader("OrkFirstNames.txt"));
 			BufferedReader reader4 = new BufferedReader(new FileReader("OrkSurnames.txt"));
+			BufferedReader reader5 = new BufferedReader(new FileReader("MonsterNames.txt"));
 
 			String line = reader.readLine();
 			String line2 = reader2.readLine();
 			String line3 = reader3.readLine();
 			String line4 = reader4.readLine();
+			String line5 = reader5.readLine();
 
 			while (StringUtils.isNotBlank(line)) {
 				barbarianNames.add(line);
@@ -73,6 +76,11 @@ public class CharacterNameService {
 			while (StringUtils.isNotBlank(line4)) {
 				orkSurnames.add(line4);
 				line4 = reader4.readLine();
+			}
+
+			while (StringUtils.isNotBlank(line5)) {
+				monsterNames.add(line5);
+				line5 = reader5.readLine();
 			}
 
 		} catch (IOException e) {
@@ -97,8 +105,7 @@ public class CharacterNameService {
 			name = randomFirstName + " " + randomLastName;
 		} else if (character instanceof Monster) {
 			Random r = new Random();
-			String[] monsterNames = {"Goblin", "Ogre", "Wolf", "Zombie", "Armored Bear"};
-			return monsterNames[r.nextInt(monsterNames.length-1)];
+			name = monsterNames.get(r.nextInt(monsterNames.size()));
 		}
 
 		return name;

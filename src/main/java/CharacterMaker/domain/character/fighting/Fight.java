@@ -1,7 +1,7 @@
 package CharacterMaker.domain.character.fighting;
 
 import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.CharacterUtils;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;

@@ -1,7 +1,7 @@
 package CharacterMaker.domain.character.monster;
 
 import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.CharacterUtils;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.constants.Constants;
 
 /**
@@ -13,6 +13,8 @@ import CharacterMaker.domain.character.constants.Constants;
  * @author Kevin Roberts Date: 12/02/2013
  */
 public class Monster extends Character {
+
+	String uniqueID;
 
 	@Override
 	public void train() {
@@ -27,4 +29,11 @@ public class Monster extends Character {
 				+ this.getBattlesWon() + ", experiencePoints=" + this.getExperiencePoints() + '}';
 	}
 
+	public String getUniqueID() {
+		return uniqueID;
+	}
+
+	public void setUniqueID(String uniqueID) {
+		this.uniqueID = uniqueID;
+	}
 }

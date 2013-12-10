@@ -1,6 +1,7 @@
 package CharacterMaker.domain.character;
 
 import CharacterMaker.domain.character.fighting.Fight;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 import com.google.common.collect.Multiset;
 
 import java.io.Serializable;

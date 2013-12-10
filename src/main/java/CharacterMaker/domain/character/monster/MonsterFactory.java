@@ -1,6 +1,7 @@
 package CharacterMaker.domain.character.monster;
 
 import java.util.Random;
+import java.util.UUID;
 
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
@@ -29,6 +30,7 @@ public class MonsterFactory implements CharacterFactory {
 		monster.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		monster.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		monster.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
+		monster.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 
 		// Define Base Attributes for a new Monster

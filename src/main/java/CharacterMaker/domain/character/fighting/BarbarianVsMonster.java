@@ -1,7 +1,7 @@
 package CharacterMaker.domain.character.fighting;
 
 import CharacterMaker.domain.character.Action;
-import CharacterMaker.domain.character.CharacterUtils;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.actions.Slash;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.barbarian.Barbarian;
@@ -58,7 +58,7 @@ public class BarbarianVsMonster extends Fight {
 			if (action instanceof Slash) {
 				Slash slash = (Slash) action;
 
-				System.out.print(monster2.getName() + " swings slashes " + barbarian1.getName());
+				System.out.print(monster2.getName() + " slashes " + barbarian1.getName());
 				if (CharacterUtils.hitSuccessCheck(monster2)) {
 					totalDamageDealtFrom2 = slash.calculateTotalDamage(monster2);
 					System.out.print(" and hits for " + totalDamageDealtFrom2 + " damage\n");
