@@ -133,4 +133,14 @@ public class CharacterUtils {
 
 	}
 
+	public static int getLuckLevelForCharacter(Character character) {
+		int luckLevel = 0;
+		for (Attribute attribute : character.getAttributes()) {
+			if (attribute instanceof Luck) {
+				luckLevel = attribute.getBattleLevel();
+			}
+		}
+		return luckLevel;
+	}
+
 }

@@ -11,5 +11,6 @@ public class Constants {
 	public static int DEFAULT_CHARACTER_HEALTH = 100;
 	public static int DEFAULT_CHARACTER_BATTLES_WON = 0;
 	public static int DEFAULT_CHARACTER_XP = 0;
+	public static int CHARACTER_LEVEL_DIFFERENCE_FOR_BONUS_XP = 3;
 
 }

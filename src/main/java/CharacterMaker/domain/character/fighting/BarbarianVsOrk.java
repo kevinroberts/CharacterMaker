@@ -5,7 +5,6 @@ import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.CharacterUtils;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.barbarian.Barbarian;
-import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.ork.Ork;
 
 /**
@@ -36,7 +35,9 @@ public class BarbarianVsOrk extends Fight {
 					totalDamageDealtFrom1 = swingSword.calculateTotalDamage(barbarian1);
 					System.out.print(" and hits for " + totalDamageDealtFrom1 + " damage\n");
 					ork2.setHealth(ork2.getHealth() - totalDamageDealtFrom1);
-					ork2.setExperiencePoints(ork2.getExperiencePoints() + swingSword.getExperienceGainedFromUse());
+					// reward the striking barbarian with experience gain
+					barbarian1.setExperiencePoints(barbarian1.getExperiencePoints()
+						+ swingSword.getExperienceGainedFromUse());
 					if (ork2.getHealth() < 0) {
 						System.out.println(ork2.getName() + " collapses and dies from his injuries.");
 					}
@@ -51,7 +52,7 @@ public class BarbarianVsOrk extends Fight {
 			return barbarian1;
 		}
 
-		// Barbarian 2 actions
+		// Ork 2 actions
 		int totalDamageDealtFrom2 = 0;
 		for (Action action : ork2.getActions()) {
 			if (action instanceof SwingSword) {
@@ -62,8 +63,8 @@ public class BarbarianVsOrk extends Fight {
 					totalDamageDealtFrom2 = swingSword.calculateTotalDamage(ork2);
 					System.out.print(" and hits for " + totalDamageDealtFrom2 + " damage\n");
 					barbarian1.setHealth(barbarian1.getHealth() - totalDamageDealtFrom2);
-					barbarian1.setExperiencePoints(barbarian1.getExperiencePoints()
-						+ swingSword.getExperienceGainedFromUse());
+					// reward the ork with experience
+					ork2.setExperiencePoints(ork2.getExperiencePoints() + swingSword.getExperienceGainedFromUse());
 					if (barbarian1.getHealth() <= 0) {
 						System.out.println(barbarian1.getName() + " collapses and dies from his injuries.");
 					}
@@ -74,26 +75,7 @@ public class BarbarianVsOrk extends Fight {
 			}
 		}
 
-		if (totalDamageDealtFrom1 > totalDamageDealtFrom2) {
-			System.out.println(barbarian1.getName() + " wins the fight.");
-			barbarian1.setBattlesWon(barbarian1.getBattlesWon() + 1);
-			// award bonus experience if the characters are near the same
-			// skill level
-			if (Math.abs(barbarian1.getLevel() - ork2.getLevel()) < 2) {
-				barbarian1.setExperiencePoints(barbarian1.getExperiencePoints() + Constants.XP_FROM_BATTLE_VICTORY);
-			}
-
-			return barbarian1;
-		} else if (totalDamageDealtFrom2 > totalDamageDealtFrom1) {
-			System.out.println(ork2.getName() + " wins the fight.");
-			ork2.setBattlesWon(ork2.getBattlesWon() + 1);
-			if (Math.abs(barbarian1.getLevel() - ork2.getLevel()) < 2) {
-				ork2.setExperiencePoints(ork2.getExperiencePoints() + Constants.XP_FROM_BATTLE_VICTORY);
-			}
-			return ork2;
-		} else {
-			return null;
-		}
+		return processFightWinner(totalDamageDealtFrom1, totalDamageDealtFrom2, barbarian1, ork2);
 	}
 
 }
