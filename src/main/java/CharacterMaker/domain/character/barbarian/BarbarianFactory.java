@@ -7,6 +7,7 @@ import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.*;
+import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.naming.CharacterNameService;
 
 import com.google.common.collect.HashMultiset;
@@ -19,10 +20,10 @@ public class BarbarianFactory implements CharacterFactory {
 		Barbarian barbarian = new Barbarian();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		barbarian.setName(nameService.generateName(barbarian));
-		barbarian.setHealth(100);
-		barbarian.setLevel(1);
-		barbarian.setBattlesWon(0);
-		barbarian.setExperiencePoints(0);
+		barbarian.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
+		barbarian.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
+		barbarian.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
+		barbarian.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		Random random = new Random();
 
 		// Define Base Attributes for a new Barbarian

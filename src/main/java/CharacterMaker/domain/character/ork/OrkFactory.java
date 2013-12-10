@@ -3,6 +3,7 @@ package CharacterMaker.domain.character.ork;
 import CharacterMaker.domain.character.*;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.*;
+import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.naming.CharacterNameService;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -22,10 +23,10 @@ public class OrkFactory implements CharacterFactory {
 		Ork ork = new Ork();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		ork.setName(nameService.generateName(ork));
-		ork.setHealth(100);
-		ork.setLevel(1);
-		ork.setExperiencePoints(0);
-		ork.setBattlesWon(0);
+		ork.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
+		ork.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
+		ork.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
+		ork.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
 		Random random = new Random();
 
 		// Define Base Attributes for a new Ork

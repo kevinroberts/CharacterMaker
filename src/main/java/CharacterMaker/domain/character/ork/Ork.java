@@ -2,6 +2,7 @@ package CharacterMaker.domain.character.ork;
 
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.CharacterUtils;
+import CharacterMaker.domain.character.constants.Constants;
 
 /**
  * Ork class
@@ -17,7 +18,7 @@ public class Ork extends Character {
 	@Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
-		this.setExperiencePoints(this.getExperiencePoints() + CharacterUtils.XP_FROM_TRAINING);
+		this.setExperiencePoints(this.getExperiencePoints() + Constants.XP_FROM_TRAINING);
 	}
 
 	@Override

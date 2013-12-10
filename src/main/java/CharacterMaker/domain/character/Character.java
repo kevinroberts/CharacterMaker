@@ -3,7 +3,9 @@ package CharacterMaker.domain.character;
 import CharacterMaker.domain.character.fighting.Fight;
 import com.google.common.collect.Multiset;
 
-public abstract class Character {
+import java.io.Serializable;
+
+public abstract class Character implements Serializable {
 
 	private int health;
 

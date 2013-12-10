@@ -1,17 +1,15 @@
 package CharacterMaker.domain.character;
 
+import java.util.Random;
+
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
+
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
-import java.util.Random;
-
 public class CharacterUtils {
-
-	public static int XP_FROM_BATTLE_VICTORY = 10;
-	public static int XP_FROM_TRAINING = 5;
 
 	public CharacterUtils() {
 	}

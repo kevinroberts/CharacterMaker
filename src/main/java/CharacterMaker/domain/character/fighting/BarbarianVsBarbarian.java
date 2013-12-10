@@ -4,6 +4,7 @@ import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.CharacterUtils;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.barbarian.Barbarian;
+import CharacterMaker.domain.character.constants.Constants;
 
 /**
  * CharacterMaker.domain.character.fighting
@@ -78,8 +79,7 @@ public class BarbarianVsBarbarian extends Fight {
 			// award bonus experience if the characters are near the same
 			// skill level
 			if (Math.abs(barbarian1.getLevel() - barbarian2.getLevel()) < 2) {
-				barbarian1
-					.setExperiencePoints(barbarian1.getExperiencePoints() + CharacterUtils.XP_FROM_BATTLE_VICTORY);
+				barbarian1.setExperiencePoints(barbarian1.getExperiencePoints() + Constants.XP_FROM_BATTLE_VICTORY);
 			}
 
 			return barbarian1;
@@ -87,8 +87,7 @@ public class BarbarianVsBarbarian extends Fight {
 			System.out.println(barbarian2.getName() + " wins the fight.");
 			barbarian2.setBattlesWon(barbarian2.getBattlesWon() + 1);
 			if (Math.abs(barbarian1.getLevel() - barbarian2.getLevel()) < 2) {
-				barbarian2
-					.setExperiencePoints(barbarian2.getExperiencePoints() + CharacterUtils.XP_FROM_BATTLE_VICTORY);
+				barbarian2.setExperiencePoints(barbarian2.getExperiencePoints() + Constants.XP_FROM_BATTLE_VICTORY);
 			}
 			return barbarian2;
 		} else {

@@ -1,13 +1,8 @@
 package CharacterMaker.domain.character.barbarian;
 
-import CharacterMaker.domain.character.Action;
-import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.CharacterUtils;
-import CharacterMaker.domain.character.actions.SwingSword;
-
-import CharacterMaker.domain.character.fighting.Fight;
-import com.google.common.collect.Multiset;
+import CharacterMaker.domain.character.constants.Constants;
 
 public class Barbarian extends Character {
 
@@ -16,7 +11,7 @@ public class Barbarian extends Character {
 	@Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
-		this.setExperiencePoints(this.getExperiencePoints() + CharacterUtils.XP_FROM_TRAINING);
+		this.setExperiencePoints(this.getExperiencePoints() + Constants.XP_FROM_TRAINING);
 	}
 
 	@Override

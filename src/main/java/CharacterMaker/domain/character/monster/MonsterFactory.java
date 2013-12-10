@@ -7,6 +7,7 @@ import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.Slash;
 import CharacterMaker.domain.character.attributes.*;
+import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.naming.CharacterNameService;
 
 import com.google.common.collect.HashMultiset;
@@ -24,10 +25,10 @@ public class MonsterFactory implements CharacterFactory {
 		Monster monster = new Monster();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		monster.setName(nameService.generateName(monster));
-		monster.setHealth(100);
-		monster.setLevel(1);
-		monster.setExperiencePoints(0);
-		monster.setBattlesWon(0);
+		monster.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
+		monster.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
+		monster.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
+		monster.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
 		Random random = new Random();
 
 		// Define Base Attributes for a new Monster
