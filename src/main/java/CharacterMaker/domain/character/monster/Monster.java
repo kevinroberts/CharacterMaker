@@ -14,8 +14,6 @@ import CharacterMaker.domain.character.constants.Constants;
  */
 public class Monster extends Character {
 
-	String uniqueID;
-
 	@Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
@@ -29,11 +27,4 @@ public class Monster extends Character {
 				+ this.getBattlesWon() + ", experiencePoints=" + this.getExperiencePoints() + '}';
 	}
 
-	public String getUniqueID() {
-		return uniqueID;
-	}
-
-	public void setUniqueID(String uniqueID) {
-		this.uniqueID = uniqueID;
-	}
 }

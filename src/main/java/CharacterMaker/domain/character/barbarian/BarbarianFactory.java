@@ -1,6 +1,7 @@
 package CharacterMaker.domain.character.barbarian;
 
 import java.util.Random;
+import java.util.UUID;
 
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
@@ -24,6 +25,7 @@ public class BarbarianFactory implements CharacterFactory {
 		barbarian.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		barbarian.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
 		barbarian.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
+        barbarian.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 
 		// Define Base Attributes for a new Barbarian

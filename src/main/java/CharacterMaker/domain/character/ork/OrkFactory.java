@@ -9,6 +9,7 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * CharacterMaker.domain.character.ork
@@ -27,6 +28,7 @@ public class OrkFactory implements CharacterFactory {
 		ork.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		ork.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		ork.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
+        ork.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 
 		// Define Base Attributes for a new Ork

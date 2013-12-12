@@ -22,6 +22,8 @@ public abstract class Character implements Serializable {
 
 	private int experiencePoints;
 
+    private String uniqueID;
+
 	public Character fight(Character otherCharacter) {
 		return Fight.fight(this, otherCharacter);
 	}
@@ -91,6 +93,14 @@ public abstract class Character implements Serializable {
 	public void setActions(Multiset<Action> actions) {
 		this.actions = actions;
 	}
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
+    }
 
 	@Override
 	public String toString() {
