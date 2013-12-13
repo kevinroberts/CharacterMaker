@@ -9,6 +9,7 @@ import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
+import CharacterMaker.game.messages.Alert;
 
 public class CharacterUtils {
 
@@ -36,7 +37,7 @@ public class CharacterUtils {
 
 	public static void printCharactersByNameAndStrength(List<Barbarian> characters) {
 		for (Barbarian character : characters) {
-			System.out.println(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character) );
+			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character) );
 		}
 	}
 
@@ -121,7 +122,7 @@ public class CharacterUtils {
 		// restore health and get bonus
 		Double healthBonus = Math.pow(character.getLevel(), 2);
 		character.setHealth(character.getHealth() + healthBonus.intValue());
-		System.out.println(character.getName() + " has just leveled up! Current level: " + character.getLevel());
+        Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel(), character);
 	}
 
 	public static void resetHealthForCharacter(Character character) {

@@ -6,6 +6,7 @@ import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.ork.Ork;
+import CharacterMaker.game.messages.Alert;
 
 /**
  * CharacterMaker.domain.character.fighting
@@ -38,7 +39,7 @@ public abstract class Fight {
 
 	public static boolean isDeadCheck(Character character) {
 		if (character.getHealth() <= 0) {
-			System.out.println(character.getName() + " is dead and cannot fight until revived.");
+			Alert.info(character.getName() + " is dead and cannot fight until revived.");
 			return true;
 		} else {
 			return false;
@@ -48,7 +49,7 @@ public abstract class Fight {
 	public static Character processFightWinner(int totalDamageDealtFrom1, int totalDamageDealtFrom2, Character character1, Character character2) {
 
 		if (totalDamageDealtFrom1 > totalDamageDealtFrom2) {
-			System.out.println(character1.getName() + " wins the fight.");
+            Alert.info(character1.getName() + " wins the fight.");
 			character1.setBattlesWon(character1.getBattlesWon() + 1);
 			// award bonus experience if the characters are near the same
 			// skill level
@@ -58,7 +59,7 @@ public abstract class Fight {
 
 			return character1;
 		} else if (totalDamageDealtFrom2 > totalDamageDealtFrom1) {
-			System.out.println(character2.getName() + " wins the fight.");
+            Alert.info(character2.getName() + " wins the fight.");
 			character2.setBattlesWon(character2.getBattlesWon() + 1);
 			if (Math.abs(character1.getLevel() - character2.getLevel()) < Constants.CHARACTER_LEVEL_DIFFERENCE_FOR_BONUS_XP) {
 				character2.setExperiencePoints(character2.getExperiencePoints() + Constants.XP_FROM_BATTLE_VICTORY);

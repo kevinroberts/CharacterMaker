@@ -4,6 +4,7 @@ import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.ork.Ork;
+import CharacterMaker.game.messages.Alert;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
@@ -35,7 +36,7 @@ public class CharacterNameService {
 	}
 
 	private CharacterNameService() {
-		System.out.println("Initializing data sources");
+		Alert.info("Initializing data sources");
 		initializeDataSources();
 
 	}
