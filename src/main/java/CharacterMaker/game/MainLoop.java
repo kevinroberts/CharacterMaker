@@ -105,6 +105,7 @@ public class MainLoop {
                     break;
                 case 2: // '\002'
                     Alert.info("\n1: " + barbarian.getName() + " - " + barbarian.getHealth());
+					Alert.info("\n2: " + monster.getName() + " - " + monster.getHealth());
                     break;
                 case 3: // '\003'
                     Alert.info("Barbarian - " + barbarian.getName());

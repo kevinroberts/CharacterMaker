@@ -17,6 +17,10 @@ public class Alert {
         System.out.println(message);
     }
 
+	public static void debug(String message) {
+		System.out.println(message);
+	}
+
     public static void infoAboutCharacter(String message, Character character) {
         if (!(character instanceof Monster)) {
             System.out.println(message);

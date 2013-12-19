@@ -33,6 +33,9 @@ public class BarbarianVsMonster extends Fight {
 				System.out.print(barbarian1.getName() + " swings his sword at " + monster2.getName());
 				if (CharacterUtils.hitSuccessCheck(barbarian1)) {
 					totalDamageDealtFrom1 = swingSword.calculateTotalDamage(barbarian1);
+					if (CharacterUtils.criticalHitSuccesCheck(barbarian1, monster2)) {
+						totalDamageDealtFrom1 = totalDamageDealtFrom1 * 2;
+					}
 					System.out.print(" and hits for " + totalDamageDealtFrom1 + " damage\n");
 					monster2.setHealth(monster2.getHealth() - totalDamageDealtFrom1);
 					barbarian1.setExperiencePoints(barbarian1.getExperiencePoints()

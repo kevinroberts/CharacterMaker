@@ -33,6 +33,9 @@ public class OrkVsMonster extends Fight {
 				System.out.print(ork1.getName() + " swings his sword at " + monster2.getName());
 				if (CharacterUtils.hitSuccessCheck(ork1)) {
 					totalDamageDealtFrom1 = swingSword.calculateTotalDamage(ork1);
+					if (CharacterUtils.criticalHitSuccesCheck(ork1, monster2)) {
+						totalDamageDealtFrom1 = totalDamageDealtFrom1 * 2;
+					}
 					System.out.print(" and hits for " + totalDamageDealtFrom1 + " damage\n");
 					monster2.setHealth(monster2.getHealth() - totalDamageDealtFrom1);
 					ork1.setExperiencePoints(ork1.getExperiencePoints()

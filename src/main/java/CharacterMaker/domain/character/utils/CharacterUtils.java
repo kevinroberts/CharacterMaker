@@ -37,7 +37,7 @@ public class CharacterUtils {
 
 	public static void printCharactersByNameAndStrength(List<Barbarian> characters) {
 		for (Barbarian character : characters) {
-			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character) );
+			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character));
 		}
 	}
 
@@ -81,6 +81,30 @@ public class CharacterUtils {
 		}
 
 		return chance;
+	}
+
+	/**
+	 *  Logic borrowed from
+	 *  http://finalfantasy.wikia.com/wiki/Critical_Hit
+	 * @param character the character performing the hit
+	 * @param character2 the target of the hit
+	 * @return boolean successful critical hit
+	 */
+	public static boolean criticalHitSuccesCheck(CharacterMaker.domain.character.Character character, CharacterMaker.domain.character.Character character2) {
+		boolean isCriticalHitSuccess = false;
+		Random randomSeed = new Random();
+
+		int critical = (getLuckLevelForCharacter(character) + character.getLevel() - character2.getLevel())/4;
+		int random = (randomSeed.nextInt(65535) * 99/65535) + 1;
+
+		if (random <= critical) {
+			isCriticalHitSuccess = true;
+			Alert.info(" landing a critical hit ");
+
+		}
+		//Alert.debug("random: " + random + " | critical: " + critical);
+
+		return isCriticalHitSuccess;
 	}
 
 	public static void incrementAttributeStats(Character character) {
