@@ -9,6 +9,8 @@ import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
+import CharacterMaker.domain.character.monster.Monster;
+import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.game.messages.Alert;
 
 public class CharacterUtils {
@@ -40,6 +42,98 @@ public class CharacterUtils {
 
 		return characterDupes;
 	}
+
+	public static Character battleRoyalWithOtherCharacters(List<? extends Character> characterList, String idToTrack) {
+		Character victor;
+		Random random = new Random();
+
+		int rounds = 1;
+		int madeItRound = 0;
+
+		while (characterList.size() > 1) {
+			Alert.info("Round: " + rounds);
+			int randomSelection1 = random.nextInt(characterList.size());
+
+			int randomSelection2 = random.nextInt(characterList.size());
+
+			while (randomSelection1 == randomSelection2) {
+				randomSelection2 = random.nextInt(characterList.size());
+			}
+
+			Character character1 = characterList.get(randomSelection1);
+			Character character2 = characterList.get(randomSelection2);
+
+			character1.fight(character2);
+
+			if (character1.getUniqueID().equals(idToTrack) || character2.getUniqueID().equals(idToTrack)) {
+				madeItRound = rounds;
+			}
+
+			if (character1.getHealth() <= 0) {
+				characterList.remove(randomSelection1);
+			}
+			if (character2.getHealth() <= 0) {
+				characterList.remove(randomSelection2);
+			}
+
+
+			rounds++;
+		}
+
+		Alert.info("Your chosen character made it: " + madeItRound + " rounds");
+
+		victor = characterList.get(0);
+
+		return victor;
+	}
+
+	public static Character battleRoyalWithMonsters(List<? extends Character> characterList, String idToTrack) {
+		Character victor;
+		Random random = new Random();
+		MonsterFactory monsterFactory = new MonsterFactory();
+
+		int rounds = 1;
+		int madeItRound = 0;
+
+		while (characterList.size() > 1) {
+			Alert.info("Round: " + rounds);
+			int randomSelection1 = random.nextInt(characterList.size());
+
+			Character character1 = characterList.get(randomSelection1);
+			Monster monster = monsterFactory.createCharacter();
+
+			if (character1.getLevel() > 1) {
+					for (int i = 0; i < character1.getLevel(); i++) {
+						monster.train();
+					}
+			}
+			// add extra training for higher levels
+			if (character1.getLevel() > 3) {
+				for (int i = 0; i < character1.getLevel(); i++) {
+					monster.train();
+				}
+			}
+
+			character1.fight(monster);
+
+			if (character1.getUniqueID().equals(idToTrack)) {
+				madeItRound = rounds;
+			}
+
+			if (character1.getHealth() <= 0) {
+				characterList.remove(randomSelection1);
+			}
+
+			rounds++;
+		}
+
+		Alert.info("Your chosen character made it: " + madeItRound + " rounds");
+
+		victor = characterList.get(0);
+
+		return victor;
+	}
+
 
 	public static void printCharactersByNameAndStrength(List<? extends Character> characters) {
 		for (Character character : characters) {

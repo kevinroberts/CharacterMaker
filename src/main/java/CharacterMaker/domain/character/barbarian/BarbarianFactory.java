@@ -25,6 +25,7 @@ public class BarbarianFactory implements CharacterFactory {
 		barbarian.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		barbarian.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
 		barbarian.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
+		barbarian.setBattleFought(Constants.DEFAULT_BATTLES_FOUGHT);
         barbarian.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 

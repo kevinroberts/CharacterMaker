@@ -20,6 +20,8 @@ public abstract class Character implements Serializable {
 
 	private int battlesWon;
 
+	private int battleFought;
+
 	private int experiencePoints;
 
     private String uniqueID;
@@ -101,6 +103,14 @@ public abstract class Character implements Serializable {
     public void setUniqueID(String uniqueID) {
         this.uniqueID = uniqueID;
     }
+
+	public int getBattleFought() {
+		return battleFought;
+	}
+
+	public void setBattleFought(int battleFought) {
+		this.battleFought = battleFought;
+	}
 
 	@Override
 	public String toString() {

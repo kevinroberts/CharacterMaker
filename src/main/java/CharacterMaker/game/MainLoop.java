@@ -42,7 +42,7 @@ public class MainLoop {
 
 		List<? extends Character> barbarianDupes = CharacterUtils.findDuplicateNames(barbarians);
 
-		CharacterUtils.printCharactersByNameAndStrength(barbarianDupes);
+		//CharacterUtils.printCharactersByNameAndStrength(barbarianDupes);
 
 		barbarians.removeAll(barbarianDupes);
 
@@ -125,7 +125,43 @@ public class MainLoop {
 			case 6:
 				Alert.info("Goodbye");
 				break;
+			case 7:
+				Alert.info("Battling your barbarian with 100 other random barbarians");
+				List<Barbarian> barbariansList = new ArrayList<Barbarian>();
+
+				for (int i = 0; i < 100; i++) {
+					barbariansList.add(barbarianFactory.createCharacter());
+				}
+
+				barbariansList.add(barbarian);
+
+				Character victor = CharacterUtils.battleRoyalWithOtherCharacters(barbariansList, barbarian.getUniqueID());
+
+				Alert.info("The victor was: ");
+				Alert.info("Barbarian - " + victor.getName());
+				Alert.printStats(victor);
+
+				break;
+				case 8:
+					Alert.info("Battling your barbarian with 100 other random barbarians against monsters");
+					List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
+
+					for (int i = 0; i < 100; i++) {
+						barbariansList2.add(barbarianFactory.createCharacter());
+					}
+
+					barbariansList2.add(barbarian);
+
+					Character victor2 = CharacterUtils.battleRoyalWithMonsters(barbariansList2, barbarian.getUniqueID());
+
+					Alert.info("The victor was: ");
+					Alert.info("Barbarian - " + victor2.getName());
+					Alert.printStats(victor2);
+
+					break;
 			}
+
+
 		} while (true);
 
 	}

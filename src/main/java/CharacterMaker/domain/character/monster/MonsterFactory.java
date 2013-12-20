@@ -30,6 +30,7 @@ public class MonsterFactory implements CharacterFactory {
 		monster.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		monster.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		monster.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
+		monster.setBattleFought(Constants.DEFAULT_BATTLES_FOUGHT);
 		monster.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 

@@ -28,6 +28,7 @@ public class OrkFactory implements CharacterFactory {
 		ork.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		ork.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		ork.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
+		ork.setBattleFought(Constants.DEFAULT_BATTLES_FOUGHT);
         ork.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 

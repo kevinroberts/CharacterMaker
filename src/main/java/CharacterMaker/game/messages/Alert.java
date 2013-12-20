@@ -4,6 +4,8 @@ import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.monster.Monster;
 
+import java.text.NumberFormat;
+
 /**
  * CharacterMaker.game.messages
  *
@@ -31,7 +33,18 @@ public class Alert {
         System.out.println("Experience points:    " + character.getExperiencePoints());
         System.out.println("Level:                " + character.getLevel());
         System.out.println("Battles won:          " + character.getBattlesWon());
-        System.out.print("Current Health:       " + character.getHealth());
+		System.out.println("Battles fought:       " + character.getBattleFought());
+		NumberFormat percentFormat = NumberFormat.getPercentInstance();
+		percentFormat.setMaximumFractionDigits(1);
+
+		try {
+			double winps = character.getBattleFought() / character.getBattlesWon();
+			String winP = percentFormat.format(winps);
+			System.out.println("Win percentage:       " + winP);
+		} catch (ArithmeticException e) {
+			// could not divide by zero
+		}
+		System.out.print("Current Health:       " + character.getHealth());
 
         System.out.println("");
         for (Attribute attribute : character.getAttributes()) {

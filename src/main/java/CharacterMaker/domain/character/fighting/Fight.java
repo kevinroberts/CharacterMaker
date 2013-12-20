@@ -59,6 +59,9 @@ public abstract class Fight {
 
 	public static Character processFightWinner(int totalDamageDealtFrom1, int totalDamageDealtFrom2, Character character1, Character character2) {
 
+		character1.setBattleFought(character1.getBattleFought() + 1);
+		character2.setBattleFought(character2.getBattleFought() + 1);
+
 		if (totalDamageDealtFrom1 > totalDamageDealtFrom2) {
             Alert.info(character1.getName() + " wins the fight.");
 			character1.setBattlesWon(character1.getBattlesWon() + 1);
