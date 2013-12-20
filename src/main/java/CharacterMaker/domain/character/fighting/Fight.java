@@ -46,6 +46,17 @@ public abstract class Fight {
 		}
 	}
 
+	public static void isKilledDuringFightCheck(Character character) {
+		if (character.getHealth() <= 0) {
+			if (character instanceof Monster) {
+				// are monsters truly genderless whaaa?
+				Alert.info(character.getName() + " collapses and dies from its injuries.");
+			} else {
+				Alert.info(character.getName() + " collapses and dies from his injuries.");
+			}
+		}
+	}
+
 	public static Character processFightWinner(int totalDamageDealtFrom1, int totalDamageDealtFrom2, Character character1, Character character2) {
 
 		if (totalDamageDealtFrom1 > totalDamageDealtFrom2) {

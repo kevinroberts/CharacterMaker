@@ -38,9 +38,7 @@ public class BarbarianVsOrk extends Fight {
 					// reward the striking barbarian with experience gain
 					barbarian1.setExperiencePoints(barbarian1.getExperiencePoints()
 						+ swingSword.getExperienceGainedFromUse());
-					if (ork2.getHealth() < 0) {
-						System.out.println(ork2.getName() + " collapses and dies from his injuries.");
-					}
+					isKilledDuringFightCheck(ork2);
 				} else {
 					System.out.print(" and misses\n");
 				}
@@ -65,9 +63,7 @@ public class BarbarianVsOrk extends Fight {
 					barbarian1.setHealth(barbarian1.getHealth() - totalDamageDealtFrom2);
 					// reward the ork with experience
 					ork2.setExperiencePoints(ork2.getExperiencePoints() + swingSword.getExperienceGainedFromUse());
-					if (barbarian1.getHealth() <= 0) {
-						System.out.println(barbarian1.getName() + " collapses and dies from his injuries.");
-					}
+					isKilledDuringFightCheck(barbarian1);
 				} else {
 					System.out.print(" and misses!\n");
 				}

@@ -16,27 +16,33 @@ public class CharacterUtils {
 	public CharacterUtils() {
 	}
 
-	public static List<Barbarian> findDuplicateNames(List<Barbarian> barbarianMultiset) {
-		List<Barbarian> barbarianDupes = new ArrayList<Barbarian>();
+	/**
+	 * Given a set list of Characters types, return all the ones with
+	 * a duplicate name.
+	 * @param characterList
+	 * @return List of Characters with Duplicate Names
+	 */
+	public static List<Character> findDuplicateNames(List<? extends Character> characterList) {
+		List<Character> characterDupes = new ArrayList<Character>();
 
-		for (int i = 0; i < barbarianMultiset.size(); i++) {
-			Barbarian barbarian1 = (Barbarian) barbarianMultiset.toArray()[i];
+		for (int i = 0; i < characterList.size(); i++) {
+			Barbarian barbarian1 = (Barbarian) characterList.toArray()[i];
 
-			for (int j = i + 1; j < barbarianMultiset.size(); j++) {
-				Barbarian barbarian2 = (Barbarian) barbarianMultiset.toArray()[j];
+			for (int j = i + 1; j < characterList.size(); j++) {
+				Barbarian barbarian2 = (Barbarian) characterList.toArray()[j];
 
 				if (i != j && barbarian1.getName().equals(barbarian2.getName())) {
-					barbarianDupes.add(barbarian1);
+					characterDupes.add(barbarian1);
 				}
 			}
 
 		}
 
-		return barbarianDupes;
+		return characterDupes;
 	}
 
-	public static void printCharactersByNameAndStrength(List<Barbarian> characters) {
-		for (Barbarian character : characters) {
+	public static void printCharactersByNameAndStrength(List<? extends Character> characters) {
+		for (Character character : characters) {
 			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character));
 		}
 	}

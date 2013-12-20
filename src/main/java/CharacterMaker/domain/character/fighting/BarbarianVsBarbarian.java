@@ -38,9 +38,7 @@ public class BarbarianVsBarbarian extends Fight {
 					barbarian2.setHealth(barbarian2.getHealth() - totalDamageDealtFrom1);
 					barbarian1.setExperiencePoints(barbarian1.getExperiencePoints()
 						+ swingSword.getExperienceGainedFromUse());
-					if (barbarian2.getHealth() < 0) {
-						System.out.println(barbarian2.getName() + " collapses and dies from his injuries.");
-					}
+					isKilledDuringFightCheck(barbarian2);
 				} else {
 					System.out.print(" and misses\n");
 				}
@@ -68,9 +66,7 @@ public class BarbarianVsBarbarian extends Fight {
 					barbarian1.setHealth(barbarian1.getHealth() - totalDamageDealtFrom2);
 					barbarian2.setExperiencePoints(barbarian2.getExperiencePoints()
 						+ swingSword.getExperienceGainedFromUse());
-					if (barbarian1.getHealth() <= 0) {
-						System.out.println(barbarian1.getName() + " collapses and dies from his injuries.");
-					}
+					isKilledDuringFightCheck(barbarian1);
 				} else {
 					System.out.print(" and misses!\n");
 				}
