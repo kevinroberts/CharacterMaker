@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public abstract class Character implements Serializable {
 
-	private int health;
+	private Integer health;
 
 	private String name;
 
@@ -16,13 +16,13 @@ public abstract class Character implements Serializable {
 
 	private Multiset<Action> actions;
 
-	private int level;
+	private Integer level;
 
-	private int battlesWon;
+	private Integer battlesWon;
 
-	private int battleFought;
+	private Integer battleFought;
 
-	private int experiencePoints;
+	private Integer experiencePoints;
 
     private String uniqueID;
 
@@ -44,27 +44,27 @@ public abstract class Character implements Serializable {
 		this.name = name;
 	}
 
-	public int getHealth() {
+	public Integer getHealth() {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	public void setHealth(Integer health) {
 		this.health = health;
 	}
 
-	public int getLevel() {
+	public Integer getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(Integer level) {
 		this.level = level;
 	}
 
-	public int getExperiencePoints() {
+	public Integer getExperiencePoints() {
 		return experiencePoints;
 	}
 
-	public void setExperiencePoints(int experiencePoints) {
+	public void setExperiencePoints(Integer experiencePoints) {
 		this.experiencePoints = experiencePoints;
 		// call to level up on all experience gains
 		if (CharacterUtils.isAtLevelUp(this)) {
@@ -72,11 +72,11 @@ public abstract class Character implements Serializable {
 		}
 	}
 
-	public int getBattlesWon() {
+	public Integer getBattlesWon() {
 		return battlesWon;
 	}
 
-	public void setBattlesWon(int battlesWon) {
+	public void setBattlesWon(Integer battlesWon) {
 		this.battlesWon = battlesWon;
 	}
 
@@ -104,11 +104,11 @@ public abstract class Character implements Serializable {
         this.uniqueID = uniqueID;
     }
 
-	public int getBattleFought() {
+	public Integer getBattleFought() {
 		return battleFought;
 	}
 
-	public void setBattleFought(int battleFought) {
+	public void setBattleFought(Integer battleFought) {
 		this.battleFought = battleFought;
 	}
 

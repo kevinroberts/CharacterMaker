@@ -38,11 +38,15 @@ public class Alert {
 		percentFormat.setMaximumFractionDigits(1);
 
 		try {
-			double winps = character.getBattleFought() / character.getBattlesWon();
-			String winP = percentFormat.format(winps);
-			System.out.println("Win percentage:       " + winP);
-		} catch (ArithmeticException e) {
-			// could not divide by zero
+            if (character.getBattleFought() > 0) {
+                Double battlesWon = (double)(character.getBattlesWon());
+                Double battlesFought = (double)(character.getBattleFought());
+                double winPercent =  battlesWon / battlesFought;
+                String winPercentageFormat = percentFormat.format(winPercent);
+                System.out.println("Win percentage:       " + winPercentageFormat);
+            }
+		} catch (Exception e) {
+			Alert.debug(e.getMessage());
 		}
 		System.out.print("Current Health:       " + character.getHealth());
 

@@ -34,16 +34,17 @@ public class BarbarianTest extends TestCase {
 	}
 
 	public void testBarbarianProperties() throws Exception {
-		assertEquals("Default health", testBarbarian.getHealth(), Constants.DEFAULT_CHARACTER_HEALTH);
-		assertEquals("Default level", testBarbarian.getLevel(), Constants.DEFAULT_CHARACTER_LEVEL);
-		assertEquals("Default battles won", testBarbarian.getBattlesWon(), Constants.DEFAULT_CHARACTER_BATTLES_WON);
-		assertEquals("Default xp", testBarbarian.getExperiencePoints(), Constants.DEFAULT_CHARACTER_XP);
+		assertEquals("Default health", testBarbarian.getHealth(), (Integer)Constants.DEFAULT_CHARACTER_HEALTH);
+		assertEquals("Default level", testBarbarian.getLevel(), (Integer)Constants.DEFAULT_CHARACTER_LEVEL);
+		assertEquals("Default battles won", testBarbarian.getBattlesWon(),(Integer) Constants.DEFAULT_CHARACTER_BATTLES_WON);
+        assertEquals("Default battles fought", testBarbarian.getBattleFought(),(Integer) Constants.DEFAULT_BATTLES_FOUGHT);
+		assertEquals("Default xp", testBarbarian.getExperiencePoints(), (Integer)Constants.DEFAULT_CHARACTER_XP);
 	}
 
 	public void testBarbarianLevelUp() throws Exception {
 		Barbarian testBarbarianLeveler = barbarianFactory.createCharacter();
 		testBarbarianLeveler.levelUp();
-		assertEquals("barbarian is at level 2", testBarbarianLeveler.getLevel(), 2);
+		assertEquals("barbarian is at level 2", testBarbarianLeveler.getLevel(), (Integer)2);
 	}
 
 	public void testBarbarianTraining() throws Exception {
