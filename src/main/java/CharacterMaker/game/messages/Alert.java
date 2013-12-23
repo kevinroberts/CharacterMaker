@@ -3,6 +3,7 @@ package CharacterMaker.game.messages;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.monster.Monster;
+import CharacterMaker.domain.character.utils.PropertyUtils;
 
 import java.text.NumberFormat;
 
@@ -15,12 +16,16 @@ import java.text.NumberFormat;
 
 public class Alert {
 
+	private static PropertyUtils propertyUtils = PropertyUtils.getInstance();
+
     public static void info(String message) {
         System.out.println(message);
     }
 
 	public static void debug(String message) {
-		System.out.println(message);
+		if (propertyUtils.getProperty("debugMode").equalsIgnoreCase("true")) {
+			System.out.println(message);
+		}
 	}
 
     public static void infoAboutCharacter(String message, Character character) {

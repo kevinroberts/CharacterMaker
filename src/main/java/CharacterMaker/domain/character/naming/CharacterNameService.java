@@ -36,9 +36,8 @@ public class CharacterNameService {
 	}
 
 	private CharacterNameService() {
-		Alert.info("Initializing data sources");
+		Alert.debug("Initializing data sources");
 		initializeDataSources();
-
 	}
 
 	public String generateName(Character character) {
