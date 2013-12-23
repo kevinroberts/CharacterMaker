@@ -35,7 +35,7 @@ public class Alert {
         System.out.println("Battles won:          " + character.getBattlesWon());
 		System.out.println("Battles fought:       " + character.getBattleFought());
 		NumberFormat percentFormat = NumberFormat.getPercentInstance();
-		percentFormat.setMaximumFractionDigits(1);
+		percentFormat.setMaximumFractionDigits(2);
 
 		try {
             if (character.getBattleFought() > 0) {

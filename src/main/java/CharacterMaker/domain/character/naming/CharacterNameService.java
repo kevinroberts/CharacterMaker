@@ -47,11 +47,11 @@ public class CharacterNameService {
 
 	private void initializeDataSources() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("BarbarianFirstNames.txt"));
-			BufferedReader reader2 = new BufferedReader(new FileReader("FantasySurnames.txt"));
-			BufferedReader reader3 = new BufferedReader(new FileReader("OrkFirstNames.txt"));
-			BufferedReader reader4 = new BufferedReader(new FileReader("OrkSurnames.txt"));
-			BufferedReader reader5 = new BufferedReader(new FileReader("MonsterNames.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("res/BarbarianFirstNames.txt"));
+			BufferedReader reader2 = new BufferedReader(new FileReader("res/FantasySurnames.txt"));
+			BufferedReader reader3 = new BufferedReader(new FileReader("res/OrkFirstNames.txt"));
+			BufferedReader reader4 = new BufferedReader(new FileReader("res/OrkSurnames.txt"));
+			BufferedReader reader5 = new BufferedReader(new FileReader("res/MonsterNames.txt"));
 
 			String line = reader.readLine();
 			String line2 = reader2.readLine();
