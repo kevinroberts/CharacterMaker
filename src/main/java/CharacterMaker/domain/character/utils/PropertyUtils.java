@@ -1,24 +1,23 @@
 package CharacterMaker.domain.character.utils;
 
-import CharacterMaker.game.messages.Alert;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.*;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
- * Singleton Properties Utility class
- * CharacterMaker.domain.character.utils
+ * Singleton Properties Utility class CharacterMaker.domain.character.utils
  * 
  * @author Kevin Roberts date: 12/23/13
  */
 public class PropertyUtils {
 	private static PropertyUtils ourInstance = null;
 	private Properties properties;
+	private String propertiesFileLocation = "res/characterMaker.properties";
 
 	public static synchronized PropertyUtils getInstance() {
 		if (ourInstance == null) {
-			ourInstance = new PropertyUtils ();
+			ourInstance = new PropertyUtils();
 		}
 		return ourInstance;
 	}
@@ -26,7 +25,6 @@ public class PropertyUtils {
 	private PropertyUtils() {
 		loadParams();
 		System.out.println("Initialized properties file...");
-		//Alert.debug("test");
 	}
 
 	private void loadParams() {
@@ -34,7 +32,7 @@ public class PropertyUtils {
 		InputStream is = null;
 		properties = new Properties();
 		try {
-			File f = new File("res/characterMaker.properties");
+			File f = new File(propertiesFileLocation);
 			is = new FileInputStream(f);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,11 +62,27 @@ public class PropertyUtils {
 	public void setProperty(String key, String value) {
 		try {
 			properties.setProperty(key, value);
-			File f = new File("res/characterMaker.properties");
+			File f = new File(propertiesFileLocation);
 			OutputStream out = new FileOutputStream(f);
 			properties.store(out, "properties file updated");
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public boolean isDebugMode() {
+		if (this.getProperty("debugMode").equalsIgnoreCase("true")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String getAlertMethod() {
+		if (StringUtils.isNotEmpty(this.getProperty("alertMethod"))) {
+			return this.getProperty("alertMethod");
+		} else {
+			return StringUtils.EMPTY;
 		}
 	}
 
