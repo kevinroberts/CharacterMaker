@@ -1,20 +1,20 @@
 package CharacterMaker.domain.character.naming;
 
-import CharacterMaker.domain.character.barbarian.Barbarian;
-import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.monster.Monster;
-import CharacterMaker.domain.character.ork.Ork;
-import CharacterMaker.game.messages.Alert;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.barbarian.Barbarian;
+import CharacterMaker.domain.character.monster.Monster;
+import CharacterMaker.domain.character.ork.Ork;
+import CharacterMaker.domain.character.utils.MersenneTwister;
 
 /**
  * Created with IntelliJ IDEA.
@@ -100,22 +100,19 @@ public class CharacterNameService {
 
 	private String readRandomNameFromResources(Character character) {
 		String name = "No Name Given";
-
+		MersenneTwister mersenneTwister = new MersenneTwister();
 		if (character instanceof Barbarian) {
-			Random r = new Random();
-			String randomFirstName = barbarianNames.get(r.nextInt(barbarianNames.size()));
-			String randomLastName = fantasySurnames.get(r.nextInt(fantasySurnames.size()));
+			String randomFirstName = barbarianNames.get(mersenneTwister.nextInt(barbarianNames.size()));
+			String randomLastName = fantasySurnames.get(mersenneTwister.nextInt(fantasySurnames.size()));
 
 			name = randomFirstName + " " + randomLastName;
 		} else if (character instanceof Ork) {
-			Random r = new Random();
-			String randomFirstName = orkFirstNames.get(r.nextInt(orkFirstNames.size()));
-			String randomLastName = orkSurnames.get(r.nextInt(orkSurnames.size()));
+			String randomFirstName = orkFirstNames.get(mersenneTwister.nextInt(orkFirstNames.size()));
+			String randomLastName = orkSurnames.get(mersenneTwister.nextInt(orkSurnames.size()));
 
 			name = randomFirstName + " " + randomLastName;
 		} else if (character instanceof Monster) {
-			Random r = new Random();
-			name = monsterNames.get(r.nextInt(monsterNames.size()));
+			name = monsterNames.get(mersenneTwister.nextInt(monsterNames.size()));
 		}
 
 		return name;

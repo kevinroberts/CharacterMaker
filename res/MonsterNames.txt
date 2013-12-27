@@ -27,3 +27,15 @@ Cyclops
 Rabid Demon Hound
 Necromancer
 Reanimated Mummy
+Sea Demon
+Banshee
+Armor Lord
+Frost Demon
+Frost Dragon
+Frost Zombie
+Giant Worm
+Imp
+Fallen Knight
+Specter
+Skeleton Soldier
+Warg
