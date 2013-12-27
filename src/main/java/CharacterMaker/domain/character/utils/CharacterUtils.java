@@ -45,19 +45,19 @@ public class CharacterUtils {
 
 	public static Character battleRoyalWithOtherCharacters(List<? extends Character> characterList, String idToTrack) {
 		Character victor;
-		Random random = new Random();
+		MersenneTwister mersenneTwister = new MersenneTwister();
 
 		int rounds = 1;
 		int madeItRound = 0;
 
 		while (characterList.size() > 1) {
 			Alert.info("Round: " + rounds);
-			int randomSelection1 = random.nextInt(characterList.size());
+			int randomSelection1 = mersenneTwister.nextInt(characterList.size());
 
-			int randomSelection2 = random.nextInt(characterList.size());
+			int randomSelection2 = mersenneTwister.nextInt(characterList.size());
 
 			while (randomSelection1 == randomSelection2) {
-				randomSelection2 = random.nextInt(characterList.size());
+				randomSelection2 = mersenneTwister.nextInt(characterList.size());
 			}
 
 			Character character1 = characterList.get(randomSelection1);
@@ -89,7 +89,7 @@ public class CharacterUtils {
 
 	public static Character battleRoyalWithMonsters(List<? extends Character> characterList, String idToTrack) {
 		Character victor;
-		Random random = new Random();
+		MersenneTwister mersenneTwister = new MersenneTwister();
 		MonsterFactory monsterFactory = new MonsterFactory();
 
 		int rounds = 1;
@@ -97,7 +97,7 @@ public class CharacterUtils {
 
 		while (characterList.size() > 1) {
 			Alert.info("Round: " + rounds);
-			int randomSelection1 = random.nextInt(characterList.size());
+			int randomSelection1 = mersenneTwister.nextInt(characterList.size());
 
 			Character character1 = characterList.get(randomSelection1);
 			Monster monster = monsterFactory.createCharacter();
@@ -144,8 +144,8 @@ public class CharacterUtils {
 	public static boolean hitSuccessCheck(CharacterMaker.domain.character.Character character) {
 		// give a character a 50/50 chance of hitting opposing character by
 		// default
-		Random random = new Random();
-		Boolean chance = random.nextBoolean();
+		MersenneTwister mersenneTwister = new MersenneTwister();
+		Boolean chance = mersenneTwister.nextBoolean();
 
 		for (Attribute attribute : character.getAttributes()) {
 			// use the character's luck attribute as a gauge of how successful
@@ -154,21 +154,21 @@ public class CharacterUtils {
 
 				int chances = attribute.getBattleLevel();
 				if (chances > 5 && chances < 7) {
-					int prob = random.nextInt(100) + 70;
+					int prob = mersenneTwister.nextInt(100) + 70;
 					if (prob >= 100) {
 						return true;
 					} else {
 						return false;
 					}
 				} else if (chances >= 7 && chances < 10) {
-					int prob = random.nextInt(100) + 80;
+					int prob = mersenneTwister.nextInt(100) + 80;
 					if (prob >= 100) {
 						return true;
 					} else {
 						return false;
 					}
 				} else if (chances >= 10) {
-					int prob = random.nextInt(100) + 90;
+					int prob = mersenneTwister.nextInt(100) + 90;
 					if (prob >= 100) {
 						return true;
 					} else {
@@ -192,10 +192,10 @@ public class CharacterUtils {
 	 */
 	public static boolean criticalHitSuccesCheck(CharacterMaker.domain.character.Character character, CharacterMaker.domain.character.Character character2) {
 		boolean isCriticalHitSuccess = false;
-		Random randomSeed = new Random();
+		MersenneTwister mersenneTwister = new MersenneTwister();
 
 		int critical = (getLuckLevelForCharacter(character) + character.getLevel() - character2.getLevel())/4;
-		int random = (randomSeed.nextInt(65535) * 99/65535) + 1;
+		int random = (mersenneTwister.nextInt(65535) * 99/65535) + 1;
 
 		if (random <= critical) {
 			isCriticalHitSuccess = true;
