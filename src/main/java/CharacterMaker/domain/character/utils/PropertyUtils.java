@@ -15,9 +15,13 @@ public class PropertyUtils {
 	private Properties properties;
 	private String propertiesFileLocation = "res/characterMaker.properties";
 
-	public static synchronized PropertyUtils getInstance() {
+	public static PropertyUtils getInstance() {
 		if (ourInstance == null) {
-			ourInstance = new PropertyUtils();
+			synchronized (PropertyUtils.class) {
+				if (ourInstance == null) {
+					ourInstance = new PropertyUtils();
+				}
+			}
 		}
 		return ourInstance;
 	}

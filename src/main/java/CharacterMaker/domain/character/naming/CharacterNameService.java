@@ -23,7 +23,7 @@ import java.util.Random;
  *         http://www.fantasynamegen.com/surnames/short/
  */
 public class CharacterNameService {
-	private static CharacterNameService ourInstance = new CharacterNameService();
+	private static CharacterNameService ourInstance = null;
 
 	private List<String> barbarianNames = new ArrayList<String>();
 	private List<String> orkFirstNames = new ArrayList<String>();
@@ -32,6 +32,13 @@ public class CharacterNameService {
 	private List<String> monsterNames = new ArrayList<String>();
 
 	public static CharacterNameService getInstance() {
+		if (ourInstance == null) {
+			synchronized (CharacterNameService.class) {
+				if (ourInstance == null) {
+					ourInstance = new CharacterNameService();
+				}
+			}
+		}
 		return ourInstance;
 	}
 
