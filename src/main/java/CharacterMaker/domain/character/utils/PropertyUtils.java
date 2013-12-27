@@ -3,12 +3,14 @@ package CharacterMaker.domain.character.utils;
 import java.io.*;
 import java.util.Properties;
 
+import CharacterMaker.domain.character.constants.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Singleton Properties Utility class CharacterMaker.domain.character.utils
+ * A generic Properties Utility class - follows the Singleton pattern for instantiation
+ * CharacterMaker.domain.character.utils
  * 
  * @author Kevin Roberts date: 12/23/13
  */
@@ -16,7 +18,7 @@ public class PropertyUtils {
 	private static final Logger LOG = LoggerFactory.getLogger(PropertyUtils.class);
 	private static PropertyUtils ourInstance = null;
 	private Properties properties;
-	private String propertiesFileLocation = "res/characterMaker.properties";
+	private String propertiesFileLocation = Constants.PROPERTIES_FILE_LOCATION;
 
 	public static PropertyUtils getInstance() {
 		if (ourInstance == null) {

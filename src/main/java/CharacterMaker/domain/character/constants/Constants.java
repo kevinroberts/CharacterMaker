@@ -13,5 +13,6 @@ public class Constants {
 	public static int DEFAULT_CHARACTER_XP = 0;
 	public static int DEFAULT_BATTLES_FOUGHT = 0;
 	public static int CHARACTER_LEVEL_DIFFERENCE_FOR_BONUS_XP = 3;
+	public static String PROPERTIES_FILE_LOCATION = "res/characterMaker.properties";
 
 }
