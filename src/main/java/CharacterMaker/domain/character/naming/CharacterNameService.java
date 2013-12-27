@@ -6,6 +6,8 @@ import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.ork.Ork;
 import CharacterMaker.game.messages.Alert;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,6 +25,7 @@ import java.util.Random;
  *         http://www.fantasynamegen.com/surnames/short/
  */
 public class CharacterNameService {
+	private static final Logger LOG = LoggerFactory.getLogger(CharacterNameService.class);
 	private static CharacterNameService ourInstance = null;
 
 	private List<String> barbarianNames = new ArrayList<String>();
@@ -43,7 +46,7 @@ public class CharacterNameService {
 	}
 
 	private CharacterNameService() {
-		Alert.debug("Initializing data sources");
+		LOG.debug("Initializing data sources");
 		initializeDataSources();
 	}
 

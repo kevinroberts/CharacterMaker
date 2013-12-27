@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Singleton Properties Utility class CharacterMaker.domain.character.utils
@@ -11,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Kevin Roberts date: 12/23/13
  */
 public class PropertyUtils {
+	private static final Logger LOG = LoggerFactory.getLogger(PropertyUtils.class);
 	private static PropertyUtils ourInstance = null;
 	private Properties properties;
 	private String propertiesFileLocation = "res/characterMaker.properties";
@@ -28,7 +31,7 @@ public class PropertyUtils {
 
 	private PropertyUtils() {
 		loadParams();
-		System.out.println("Initialized properties file...");
+		LOG.debug("Initialized properties file...");
 	}
 
 	private void loadParams() {
