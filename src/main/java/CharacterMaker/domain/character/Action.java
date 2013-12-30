@@ -23,6 +23,8 @@ public abstract class Action {
 		this.damage = damage;
 	}
 
+	public abstract int use(Character user, Character victim);
+
 	public String getName() {
 		return name;
 	}

@@ -29,22 +29,7 @@ public class OrkVsMonster extends Fight {
 		for (Action action : ork1.getActions()) {
 			if (action instanceof SwingSword) {
 				SwingSword swingSword = (SwingSword) action;
-
-				System.out.print(ork1.getName() + " swings his sword at " + monster2.getName());
-				if (CharacterUtils.hitSuccessCheck(ork1)) {
-					totalDamageDealtFrom1 = swingSword.calculateTotalDamage(ork1);
-					if (CharacterUtils.criticalHitSuccesCheck(ork1, monster2)) {
-						totalDamageDealtFrom1 = totalDamageDealtFrom1 * 2;
-					}
-					System.out.print(" and hits for " + totalDamageDealtFrom1 + " damage\n");
-					monster2.setHealth(monster2.getHealth() - totalDamageDealtFrom1);
-					ork1.setExperiencePoints(ork1.getExperiencePoints()
-							+ swingSword.getExperienceGainedFromUse());
-					isKilledDuringFightCheck(monster2);
-				} else {
-					System.out.print(" and misses\n");
-				}
-
+				totalDamageDealtFrom1 = swingSword.use(ork1, monster2);
 			}
 		}
 
@@ -58,19 +43,7 @@ public class OrkVsMonster extends Fight {
 		for (Action action : monster2.getActions()) {
 			if (action instanceof Slash) {
 				Slash slash = (Slash) action;
-
-				System.out.print(monster2.getName() + " slashes " + ork1.getName());
-				if (CharacterUtils.hitSuccessCheck(monster2)) {
-					totalDamageDealtFrom2 = slash.calculateTotalDamage(monster2);
-					System.out.print(" and hits for " + totalDamageDealtFrom2 + " damage\n");
-					ork1.setHealth(ork1.getHealth() - totalDamageDealtFrom2);
-					monster2.setExperiencePoints(monster2.getExperiencePoints()
-							+ slash.getExperienceGainedFromUse());
-					isKilledDuringFightCheck(ork1);
-				} else {
-					System.out.print(" and misses!\n");
-				}
-
+				totalDamageDealtFrom2 = slash.use(monster2, ork1);
 			}
 		}
 

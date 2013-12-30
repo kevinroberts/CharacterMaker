@@ -29,20 +29,7 @@ public class BarbarianVsOrk extends Fight {
 		for (Action action : barbarian1.getActions()) {
 			if (action instanceof SwingSword) {
 				SwingSword swingSword = (SwingSword) action;
-
-				System.out.print(barbarian1.getName() + " swings his sword at " + ork2.getName());
-				if (CharacterUtils.hitSuccessCheck(barbarian1)) {
-					totalDamageDealtFrom1 = swingSword.calculateTotalDamage(barbarian1);
-					System.out.print(" and hits for " + totalDamageDealtFrom1 + " damage\n");
-					ork2.setHealth(ork2.getHealth() - totalDamageDealtFrom1);
-					// reward the striking barbarian with experience gain
-					barbarian1.setExperiencePoints(barbarian1.getExperiencePoints()
-						+ swingSword.getExperienceGainedFromUse());
-					isKilledDuringFightCheck(ork2);
-				} else {
-					System.out.print(" and misses\n");
-				}
-
+				totalDamageDealtFrom1 = swingSword.use(barbarian1, ork2);
 			}
 		}
 
@@ -55,19 +42,7 @@ public class BarbarianVsOrk extends Fight {
 		for (Action action : ork2.getActions()) {
 			if (action instanceof SwingSword) {
 				SwingSword swingSword = (SwingSword) action;
-
-				System.out.print(ork2.getName() + " swings his sword at " + barbarian1.getName());
-				if (CharacterUtils.hitSuccessCheck(ork2)) {
-					totalDamageDealtFrom2 = swingSword.calculateTotalDamage(ork2);
-					System.out.print(" and hits for " + totalDamageDealtFrom2 + " damage\n");
-					barbarian1.setHealth(barbarian1.getHealth() - totalDamageDealtFrom2);
-					// reward the ork with experience
-					ork2.setExperiencePoints(ork2.getExperiencePoints() + swingSword.getExperienceGainedFromUse());
-					isKilledDuringFightCheck(barbarian1);
-				} else {
-					System.out.print(" and misses!\n");
-				}
-
+				totalDamageDealtFrom1 = swingSword.use(ork2, barbarian1);
 			}
 		}
 

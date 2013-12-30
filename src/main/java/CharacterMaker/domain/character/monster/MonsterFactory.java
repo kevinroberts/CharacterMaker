@@ -27,6 +27,7 @@ public class MonsterFactory implements CharacterFactory {
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		monster.setName(nameService.generateName(monster));
 		monster.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
+		monster.setMaxHealth(Constants.DEFAULT_CHARACTER_HEALTH);
 		monster.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		monster.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		monster.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);

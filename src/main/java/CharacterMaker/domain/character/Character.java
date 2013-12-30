@@ -10,6 +10,8 @@ public abstract class Character implements Serializable {
 
 	private Integer health;
 
+	private Integer maxHealth;
+
 	private String name;
 
 	private Multiset<Attribute> attributes;
@@ -110,6 +112,14 @@ public abstract class Character implements Serializable {
 
 	public void setBattleFought(Integer battleFought) {
 		this.battleFought = battleFought;
+	}
+
+	public Integer getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(Integer maxHealth) {
+		this.maxHealth = maxHealth;
 	}
 
 	@Override

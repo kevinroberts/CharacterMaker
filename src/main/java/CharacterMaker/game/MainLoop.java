@@ -97,13 +97,13 @@ public class MainLoop {
 
 				barbarian.fight(monster);
 				battlesFought++;
-				Alert.info("health report is:\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + "\n2: "
+				Alert.info("health report is:\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / " + barbarian.getMaxHealth() +  "\n2: "
 					+ monster.getName() + " - " + monster.getHealth());
 
 				break;
 			case 2: // '\002'
-				Alert.info("\n1: " + barbarian.getName() + " - " + barbarian.getHealth());
-				Alert.info("\n2: " + monster.getName() + " - " + monster.getHealth());
+				Alert.info("\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / " + barbarian.getMaxHealth());
+				Alert.info("\n2: " + monster.getName() + " - " + monster.getHealth() + " / " + barbarian.getMaxHealth());
 				break;
 			case 3: // '\003'
 				Alert.info("Barbarian - " + barbarian.getName());

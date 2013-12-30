@@ -5,12 +5,35 @@ import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.attributes.Dexterity;
 import CharacterMaker.domain.character.attributes.Strength;
-import CharacterMaker.domain.character.barbarian.Barbarian;
+import CharacterMaker.domain.character.fighting.Fight;
+import CharacterMaker.domain.character.utils.CharacterUtils;
+import CharacterMaker.game.messages.Alert;
 
 public class SwingSword extends Action {
 
 	public SwingSword(String name, String description, int experienceGainedFromUse, int damage) {
 		super(name, description, experienceGainedFromUse, damage);
+	}
+
+	@Override
+	public int use(Character user, Character victim) {
+		Alert.info(user.getName() + " swings his sword at " + victim.getName(), false);
+		int totalDamageDealtFrom1 = 0;
+		if (CharacterUtils.hitSuccessCheck(user)) {
+			totalDamageDealtFrom1 = this.calculateTotalDamage(user);
+			if (CharacterUtils.criticalHitSuccesCheck(user, victim)) {
+				totalDamageDealtFrom1 = totalDamageDealtFrom1 * 2;
+			}
+			Alert.info(" and hits for " + totalDamageDealtFrom1 + " damage\n", false);
+			victim.setHealth(victim.getHealth() - totalDamageDealtFrom1);
+			user.setExperiencePoints(user.getExperiencePoints()
+					+ this.getExperienceGainedFromUse());
+			Fight.isKilledDuringFightCheck(victim);
+		} else {
+			Alert.info(" and misses\n", false);
+		}
+
+		return totalDamageDealtFrom1;
 	}
 
 	@Override

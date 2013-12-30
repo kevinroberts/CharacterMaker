@@ -24,6 +24,17 @@ public class Alert {
 		}
 	}
 
+	public static void info(String message, boolean newLine) {
+		if (CONSOLE.equals(propertyUtils.getAlertMethod())) {
+			if (newLine) {
+				consolePrintLine(message);
+			} else {
+				consolePrint(message);
+			}
+
+		}
+	}
+
 	public static void debug(String message) {
 		if (propertyUtils.isDebugMode() && CONSOLE.equals(propertyUtils.getAlertMethod())) {
 			consolePrintLine(message);
@@ -43,6 +54,7 @@ public class Alert {
 		String alertMethod = propertyUtils.getAlertMethod();
 
 		if (CONSOLE.equals(alertMethod)) {
+			consolePrintLine("Current Health:       " + character.getHealth() + " / " + character.getMaxHealth());
 			consolePrintLine("Experience points:    " + character.getExperiencePoints());
 			consolePrintLine("Level:                " + character.getLevel());
 			consolePrintLine("Battles won:          " + character.getBattlesWon());
@@ -61,7 +73,7 @@ public class Alert {
 			} catch (Exception e) {
 				Alert.debug(e.getMessage());
 			}
-			consolePrint("Current Health:       " + character.getHealth());
+
 
 			consolePrintLine("");
 			for (Attribute attribute : character.getAttributes()) {

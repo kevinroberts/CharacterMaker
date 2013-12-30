@@ -25,6 +25,7 @@ public class OrkFactory implements CharacterFactory {
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		ork.setName(nameService.generateName(ork));
 		ork.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
+		ork.setMaxHealth(Constants.DEFAULT_CHARACTER_HEALTH);
 		ork.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		ork.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
 		ork.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);

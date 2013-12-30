@@ -22,6 +22,7 @@ public class BarbarianFactory implements CharacterFactory {
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		barbarian.setName(nameService.generateName(barbarian));
 		barbarian.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
+		barbarian.setMaxHealth(Constants.DEFAULT_CHARACTER_HEALTH);
 		barbarian.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
 		barbarian.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
 		barbarian.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);

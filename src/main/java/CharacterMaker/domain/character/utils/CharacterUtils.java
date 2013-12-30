@@ -246,17 +246,15 @@ public class CharacterUtils {
 		// restore health and get bonus
 		Double healthBonus = Math.pow(character.getLevel(), 2);
 		character.setHealth(character.getHealth() + healthBonus.intValue());
+
+		// set character's new max health value
+		character.setMaxHealth(100 + healthBonus.intValue());
+
         Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel(), character);
 	}
 
 	public static void resetHealthForCharacter(Character character) {
-		if (character.getLevel() > 1) {
-			Double healthBonus = Math.pow(character.getLevel(), 2);
-			character.setHealth(100 + healthBonus.intValue());
-		} else {
-			character.setHealth(100);
-		}
-
+			character.setHealth(character.getMaxHealth());
 	}
 
 	public static int getLuckLevelForCharacter(Character character) {
