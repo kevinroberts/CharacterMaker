@@ -23,6 +23,12 @@ public abstract class Action {
 		this.damage = damage;
 	}
 
+	/**
+	 * Use action
+	 * @param user - the Character performing this action
+	 * @param victim - the Character getting this action performed on
+	 * @return int - the amount of damage afflicted
+	 */
 	public abstract int use(Character user, Character victim);
 
 	public String getName() {
