@@ -1,8 +1,15 @@
 package CharacterMaker;
 
+import CharacterMaker.domain.character.utils.MersenneTwister;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
 /**
  * Unit test for simple App.
@@ -35,4 +42,34 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+//	public void testRandomness() {
+//		MersenneTwister mersenneTwister = new MersenneTwister();
+//
+//		Random r = new Random();
+//		BufferedImage bimg = new BufferedImage(256, 256,
+//				BufferedImage.TYPE_BYTE_BINARY);
+//		int w = bimg.getWidth();
+//		for (int y = 0; y < bimg.getHeight(); y++) {
+//			for (int x = 0; x < w; x++) {
+//				int bit;
+//				if (mersenneTwister.nextBoolean()) {
+//					bit = 1;
+//				}
+//				else {
+//					bit = 0;
+//				}
+//
+//				bimg.setRGB(x, y, (bit == 0) ? 0 : 0xffffff);
+//			}
+//		}
+//
+//		File outputfile = new File("saved" + System.currentTimeMillis() + ".png");
+//		try {
+//			ImageIO.write(bimg, "png", outputfile);
+//		} catch (IOException e) {
+//			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//		}
+//
+//	}
 }
