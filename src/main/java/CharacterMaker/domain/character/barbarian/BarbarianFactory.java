@@ -54,14 +54,17 @@ public class BarbarianFactory implements CharacterFactory {
 
 		// Define Base Actions for a new Barbarian
 		Multiset<Action> actions = HashMultiset.create();
+		Multiset<Action> equippedActions = HashMultiset.create();
 
 
+		SwingSword swingSword = new SwingSword("Barbarian Blade", "The barbarian swings his mighty blade", 3, 10 + random
+				.nextInt(5));
 
-		actions.add(new SwingSword("Barbarian Blade", "The barbarian swings his mighty blade", 3, 10 + random
-			.nextInt(5)));
+		actions.add(swingSword);
+		equippedActions.add(swingSword);
 
 		barbarian.setActions(actions);
-		barbarian.setEquippedActions(actions); // set the default action to use in fights
+		barbarian.setEquippedActions(equippedActions); // set the default action to use in fights
 
 		return barbarian;
 	}

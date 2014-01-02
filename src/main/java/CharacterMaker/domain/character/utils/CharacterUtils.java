@@ -7,6 +7,7 @@ import java.util.Random;
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.actions.ShootArrowFromBow;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
@@ -156,6 +157,17 @@ public class CharacterUtils {
 		}
 	}
 
+	public static void addActionForCharacter(Character character, Action actionToAdd) {
+		// ensure action is not already equipped
+		boolean added = doesCharacterHaveAction(character, actionToAdd);
+
+		if (!added) {
+			Multiset<Action> actions = character.getActions();
+			actions.add(actionToAdd);
+			character.setActions(actions);
+		}
+	}
+
 	public static boolean isActionAlreadyEquipped(Character character, Action actionToCheck) {
 		boolean equipped = false;
 		for (Action action : character.getEquippedActions()) {
@@ -164,6 +176,16 @@ public class CharacterUtils {
 			}
 		}
 		return equipped;
+	}
+
+	public static boolean doesCharacterHaveAction(Character character, Action actionToCheck) {
+		boolean hasAction = false;
+		for (Action action : character.getActions()) {
+			if (action.getClass().equals(actionToCheck.getClass())) {
+				hasAction = true;
+			}
+		}
+		return hasAction;
 	}
 
 	public static boolean hitSuccessCheck(CharacterMaker.domain.character.Character character) {
@@ -193,7 +215,15 @@ public class CharacterUtils {
 					} else {
 						return false;
 					}
-				} else if (chances >= 10) {
+				}
+				 else if (chances >= 10 && chances < 20) {
+				int prob = random.nextInt(100) + 85;
+				if (prob >= 100) {
+					return true;
+				} else {
+					return false;
+				}
+				}else if (chances >= 20) {
 					int prob = random.nextInt(100) + 90;
 					if (prob >= 100) {
 						return true;
@@ -277,6 +307,15 @@ public class CharacterUtils {
 		character.setMaxHealth(100 + healthBonus.intValue());
 
         Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel(), character);
+
+		// grant new actions on level ups
+		if (character instanceof Barbarian && character.getLevel() > 5) {
+			ShootArrowFromBow shootArrowFromBow = new ShootArrowFromBow("Bow and Arrows", "Barbarian bow", 2, 12);
+			if (!doesCharacterHaveAction(character, shootArrowFromBow)) {
+				addActionForCharacter(character, shootArrowFromBow);
+				Alert.infoAboutCharacter(character.getName() + " has just found a bow and arrow! You may equip it to do additional damage in fights.", character);
+			}
+		}
 	}
 
 	public static void resetHealthForCharacter(Character character) {

@@ -1,6 +1,7 @@
 package CharacterMaker.domain.character.fighting;
 
 import CharacterMaker.domain.character.Action;
+import CharacterMaker.domain.character.actions.ShootArrowFromBow;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.actions.Slash;
 import CharacterMaker.domain.character.actions.SwingSword;
@@ -24,6 +25,7 @@ public class BarbarianVsMonster extends Fight {
 			return barbarian1;
 		}
 
+		// TODO only initiate one action at a time against each other in fights
 		// Barbarian 1 actions against monster2
 		int totalDamageDealtFrom1 = 0;
 		for (Action action : barbarian1.getEquippedActions()) {
@@ -31,8 +33,11 @@ public class BarbarianVsMonster extends Fight {
 				SwingSword swingSword = (SwingSword) action;
 				totalDamageDealtFrom1 = swingSword.use(barbarian1, monster2);
 			}
+			if (action instanceof ShootArrowFromBow) {
+				ShootArrowFromBow shootArrowFromBow = (ShootArrowFromBow) action;
+				totalDamageDealtFrom1 = shootArrowFromBow.use(barbarian1, monster2);
+			}
 		}
-
 
 		if (isDeadCheck(monster2)) {
 			return barbarian1;

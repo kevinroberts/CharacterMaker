@@ -103,6 +103,18 @@ public class Alert {
 				}
 				consolePrint(attribute.getBattleLevel() + "\n");
 			}
+			consolePrintLine("Equipped Actions: ");
+			for (Action action : character.getEquippedActions()) {
+				int spaces = 18;
+				int length = action.getName().length();
+				spaces = spaces - length;
+
+				System.out.print(action.getName() + " - base damage:");
+				for (int i = 1; i < spaces; spaces--) {
+					consolePrint(" ");
+				}
+				consolePrint(action.getDamage() + "\n");
+			}
 		}
 
 	}

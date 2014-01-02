@@ -1,6 +1,7 @@
 package CharacterMaker.domain.character.fighting;
 
 import CharacterMaker.domain.character.Action;
+import CharacterMaker.domain.character.actions.ShootArrowFromBow;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.barbarian.Barbarian;
@@ -29,6 +30,10 @@ public class BarbarianVsBarbarian extends Fight {
 				SwingSword swingSword = (SwingSword) action;
 				totalDamageDealtFrom1 = swingSword.use(barbarian1, barbarian2);
 			}
+			if (action instanceof ShootArrowFromBow) {
+				ShootArrowFromBow shootArrowFromBow = (ShootArrowFromBow) action;
+				totalDamageDealtFrom1 = shootArrowFromBow.use(barbarian1, barbarian2);
+			}
 		}
 
 		if (isDeadCheck(barbarian2)) {
@@ -40,7 +45,11 @@ public class BarbarianVsBarbarian extends Fight {
 		for (Action action : barbarian2.getEquippedActions()) {
 			if (action instanceof SwingSword) {
 				SwingSword swingSword = (SwingSword) action;
-				totalDamageDealtFrom1 = swingSword.use(barbarian2, barbarian1);
+				totalDamageDealtFrom2 = swingSword.use(barbarian2, barbarian1);
+			}
+			if (action instanceof ShootArrowFromBow) {
+				ShootArrowFromBow shootArrowFromBow = (ShootArrowFromBow) action;
+				totalDamageDealtFrom2 = shootArrowFromBow.use(barbarian2, barbarian1);
 			}
 		}
 

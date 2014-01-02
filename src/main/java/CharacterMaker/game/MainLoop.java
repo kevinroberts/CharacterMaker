@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.barbarian.BarbarianFactory;
@@ -125,6 +126,17 @@ public class MainLoop {
 			case 6:
 				Alert.info("Pick a new action or weapon to equip:");
 				Alert.printActions(barbarian);
+				int newAction = console.nextInt();
+				if (newAction > 0) {
+					int step = 1;
+					for (Action action : barbarian.getActions()) {
+						if (step == newAction) {
+							CharacterUtils.equipActionForCharacter(barbarian, action);
+							Alert.info("Equipped " + action.getName());
+						}
+						step++;
+					}
+				}
 				break;
 			case 7:
 				Alert.info("Goodbye");
