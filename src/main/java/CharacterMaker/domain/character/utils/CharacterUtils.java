@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.game.messages.Alert;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 
 public class CharacterUtils {
 
@@ -20,7 +24,7 @@ public class CharacterUtils {
 
 	/**
 	 * Given a set list of Characters types, return all the ones with
-	 * a duplicate name.
+	 * duplicate names.
 	 * @param characterList
 	 * @return List of Characters with Duplicate Names
 	 */
@@ -139,6 +143,27 @@ public class CharacterUtils {
 		for (Character character : characters) {
 			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character));
 		}
+	}
+
+	public static void equipActionForCharacter(Character character, Action actionToEquip) {
+		// ensure action is not already equipped
+		boolean equipped = isActionAlreadyEquipped(character, actionToEquip);
+
+		if (!equipped) {
+			Multiset<Action> actions = character.getEquippedActions();
+			actions.add(actionToEquip);
+			character.setEquippedActions(actions);
+		}
+	}
+
+	public static boolean isActionAlreadyEquipped(Character character, Action actionToCheck) {
+		boolean equipped = false;
+		for (Action action : character.getEquippedActions()) {
+			if (action.getClass().equals(actionToCheck.getClass())) {
+				equipped = true;
+			}
+		}
+		return equipped;
 	}
 
 	public static boolean hitSuccessCheck(CharacterMaker.domain.character.Character character) {

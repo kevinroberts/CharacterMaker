@@ -2,9 +2,11 @@ package CharacterMaker.game.messages;
 
 import java.text.NumberFormat;
 
+import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.monster.Monster;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.utils.PropertyUtils;
 
 /**
@@ -46,6 +48,20 @@ public class Alert {
 		if (!(character instanceof Monster)) {
 			if (CONSOLE.equals(alertMethod)) {
 				consolePrintLine(message);
+			}
+		}
+	}
+
+	public static void printActions(Character character) {
+		String alertMethod = propertyUtils.getAlertMethod();
+		if (CONSOLE.equals(alertMethod)) {
+			int num = 1;
+			for (Action action : character.getActions()) {
+				consolePrint(num + ":       " + action.getName());
+				if (CharacterUtils.isActionAlreadyEquipped(character, action)) {
+					consolePrint(" (currently equipped)\n");
+				}
+				num++;
 			}
 		}
 	}

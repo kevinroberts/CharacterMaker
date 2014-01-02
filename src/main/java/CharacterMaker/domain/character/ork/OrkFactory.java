@@ -61,6 +61,7 @@ public class OrkFactory implements CharacterFactory {
 		actions.add(new SwingSword("Ork Blade", "The ork swings his mighty blade", 3, 8 + random.nextInt(9)));
 
 		ork.setActions(actions);
+		ork.setEquippedActions(actions); // set the default action to use in fights
 
 		return ork;
 	}

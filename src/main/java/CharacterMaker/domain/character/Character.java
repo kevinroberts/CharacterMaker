@@ -1,10 +1,12 @@
 package CharacterMaker.domain.character;
 
+import java.io.Serializable;
+
 import CharacterMaker.domain.character.fighting.Fight;
 import CharacterMaker.domain.character.utils.CharacterUtils;
-import com.google.common.collect.Multiset;
 
-import java.io.Serializable;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 
 public abstract class Character implements Serializable {
 
@@ -18,6 +20,12 @@ public abstract class Character implements Serializable {
 
 	private Multiset<Action> actions;
 
+	/**
+	 * The set of actions this character will use in a fight / is a subset of
+	 * the characters available actions
+	 */
+	private Multiset<Action> equippedActions;
+
 	private Integer level;
 
 	private Integer battlesWon;
@@ -26,7 +34,7 @@ public abstract class Character implements Serializable {
 
 	private Integer experiencePoints;
 
-    private String uniqueID;
+	private String uniqueID;
 
 	public Character fight(Character otherCharacter) {
 		return Fight.fight(this, otherCharacter);
@@ -98,13 +106,13 @@ public abstract class Character implements Serializable {
 		this.actions = actions;
 	}
 
-    public String getUniqueID() {
-        return uniqueID;
-    }
+	public String getUniqueID() {
+		return uniqueID;
+	}
 
-    public void setUniqueID(String uniqueID) {
-        this.uniqueID = uniqueID;
-    }
+	public void setUniqueID(String uniqueID) {
+		this.uniqueID = uniqueID;
+	}
 
 	public Integer getBattleFought() {
 		return battleFought;
@@ -122,10 +130,34 @@ public abstract class Character implements Serializable {
 		this.maxHealth = maxHealth;
 	}
 
+	public Multiset<Action> getEquippedActions() {
+		return equippedActions;
+	}
+
+	public void setEquippedActions(Multiset<Action> equippedActions) {
+		this.equippedActions = equippedActions;
+	}
+
+	public void removeAllEquipedActions() {
+		Multiset<Action> actions = HashMultiset.create();
+		this.equippedActions = actions;
+	}
+
 	@Override
 	public String toString() {
-		return "Character{" + "health=" + health + ", name='" + name + '\'' + ", attributes=" + attributes
-			+ ", actions=" + actions + ", level=" + level + ", battlesWon=" + battlesWon + ", experiencePoints="
-			+ experiencePoints + '}';
+		return "Character {" +
+				"health=" + health +
+				", maxHealth=" + maxHealth +
+				", name='" + name + '\'' +
+				", attributes=" + attributes +
+				", actions=" + actions +
+				", equippedActions=" + equippedActions +
+				", level=" + level +
+				", battlesWon=" + battlesWon +
+				", battleFought=" + battleFought +
+				", experiencePoints=" + experiencePoints +
+				", uniqueID='" + uniqueID + '\'' +
+				'}';
 	}
+
 }

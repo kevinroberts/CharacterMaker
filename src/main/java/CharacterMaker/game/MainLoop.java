@@ -62,11 +62,11 @@ public class MainLoop {
 		String oldMonsterID = monster.getUniqueID();
 		do {
 
-			if (quit == 6)
+			if (quit == 7)
 				break;
 			Alert.info("\nHere is what I can do for you now:\n " + "1. Battle your barbarian\n "
-				+ "2. Health totals\n " + "3. Stat totals\n " + "4. Reset total health\n " + "5. Train Barbarian, "
-				+ barbarian.getName() + "\n 6. Quit the application");
+				+ "2. Health totals\n " + "3. Character status\n " + "4. Reset total health\n " + "5. Train Barbarian, "
+				+ barbarian.getName() + "\n 6. Equip a new weapon" + "\n 7. Quit the application");
 			quit = console.nextInt();
 			switch (quit) {
 			case 1: // '\001'
@@ -123,9 +123,13 @@ public class MainLoop {
 				barbarian.train();
 				break;
 			case 6:
-				Alert.info("Goodbye");
+				Alert.info("Pick a new action or weapon to equip:");
+				Alert.printActions(barbarian);
 				break;
 			case 7:
+				Alert.info("Goodbye");
+				break;
+			case 8:
 				Alert.info("Battling your barbarian with 100 other random barbarians");
 				List<Barbarian> barbariansList = new ArrayList<Barbarian>();
 
@@ -142,7 +146,7 @@ public class MainLoop {
 				Alert.printStats(victor);
 
 				break;
-				case 8:
+			case 9:
 					Alert.info("Battling your barbarian with 100 other random barbarians against monsters");
 					List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
 

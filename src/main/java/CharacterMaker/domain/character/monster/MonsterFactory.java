@@ -59,6 +59,7 @@ public class MonsterFactory implements CharacterFactory {
 		actions.add(new Slash("Slash", monster.getName() + " attacks with a brutal slash", 3, 5 + random.nextInt(5)));
 
 		monster.setActions(actions);
+		monster.setEquippedActions(actions); // set the default action to use in fights
 
 		return monster;
 

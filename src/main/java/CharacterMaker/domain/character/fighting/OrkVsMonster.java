@@ -26,7 +26,7 @@ public class OrkVsMonster extends Fight {
 
 		// Barbarian 1 actions against monster2
 		int totalDamageDealtFrom1 = 0;
-		for (Action action : ork1.getActions()) {
+		for (Action action : ork1.getEquippedActions()) {
 			if (action instanceof SwingSword) {
 				SwingSword swingSword = (SwingSword) action;
 				totalDamageDealtFrom1 = swingSword.use(ork1, monster2);
@@ -40,7 +40,7 @@ public class OrkVsMonster extends Fight {
 
 		// Monster's actions against Barbarian
 		int totalDamageDealtFrom2 = 0;
-		for (Action action : monster2.getActions()) {
+		for (Action action : monster2.getEquippedActions()) {
 			if (action instanceof Slash) {
 				Slash slash = (Slash) action;
 				totalDamageDealtFrom2 = slash.use(monster2, ork1);
