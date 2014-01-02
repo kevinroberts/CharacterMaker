@@ -8,14 +8,13 @@ import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.actions.ShootArrowFromBow;
-import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.game.messages.Alert;
-import com.google.common.collect.HashMultiset;
+
 import com.google.common.collect.Multiset;
 
 public class CharacterUtils {
@@ -24,9 +23,10 @@ public class CharacterUtils {
 	}
 
 	/**
-	 * Given a set list of Characters types, return all the ones with
-	 * duplicate names.
-	 * @param characterList
+	 * Given a set list of Characters types, return all the ones with duplicate
+	 * names.
+	 * 
+	 * @param characterList the list of characters to check for dupes
 	 * @return List of Characters with Duplicate Names
 	 */
 	public static List<Character> findDuplicateNames(List<? extends Character> characterList) {
@@ -81,7 +81,6 @@ public class CharacterUtils {
 				characterList.remove(randomSelection2);
 			}
 
-
 			rounds++;
 		}
 
@@ -108,9 +107,9 @@ public class CharacterUtils {
 			Monster monster = monsterFactory.createCharacter();
 
 			if (character1.getLevel() > 1) {
-					for (int i = 0; i < character1.getLevel(); i++) {
-						monster.train();
-					}
+				for (int i = 0; i < character1.getLevel(); i++) {
+					monster.train();
+				}
 			}
 			// add extra training for higher levels
 			if (character1.getLevel() > 3) {
@@ -139,12 +138,11 @@ public class CharacterUtils {
 		return victor;
 	}
 
-
-	public static void printCharactersByNameAndStrength(List<? extends Character> characters) {
-		for (Character character : characters) {
-			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character));
-		}
-	}
+//	public static void printCharactersByNameAndStrength(List<? extends Character> characters) {
+//		for (Character character : characters) {
+//			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character));
+//		}
+//	}
 
 	public static void equipActionForCharacter(Character character, Action actionToEquip) {
 		// ensure action is not already equipped
@@ -205,33 +203,24 @@ public class CharacterUtils {
 					int prob = random.nextInt(100) + 70;
 					if (prob >= 100) {
 						return true;
-					} else {
-						return false;
 					}
 				} else if (chances >= 7 && chances < 10) {
 					int prob = random.nextInt(100) + 80;
 					if (prob >= 100) {
 						return true;
-					} else {
-						return false;
 					}
-				}
-				 else if (chances >= 10 && chances < 20) {
-				int prob = random.nextInt(100) + 85;
-				if (prob >= 100) {
-					return true;
-				} else {
-					return false;
-				}
-				}else if (chances >= 20) {
+				} else if (chances >= 10 && chances < 20) {
+					int prob = random.nextInt(100) + 85;
+					if (prob >= 100) {
+						return true;
+					}
+				} else if (chances >= 20) {
 					int prob = random.nextInt(100) + 90;
 					if (prob >= 100) {
 						return true;
-					} else {
-						return false;
 					}
 				}
-
+				return false;
 			}
 
 		}
@@ -240,25 +229,26 @@ public class CharacterUtils {
 	}
 
 	/**
-	 *  Logic borrowed from
-	 *  http://finalfantasy.wikia.com/wiki/Critical_Hit
+	 * Logic borrowed from http://finalfantasy.wikia.com/wiki/Critical_Hit
+	 * 
 	 * @param character the character performing the hit
 	 * @param character2 the target of the hit
 	 * @return boolean successful critical hit
 	 */
-	public static boolean criticalHitSuccesCheck(CharacterMaker.domain.character.Character character, CharacterMaker.domain.character.Character character2) {
+	public static boolean criticalHitSuccesCheck(CharacterMaker.domain.character.Character character,
+		CharacterMaker.domain.character.Character character2) {
 		boolean isCriticalHitSuccess = false;
 		Random randomObj = new Random();
 
-		int critical = (getLuckLevelForCharacter(character) + character.getLevel() - character2.getLevel())/4;
-		int random = (randomObj.nextInt(65535) * 99/65535) + 1;
+		int critical = (getLuckLevelForCharacter(character) + character.getLevel() - character2.getLevel()) / 4;
+		int random = (randomObj.nextInt(65535) * 99 / 65535) + 1;
 
 		if (random <= critical) {
 			isCriticalHitSuccess = true;
 			Alert.info(" landing a critical hit ");
 
 		}
-		//LOG.debug("random: " + random + " | critical: " + critical);
+		// LOG.debug("random: " + random + " | critical: " + critical);
 
 		return isCriticalHitSuccess;
 	}
@@ -266,7 +256,7 @@ public class CharacterUtils {
 	public static void incrementAttributeStats(Character character) {
 		for (Attribute attribute : character.getAttributes()) {
 			if (character instanceof Barbarian && attribute instanceof Strength) {
-				attribute.setBattleLevel(attribute.getBattleLevel() + (1 * Barbarian.STRENGTH_MULTIPLIER));
+				attribute.setBattleLevel(attribute.getBattleLevel() + (Barbarian.STRENGTH_MULTIPLIER));
 			} else {
 				attribute.setBattleLevel(attribute.getBattleLevel() + 1);
 			}
@@ -306,20 +296,24 @@ public class CharacterUtils {
 		// set character's new max health value
 		character.setMaxHealth(100 + healthBonus.intValue());
 
-        Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel(), character);
+		Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel(),
+			character);
 
 		// grant new actions on level ups
 		if (character instanceof Barbarian && character.getLevel() > 5) {
 			ShootArrowFromBow shootArrowFromBow = new ShootArrowFromBow("Bow and Arrows", "Barbarian bow", 2, 12);
 			if (!doesCharacterHaveAction(character, shootArrowFromBow)) {
 				addActionForCharacter(character, shootArrowFromBow);
-				Alert.infoAboutCharacter(character.getName() + " has just found a bow and arrow! You may equip it to do additional damage in fights.", character);
+				Alert
+					.infoAboutCharacter(character.getName()
+							+ " has just found a bow and arrow! You may equip it to do additional damage in fights.",
+							character);
 			}
 		}
 	}
 
 	public static void resetHealthForCharacter(Character character) {
-			character.setHealth(character.getMaxHealth());
+		character.setHealth(character.getMaxHealth());
 	}
 
 	public static int getLuckLevelForCharacter(Character character) {
@@ -340,6 +334,16 @@ public class CharacterUtils {
 			}
 		}
 		return strengthLevel;
+	}
+
+	public static Action getRandomAction(Multiset<Action> actionMultiset) {
+		if (actionMultiset.size() == 1) {
+			return (Action) actionMultiset.toArray()[0];
+		} else if (actionMultiset.size() > 1) {
+			Random random = new Random();
+			return (Action) actionMultiset.toArray()[random.nextInt(actionMultiset.size())];
+		}
+		return null;
 	}
 
 }
