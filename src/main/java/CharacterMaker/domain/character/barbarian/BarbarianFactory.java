@@ -38,7 +38,7 @@ public class BarbarianFactory implements CharacterFactory {
 			"Intelligence",
 			"Barbarians are not known for their intelligence. \"Durr I haz beeg shield and er club and i gonna smack you upside dee head\"",
 			random.nextInt(2) + 5);
-		Stamina stamina = new Stamina("Stamina", "Stamina", random.nextInt(10) + 5);
+		Stamina stamina = new Stamina("Stamina", "Stamina determines how many actions you can perform per fight", random.nextInt(10) + 5);
 		Strength strength = new Strength("Strength", "Barbarian Strength", random.nextInt(5) + 10);
 
 		Multiset<Attribute> attributes = HashMultiset.create();

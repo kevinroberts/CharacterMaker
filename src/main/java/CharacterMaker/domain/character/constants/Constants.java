@@ -7,6 +7,7 @@ public class Constants {
 
 	public static int XP_FROM_BATTLE_VICTORY = 10;
 	public static int XP_FROM_TRAINING = 5;
+	public static int STAMINA_USE_FROM_ACTION = 5;
 	public static int DEFAULT_CHARACTER_LEVEL = 1;
 	public static int DEFAULT_CHARACTER_HEALTH = 100;
 	public static int DEFAULT_CHARACTER_BATTLES_WON = 0;

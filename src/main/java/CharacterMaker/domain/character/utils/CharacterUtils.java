@@ -9,6 +9,7 @@ import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.actions.ShootArrowFromBow;
 import CharacterMaker.domain.character.attributes.Luck;
+import CharacterMaker.domain.character.attributes.Stamina;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.monster.Monster;
@@ -324,6 +325,16 @@ public class CharacterUtils {
 			}
 		}
 		return luckLevel;
+	}
+
+	public static int getStaminaLevelForCharacter(Character character) {
+		int staminaLevel = 0;
+		for (Attribute attribute : character.getAttributes()) {
+			if (attribute instanceof Stamina) {
+				staminaLevel = attribute.getBattleLevel();
+			}
+		}
+		return staminaLevel;
 	}
 
 	public static int getStrengthLevelForCharacter(Character character) {

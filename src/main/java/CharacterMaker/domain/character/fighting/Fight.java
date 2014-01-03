@@ -1,12 +1,16 @@
 package CharacterMaker.domain.character.fighting;
 
+import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.utils.CharacterUtils;
-import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
-import CharacterMaker.domain.character.ork.Ork;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.game.messages.Alert;
+
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * CharacterMaker.domain.character.fighting
@@ -15,26 +19,83 @@ import CharacterMaker.game.messages.Alert;
  */
 
 public abstract class Fight {
+	private static final Logger LOG = LoggerFactory.getLogger(Fight.class);
+	// total damage tracking variables
+	private static int totalDamageDealtFrom1;
+	private static int totalDamageDealtFrom2;
 
 	public static Character fight(Character character1, Character character2) {
-		if (character1 instanceof Barbarian && character2 instanceof Barbarian) {
-			return BarbarianVsBarbarian.fight((Barbarian) character1, (Barbarian) character2);
-		} else if (character1 instanceof Barbarian && character2 instanceof Ork ) {
-			return BarbarianVsOrk.fight((Barbarian) character1, (Ork) character2);
-		} else if (character1 instanceof Ork && character2 instanceof Barbarian) {
-			return BarbarianVsOrk.fight((Barbarian) character2, (Ork) character1);
-		} else if (character1 instanceof Barbarian && character2 instanceof Monster) {
-			return BarbarianVsMonster.fight((Barbarian) character1, (Monster) character2);
-		} else if (character1 instanceof Monster && character2 instanceof Barbarian) {
-			return BarbarianVsMonster.fight((Barbarian) character2, (Monster) character1);
-		} else if (character1 instanceof Ork && character2 instanceof Monster) {
-			return OrkVsMonster.fight((Ork) character1, (Monster) character2);
-		} else if (character2 instanceof Ork && character1 instanceof Monster) {
-			return OrkVsMonster.fight((Ork) character2, (Monster) character1);
+		if (isDeadCheck(character1)) {
+			return character2;
 		}
-		else {
-			return null;
+		if (isDeadCheck(character2)) {
+			return character1;
 		}
+
+		totalDamageDealtFrom1 = 0;
+		totalDamageDealtFrom2 = 0;
+
+		// stamina tracking
+		int staminaForCharacter1 = CharacterUtils.getStaminaLevelForCharacter(character1);
+		int staminaForCharacter2 = CharacterUtils.getStaminaLevelForCharacter(character2);
+
+		// clone the available actions for each character
+		Multiset<Action> availableActionsForCharacter1 = HashMultiset.create();
+
+		for (Action action : character1.getEquippedActions()) {
+			availableActionsForCharacter1.add(action);
+		}
+
+		Multiset<Action> availableActionsForCharacter2 = HashMultiset.create();
+
+		for (Action action : character2.getEquippedActions()) {
+			availableActionsForCharacter2.add(action);
+		}
+
+		// Fight back and forth until each character runs out of actions or stamina (whichever comes first)
+		while ((availableActionsForCharacter1.size() > 0 || availableActionsForCharacter2.size() > 0) &&
+				(staminaForCharacter1 > 0 || staminaForCharacter2 > 0)) {
+			// subtract stamina from character 1 on use of action
+			staminaForCharacter1 = staminaForCharacter1 - Constants.STAMINA_USE_FROM_ACTION;
+			//LOG.debug("stamina for character " + character1.getName() + " is now " + staminaForCharacter1);
+			if (staminaForCharacter1 <= 0) {
+				Alert.info(character1.getName() + " ran out of stamina before he could finish his attacks");
+			}
+			// check if character 1 ran out of stamina - if so end his actions
+			if (staminaForCharacter1 > 0) {
+				// get a random action and use it from the first character
+				Action action1 = CharacterUtils.getRandomAction(availableActionsForCharacter1);
+				if (action1 != null) {
+					totalDamageDealtFrom1 += action1.use(character1, character2);
+					availableActionsForCharacter1.remove(action1);
+				}
+				if (isDeadCheck(character2)) {
+					return character1;
+				}
+			}
+
+			// subtract stamina from character 2 on use of action
+			staminaForCharacter2 = staminaForCharacter2 - Constants.STAMINA_USE_FROM_ACTION;
+
+			// check if character 2 ran out of stamina - if so end his actions
+			if (staminaForCharacter2 <= 0) {
+				Alert.info(character2.getName() + " ran out of stamina before he could finish his attacks");
+			}
+
+			if (staminaForCharacter2 > 0) {
+				Action action2 = CharacterUtils.getRandomAction(availableActionsForCharacter2);
+				if (action2 != null) {
+					totalDamageDealtFrom2 += action2.use(character2, character1);
+					availableActionsForCharacter2.remove(action2);
+				}
+				if (isDeadCheck(character1)) {
+					return character1;
+				}
+			}
+
+		}
+
+		return processFightWinner(character1, character2);
 	}
 
 	public static boolean isDeadCheck(Character character) {
@@ -49,7 +110,7 @@ public abstract class Fight {
 	public static void isKilledDuringFightCheck(Character character) {
 		if (character.getHealth() <= 0) {
 			if (character instanceof Monster) {
-				// are monsters truly genderless whaaa?
+				// are monsters truly genderless - is this sexist to monsters?
 				Alert.info(character.getName() + " collapses and dies from its injuries.");
 			} else {
 				Alert.info(character.getName() + " collapses and dies from his injuries.");
@@ -57,13 +118,13 @@ public abstract class Fight {
 		}
 	}
 
-	public static Character processFightWinner(int totalDamageDealtFrom1, int totalDamageDealtFrom2, Character character1, Character character2) {
+	public static Character processFightWinner(Character character1, Character character2) {
 
 		character1.setBattleFought(character1.getBattleFought() + 1);
 		character2.setBattleFought(character2.getBattleFought() + 1);
 
 		if (totalDamageDealtFrom1 > totalDamageDealtFrom2) {
-            Alert.info(character1.getName() + " wins the fight.");
+			Alert.info(character1.getName() + " wins the fight.");
 			character1.setBattlesWon(character1.getBattlesWon() + 1);
 			// award bonus experience if the characters are near the same
 			// skill level
@@ -73,14 +134,15 @@ public abstract class Fight {
 
 			return character1;
 		} else if (totalDamageDealtFrom2 > totalDamageDealtFrom1) {
-            Alert.info(character2.getName() + " wins the fight.");
+			Alert.info(character2.getName() + " wins the fight.");
 			character2.setBattlesWon(character2.getBattlesWon() + 1);
 			if (Math.abs(character1.getLevel() - character2.getLevel()) < Constants.CHARACTER_LEVEL_DIFFERENCE_FOR_BONUS_XP) {
 				character2.setExperiencePoints(character2.getExperiencePoints() + Constants.XP_FROM_BATTLE_VICTORY);
 			}
 			return character2;
 		} else if (totalDamageDealtFrom1 == totalDamageDealtFrom2) {
-			// there was a tie in damage dealt -- we determine a random winner based on health / luck
+			// there was a tie in damage dealt -- we determine a random winner
+			// based on health / luck
 			if (character1.getHealth() > character2.getHealth()) {
 				return character1;
 			} else if (character2.getHealth() < character1.getHealth()) {
@@ -101,6 +163,5 @@ public abstract class Fight {
 		}
 
 	}
-
 
 }

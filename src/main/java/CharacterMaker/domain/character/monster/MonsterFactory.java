@@ -40,7 +40,7 @@ public class MonsterFactory implements CharacterFactory {
 		Luck luck = new Luck("Luck", "Monster Luck", random.nextInt(4) + 3);
 		Dexterity dexterity = new Dexterity("Dexterity", "Monster dexterity", random.nextInt(5) + 5);
 		Intelligence intelligence = new Intelligence("Intelligence", "Monsters Intelligence", random.nextInt(1) + 3);
-		Stamina stamina = new Stamina("Stamina", "Monster Stamina", random.nextInt(10) + 5);
+		Stamina stamina = new Stamina("Stamina", "Monster Stamina",  5);
 		Strength strength = new Strength("Strength", "Monster Strength", random.nextInt(5) + 2);
 
 		Multiset<Attribute> attributes = HashMultiset.create();
