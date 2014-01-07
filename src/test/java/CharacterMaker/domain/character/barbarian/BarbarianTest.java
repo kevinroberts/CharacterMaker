@@ -39,6 +39,7 @@ public class BarbarianTest extends TestCase {
 		assertEquals("Default battles won", testBarbarian.getBattlesWon(),(Integer) Constants.DEFAULT_CHARACTER_BATTLES_WON);
         assertEquals("Default battles fought", testBarbarian.getBattleFought(),(Integer) Constants.DEFAULT_BATTLES_FOUGHT);
 		assertEquals("Default xp", testBarbarian.getExperiencePoints(), (Integer)Constants.DEFAULT_CHARACTER_XP);
+        assertEquals("Default max hp", testBarbarian.getMaxHealth(), (Integer)Constants.DEFAULT_CHARACTER_HEALTH);
 	}
 
 	public void testBarbarianLevelUp() throws Exception {
@@ -46,6 +47,12 @@ public class BarbarianTest extends TestCase {
 		testBarbarianLeveler.levelUp();
 		assertEquals("barbarian is at level 2", testBarbarianLeveler.getLevel(), (Integer)2);
 	}
+
+    public void testBarbarianUnique() throws Exception {
+        Barbarian barbarian1 = barbarianFactory.createCharacter();
+        Barbarian barbarian2 = barbarianFactory.createCharacter();
+        assertFalse("Two barbarians do not have the same ID", barbarian1.getUniqueID().equals(barbarian2.getUniqueID()));
+    }
 
 	public void testBarbarianTraining() throws Exception {
 		Barbarian testBarbarianTrainee = barbarianFactory.createCharacter();
