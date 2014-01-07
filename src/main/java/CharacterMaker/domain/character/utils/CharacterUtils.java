@@ -139,11 +139,6 @@ public class CharacterUtils {
 		return victor;
 	}
 
-//	public static void printCharactersByNameAndStrength(List<? extends Character> characters) {
-//		for (Character character : characters) {
-//			Alert.info(character.getName() + " - Strength: " + getStrengthLevelForCharacter(character));
-//		}
-//	}
 
 	public static boolean equipActionForCharacter(Character character, Action actionToEquip) {
 		// ensure action is not already equipped
