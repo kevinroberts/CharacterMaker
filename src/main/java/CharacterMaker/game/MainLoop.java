@@ -131,8 +131,11 @@ public class MainLoop {
 					int step = 1;
 					for (Action action : barbarian.getActions()) {
 						if (step == newAction) {
-							CharacterUtils.equipActionForCharacter(barbarian, action);
-							Alert.info("Equipped " + action.getName());
+							boolean equipped = CharacterUtils.equipActionForCharacter(barbarian, action);
+							if (equipped)
+								Alert.info("Equipped " + action.getName());
+							else
+								Alert.info(action.getName() + " is already equipped");
 						}
 						step++;
 					}

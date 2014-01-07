@@ -60,6 +60,8 @@ public class Alert {
 				consolePrint(num + ":       " + action.getName());
 				if (CharacterUtils.isActionAlreadyEquipped(character, action)) {
 					consolePrint(" (currently equipped)\n");
+				} else {
+					consolePrintLine("");
 				}
 				num++;
 			}

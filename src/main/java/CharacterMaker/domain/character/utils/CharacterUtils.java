@@ -145,7 +145,7 @@ public class CharacterUtils {
 //		}
 //	}
 
-	public static void equipActionForCharacter(Character character, Action actionToEquip) {
+	public static boolean equipActionForCharacter(Character character, Action actionToEquip) {
 		// ensure action is not already equipped
 		boolean equipped = isActionAlreadyEquipped(character, actionToEquip);
 
@@ -154,6 +154,8 @@ public class CharacterUtils {
 			actions.add(actionToEquip);
 			character.setEquippedActions(actions);
 		}
+
+		return !equipped;
 	}
 
 	public static void addActionForCharacter(Character character, Action actionToAdd) {

@@ -51,6 +51,8 @@ public abstract class Fight {
 		for (Action action : character2.getEquippedActions()) {
 			availableActionsForCharacter2.add(action);
 		}
+		boolean isOutOfStamina1 = false;
+		boolean isOutOfStamina2 = false;
 
 		// Fight back and forth until each character runs out of actions or stamina (whichever comes first)
 		while ((availableActionsForCharacter1.size() > 0 || availableActionsForCharacter2.size() > 0) &&
@@ -58,7 +60,8 @@ public abstract class Fight {
 			// subtract stamina from character 1 on use of action
 			staminaForCharacter1 = staminaForCharacter1 - Constants.STAMINA_USE_FROM_ACTION;
 			//LOG.debug("stamina for character " + character1.getName() + " is now " + staminaForCharacter1);
-			if (staminaForCharacter1 <= 0) {
+			if (staminaForCharacter1 <= 0 && !isOutOfStamina1 && availableActionsForCharacter1.size() > 0) {
+				isOutOfStamina1 = true;
 				Alert.info(character1.getName() + " ran out of stamina before he could finish his attacks");
 			}
 			// check if character 1 ran out of stamina - if so end his actions
@@ -74,14 +77,16 @@ public abstract class Fight {
 				}
 			}
 
+
 			// subtract stamina from character 2 on use of action
 			staminaForCharacter2 = staminaForCharacter2 - Constants.STAMINA_USE_FROM_ACTION;
 
-			// check if character 2 ran out of stamina - if so end his actions
-			if (staminaForCharacter2 <= 0) {
+			if (staminaForCharacter2 <= 0 && !isOutOfStamina2 && availableActionsForCharacter2.size() > 0) {
+				isOutOfStamina2 = true;
 				Alert.info(character2.getName() + " ran out of stamina before he could finish his attacks");
 			}
 
+			// check if character 2 ran out of stamina - if so end his actions
 			if (staminaForCharacter2 > 0) {
 				Action action2 = CharacterUtils.getRandomAction(availableActionsForCharacter2);
 				if (action2 != null) {
@@ -92,6 +97,8 @@ public abstract class Fight {
 					return character1;
 				}
 			}
+
+
 
 		}
 
