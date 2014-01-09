@@ -17,10 +17,9 @@ import java.util.UUID;
  * @author Kevin Roberts Date: 12/02/2013
  */
 
-public class OrkFactory implements CharacterFactory {
+public class OrkFactory extends CharacterFactory {
 
-	@Override
-	public Ork createCharacter() {
+	public static Ork createCharacter(String characterType) {
 		Ork ork = new Ork();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		ork.setName(nameService.generateName(ork));

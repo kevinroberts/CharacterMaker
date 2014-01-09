@@ -14,10 +14,10 @@ import CharacterMaker.domain.character.naming.CharacterNameService;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
-public class BarbarianFactory implements CharacterFactory {
+public class BarbarianFactory extends CharacterFactory {
 
-	@Override
-	public Barbarian createCharacter() {
+
+	public static Barbarian createCharacter(String characterType) {
 		Barbarian barbarian = new Barbarian();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		barbarian.setName(nameService.generateName(barbarian));

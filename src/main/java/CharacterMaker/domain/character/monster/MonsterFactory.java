@@ -19,10 +19,9 @@ import com.google.common.collect.Multiset;
  * 
  * @author Kevin Roberts 12/5/13
  */
-public class MonsterFactory implements CharacterFactory {
+public class MonsterFactory extends CharacterFactory {
 
-	@Override
-	public Monster createCharacter() {
+	public static Monster createCharacter(String characterType) {
 		Monster monster = new Monster();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		monster.setName(nameService.generateName(monster));
