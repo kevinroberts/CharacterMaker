@@ -8,7 +8,7 @@ public class Barbarian extends Character {
 
 	public static final int STRENGTH_MULTIPLIER = 2;
 
-    public Character initializeNewCharacter() {
+    protected Character initializeNewCharacter() {
         BarbarianFactory barbarianFactory = new BarbarianFactory();
         return barbarianFactory.createCharacter();
     }

@@ -50,8 +50,8 @@ public class BarbarianTest extends TestCase {
 	}
 
     public void testBarbarianUnique() throws Exception {
-        Barbarian barbarian1 = barbarianFactory.createCharacter();
-        Barbarian barbarian2 = barbarianFactory.createCharacter();
+        Barbarian barbarian1 = (Barbarian)barbarianFactory.createCharacter("Barbarian");
+        Barbarian barbarian2 = (Barbarian)barbarianFactory.createCharacter("Barbarian");
         assertFalse("Two barbarians do not have the same ID", barbarian1.getUniqueID().equals(barbarian2.getUniqueID()));
     }
 

@@ -15,7 +15,7 @@ import CharacterMaker.domain.character.constants.Constants;
 
 public class Ork extends Character {
 
-    public Character initializeNewCharacter() {
+    protected Character initializeNewCharacter() {
         OrkFactory orkFactory = new OrkFactory();
         return orkFactory.createCharacter();
     }

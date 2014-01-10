@@ -14,7 +14,11 @@ import CharacterMaker.domain.character.constants.Constants;
  */
 public class Monster extends Character {
 
-    public Character initializeNewCharacter() {
+	/**
+	 * Initializes a new Monster - used internally from the CharacterFactory.class
+	 * @return new Monster instance
+	 */
+	protected Character initializeNewCharacter() {
         MonsterFactory monsterFactory = new MonsterFactory();
         return monsterFactory.createCharacters();
     }

@@ -39,7 +39,11 @@ public abstract class Character implements Serializable {
 
 	private String uniqueID;
 
-    public abstract Character initializeNewCharacter();
+	/**
+	 * Must be implemented to initialize a new Character - used internally from the CharacterFactory.class by all subclasses of Character
+	 * @return new Monster instance
+	 */
+	protected abstract Character initializeNewCharacter();
 
 	public Character fight(Character otherCharacter) {
 		return Fight.fight(this, otherCharacter);
