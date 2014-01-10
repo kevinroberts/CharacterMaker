@@ -1,5 +1,6 @@
 package CharacterMaker.domain.character.barbarian;
 
+import CharacterMaker.domain.character.CharacterFactory;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -12,14 +13,14 @@ import CharacterMaker.domain.character.constants.Constants;
  */
 public class BarbarianTest extends TestCase {
 
-	BarbarianFactory barbarianFactory;
+	CharacterFactory barbarianFactory;
 	Barbarian testBarbarian;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		barbarianFactory = new BarbarianFactory();
-		testBarbarian = barbarianFactory.createCharacter();
+		barbarianFactory = new CharacterFactory();
+		testBarbarian = (Barbarian)barbarianFactory.createCharacter("Barbarian");
 	}
 
 	/**
@@ -30,7 +31,7 @@ public class BarbarianTest extends TestCase {
 	}
 
 	public void testCreateValidBarbarian() throws Exception {
-		assertEquals("Barbarian is created", Barbarian.class, barbarianFactory.createCharacter().getClass());
+		assertEquals("Barbarian is created", Barbarian.class, testBarbarian.getClass());
 	}
 
 	public void testBarbarianProperties() throws Exception {
@@ -42,13 +43,13 @@ public class BarbarianTest extends TestCase {
 	}
 
 	public void testBarbarianLevelUp() throws Exception {
-		Barbarian testBarbarianLeveler = barbarianFactory.createCharacter();
+		Barbarian testBarbarianLeveler = (Barbarian)barbarianFactory.createCharacter("Barbarian");
 		testBarbarianLeveler.levelUp();
 		assertEquals("barbarian is at level 2", testBarbarianLeveler.getLevel(), (Integer)2);
 	}
 
 	public void testBarbarianTraining() throws Exception {
-		Barbarian testBarbarianTrainee = barbarianFactory.createCharacter();
+		Barbarian testBarbarianTrainee = (Barbarian)barbarianFactory.createCharacter("Barbarian");
 		testBarbarianTrainee.train();
 		assertTrue("Experience Points increased from training",
 			testBarbarianTrainee.getExperiencePoints() > Constants.DEFAULT_CHARACTER_XP);

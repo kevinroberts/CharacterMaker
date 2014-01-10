@@ -7,11 +7,13 @@ import java.util.Random;
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.ShootArrowFromBow;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Stamina;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
+import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.game.messages.Alert;
@@ -95,7 +97,7 @@ public class CharacterUtils {
 	public static Character battleRoyalWithMonsters(List<? extends Character> characterList, String idToTrack) {
 		Character victor;
 		MersenneTwister mersenneTwister = new MersenneTwister();
-		MonsterFactory monsterFactory = new MonsterFactory();
+        CharacterFactory characterFactory = new CharacterFactory();
 
 		int rounds = 1;
 		int madeItRound = 0;
@@ -105,7 +107,7 @@ public class CharacterUtils {
 			int randomSelection1 = mersenneTwister.nextInt(characterList.size());
 
 			Character character1 = characterList.get(randomSelection1);
-			Monster monster = monsterFactory.createCharacter();
+			Monster monster = (Monster)characterFactory.createCharacter(Constants.MONSTER);
 
 			if (character1.getLevel() > 1) {
 				for (int i = 0; i < character1.getLevel(); i++) {

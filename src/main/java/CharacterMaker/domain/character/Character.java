@@ -10,7 +10,10 @@ import com.google.common.collect.Multiset;
 
 public abstract class Character implements Serializable {
 
-	private Integer health;
+    protected Character() {
+    }
+
+    private Integer health;
 
 	private Integer maxHealth;
 
@@ -35,6 +38,8 @@ public abstract class Character implements Serializable {
 	private Integer experiencePoints;
 
 	private String uniqueID;
+
+    public abstract Character initializeNewCharacter();
 
 	public Character fight(Character otherCharacter) {
 		return Fight.fight(this, otherCharacter);

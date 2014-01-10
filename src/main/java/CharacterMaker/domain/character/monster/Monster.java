@@ -14,7 +14,12 @@ import CharacterMaker.domain.character.constants.Constants;
  */
 public class Monster extends Character {
 
-	@Override
+    public Character initializeNewCharacter() {
+        MonsterFactory monsterFactory = new MonsterFactory();
+        return monsterFactory.createCharacters();
+    }
+
+    @Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
 		this.setExperiencePoints(this.getExperiencePoints() + Constants.XP_FROM_TRAINING);

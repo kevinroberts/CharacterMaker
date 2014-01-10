@@ -8,7 +8,12 @@ public class Barbarian extends Character {
 
 	public static final int STRENGTH_MULTIPLIER = 2;
 
-	@Override
+    public Character initializeNewCharacter() {
+        BarbarianFactory barbarianFactory = new BarbarianFactory();
+        return barbarianFactory.createCharacter();
+    }
+
+    @Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
 		this.setExperiencePoints(this.getExperiencePoints() + Constants.XP_FROM_TRAINING);

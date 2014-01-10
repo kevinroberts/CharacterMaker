@@ -1,33 +1,22 @@
 package CharacterMaker.domain.character.barbarian;
 
-import java.util.Random;
-import java.util.UUID;
-
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.*;
-import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.naming.CharacterNameService;
-
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
+import java.util.Random;
+
 public class BarbarianFactory extends CharacterFactory {
 
-
-	public static Barbarian createCharacter(String characterType) {
+	public Barbarian createCharacter() {
 		Barbarian barbarian = new Barbarian();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		barbarian.setName(nameService.generateName(barbarian));
-		barbarian.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
-		barbarian.setMaxHealth(Constants.DEFAULT_CHARACTER_HEALTH);
-		barbarian.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
-		barbarian.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
-		barbarian.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
-		barbarian.setBattleFought(Constants.DEFAULT_BATTLES_FOUGHT);
-        barbarian.setUniqueID(UUID.randomUUID().toString());
 		Random random = new Random();
 
 		// Define Base Attributes for a new Barbarian

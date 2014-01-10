@@ -15,7 +15,12 @@ import CharacterMaker.domain.character.constants.Constants;
 
 public class Ork extends Character {
 
-	@Override
+    public Character initializeNewCharacter() {
+        OrkFactory orkFactory = new OrkFactory();
+        return orkFactory.createCharacter();
+    }
+
+    @Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
 		this.setExperiencePoints(this.getExperiencePoints() + Constants.XP_FROM_TRAINING);
