@@ -9,17 +9,13 @@ import CharacterMaker.game.messages.Alert;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * CharacterMaker.domain.character.fighting
- * 
+ *
  * @author Kevin Roberts Date: 12/02/2013
  */
-
 public abstract class Fight {
-	private static final Logger LOG = LoggerFactory.getLogger(Fight.class);
 	// total damage tracking variables
 	private static int totalDamageDealtFrom1;
 	private static int totalDamageDealtFrom2;
@@ -97,7 +93,6 @@ public abstract class Fight {
 					return character1;
 				}
 			}
-
 
 
 		}

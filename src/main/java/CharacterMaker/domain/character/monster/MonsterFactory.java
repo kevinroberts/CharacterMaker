@@ -13,7 +13,7 @@ import java.util.Random;
 
 /**
  * CharacterMaker.domain.character.monster
- * 
+ *
  * @author Kevin Roberts 12/5/13
  */
 public class MonsterFactory extends CharacterFactory {
@@ -23,9 +23,8 @@ public class MonsterFactory extends CharacterFactory {
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		monster.setName(nameService.generateName(monster));
 
-		Random random = new Random();
-
 		// Define Base Attributes for a new Monster
+		Random random = new Random();
 		Charisma charisma = new Charisma("Charisma", "Monster Charisma", random.nextInt(5) + 2);
 		Luck luck = new Luck("Luck", "Monster Luck", random.nextInt(4) + 3);
 		Dexterity dexterity = new Dexterity("Dexterity", "Monster dexterity", random.nextInt(5) + 5);
