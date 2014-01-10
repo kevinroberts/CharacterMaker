@@ -1,15 +1,15 @@
 package CharacterMaker.domain.character.ork;
 
-import CharacterMaker.domain.character.*;
+import CharacterMaker.domain.character.Action;
+import CharacterMaker.domain.character.Attribute;
+import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.*;
-import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.naming.CharacterNameService;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * CharacterMaker.domain.character.ork
@@ -17,20 +17,13 @@ import java.util.UUID;
  * @author Kevin Roberts Date: 12/02/2013
  */
 
-public class OrkFactory implements CharacterFactory {
+public class OrkFactory extends CharacterFactory {
 
-	@Override
 	public Ork createCharacter() {
 		Ork ork = new Ork();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		ork.setName(nameService.generateName(ork));
-		ork.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
-		ork.setMaxHealth(Constants.DEFAULT_CHARACTER_HEALTH);
-		ork.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
-		ork.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
-		ork.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
-		ork.setBattleFought(Constants.DEFAULT_BATTLES_FOUGHT);
-        ork.setUniqueID(UUID.randomUUID().toString());
+
 		Random random = new Random();
 
 		// Define Base Attributes for a new Ork

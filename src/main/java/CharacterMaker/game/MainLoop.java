@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.barbarian.BarbarianFactory;
+import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.domain.character.utils.CharacterStrengthSorter;
@@ -23,22 +25,20 @@ import CharacterMaker.game.messages.Alert;
 
 public class MainLoop {
 
-	private MonsterFactory monsterFactory;
-	private BarbarianFactory barbarianFactory;
+	private CharacterFactory characterFactory;
 	private Barbarian barbarian;
 
 	public MainLoop() {
-		monsterFactory = new MonsterFactory();
-		barbarianFactory = new BarbarianFactory();
+        characterFactory = new CharacterFactory();
 	}
 
 	public void runLoop() {
-		Monster monster = monsterFactory.createCharacter();
+		Monster monster = (Monster)characterFactory.createCharacter(Constants.MONSTER);
 
 		List<Barbarian> barbarians = new ArrayList<Barbarian>();
 
 		for (int i = 0; i < 50; i++) {
-			barbarians.add(barbarianFactory.createCharacter());
+			barbarians.add((Barbarian)characterFactory.createCharacter(Constants.BARBARIAN));
 		}
 
 		List<? extends Character> barbarianDupes = CharacterUtils.findDuplicateNames(barbarians);
@@ -78,7 +78,7 @@ public class MainLoop {
 
 				if (monster.getHealth() <= 0) {
 					// refresh with a new monster if the old one is killed
-					monster = monsterFactory.createCharacter();
+					monster = (Monster)characterFactory.createCharacter(Constants.MONSTER);
 					if (barbarian.getLevel() > 1) {
 						for (int i = 0; i < barbarian.getLevel(); i++) {
 							monster.train();
@@ -149,7 +149,7 @@ public class MainLoop {
 				List<Barbarian> barbariansList = new ArrayList<Barbarian>();
 
 				for (int i = 0; i < 100; i++) {
-					barbariansList.add(barbarianFactory.createCharacter());
+					barbariansList.add((Barbarian)characterFactory.createCharacter(Constants.BARBARIAN));
 				}
 
 				barbariansList.add(barbarian);
@@ -166,7 +166,7 @@ public class MainLoop {
 					List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
 
 					for (int i = 0; i < 100; i++) {
-						barbariansList2.add(barbarianFactory.createCharacter());
+						barbariansList2.add((Barbarian)characterFactory.createCharacter("Barbarian"));
 					}
 
 					barbariansList2.add(barbarian);

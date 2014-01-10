@@ -1,38 +1,28 @@
 package CharacterMaker.domain.character.monster;
 
-import java.util.Random;
-import java.util.UUID;
-
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.Slash;
 import CharacterMaker.domain.character.attributes.*;
-import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.naming.CharacterNameService;
-
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+
+import java.util.Random;
 
 /**
  * CharacterMaker.domain.character.monster
  * 
  * @author Kevin Roberts 12/5/13
  */
-public class MonsterFactory implements CharacterFactory {
+public class MonsterFactory extends CharacterFactory {
 
-	@Override
-	public Monster createCharacter() {
+	public Monster createCharacters() {
 		Monster monster = new Monster();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		monster.setName(nameService.generateName(monster));
-		monster.setHealth(Constants.DEFAULT_CHARACTER_HEALTH);
-		monster.setMaxHealth(Constants.DEFAULT_CHARACTER_HEALTH);
-		monster.setLevel(Constants.DEFAULT_CHARACTER_LEVEL);
-		monster.setExperiencePoints(Constants.DEFAULT_CHARACTER_XP);
-		monster.setBattlesWon(Constants.DEFAULT_CHARACTER_BATTLES_WON);
-		monster.setBattleFought(Constants.DEFAULT_BATTLES_FOUGHT);
-		monster.setUniqueID(UUID.randomUUID().toString());
+
 		Random random = new Random();
 
 		// Define Base Attributes for a new Monster
