@@ -13,7 +13,11 @@ import java.util.Random;
 
 public class BarbarianFactory extends CharacterFactory {
 
-	public Barbarian createCharacter() {
+	/**
+	 * Protected factory for creating new Barbarians - should only be accessed from inside the Barbarian's character class
+	 * @return new Barbarian
+	 */
+	protected Barbarian createCharacter() {
 		Barbarian barbarian = new Barbarian();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		barbarian.setName(nameService.generateName(barbarian));

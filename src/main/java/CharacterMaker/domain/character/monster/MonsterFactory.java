@@ -18,7 +18,11 @@ import java.util.Random;
  */
 public class MonsterFactory extends CharacterFactory {
 
-	public Monster createCharacters() {
+	/**
+	 * Protected factory for creating new Monsters - should only be accessed from inside the Monster's character class
+	 * @return new Monster
+	 */
+	protected Monster createCharacters() {
 		Monster monster = new Monster();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		monster.setName(nameService.generateName(monster));

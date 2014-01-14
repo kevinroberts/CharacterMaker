@@ -19,7 +19,11 @@ import java.util.Random;
 
 public class OrkFactory extends CharacterFactory {
 
-	public Ork createCharacter() {
+	/**
+	 * Protected factory for creating new Orks - should only be accessed from inside the Ork character class
+	 * @return new Ork
+	 */
+	protected Ork createCharacter() {
 		Ork ork = new Ork();
 		CharacterNameService nameService = CharacterNameService.getInstance();
 		ork.setName(nameService.generateName(ork));
