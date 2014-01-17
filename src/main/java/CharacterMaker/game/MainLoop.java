@@ -9,10 +9,8 @@ import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.barbarian.Barbarian;
-import CharacterMaker.domain.character.barbarian.BarbarianFactory;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
-import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.domain.character.utils.CharacterStrengthSorter;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.game.messages.Alert;
@@ -29,21 +27,21 @@ public class MainLoop {
 	private Barbarian barbarian;
 
 	public MainLoop() {
-        characterFactory = new CharacterFactory();
+		characterFactory = new CharacterFactory();
 	}
 
 	public void runLoop() {
-		Monster monster = (Monster)characterFactory.createCharacter(Constants.MONSTER);
+		Monster monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
 
 		List<Barbarian> barbarians = new ArrayList<Barbarian>();
 
 		for (int i = 0; i < 50; i++) {
-			barbarians.add((Barbarian)characterFactory.createCharacter(Constants.BARBARIAN));
+			barbarians.add((Barbarian) characterFactory.createCharacter(Constants.BARBARIAN));
 		}
 
 		List<? extends Character> barbarianDupes = CharacterUtils.findDuplicateNames(barbarians);
 
-		//CharacterUtils.printCharactersByNameAndStrength(barbarianDupes);
+		// CharacterUtils.printCharactersByNameAndStrength(barbarianDupes);
 
 		barbarians.removeAll(barbarianDupes);
 
@@ -66,8 +64,9 @@ public class MainLoop {
 			if (quit == 7)
 				break;
 			Alert.info("\nHere is what I can do for you now:\n " + "1. Battle your barbarian\n "
-				+ "2. Health totals\n " + "3. Character status\n " + "4. Reset total health\n " + "5. Train Barbarian, "
-				+ barbarian.getName() + "\n 6. Equip a new weapon" + "\n 7. Quit the application");
+				+ "2. Health totals\n " + "3. Character status\n " + "4. Reset total health\n "
+				+ "5. Train Barbarian, " + barbarian.getName() + "\n 6. Equip a new weapon"
+				+ "\n 7. Quit the application");
 			quit = console.nextInt();
 			switch (quit) {
 			case 1: // '\001'
@@ -78,7 +77,7 @@ public class MainLoop {
 
 				if (monster.getHealth() <= 0) {
 					// refresh with a new monster if the old one is killed
-					monster = (Monster)characterFactory.createCharacter(Constants.MONSTER);
+					monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
 					if (barbarian.getLevel() > 1) {
 						for (int i = 0; i < barbarian.getLevel(); i++) {
 							monster.train();
@@ -98,13 +97,14 @@ public class MainLoop {
 
 				barbarian.fight(monster);
 				battlesFought++;
-				Alert.info("health report is:\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / " + barbarian.getMaxHealth() +  "\n2: "
-					+ monster.getName() + " - " + monster.getHealth());
+				Alert.info("health report is:\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / "
+					+ barbarian.getMaxHealth() + "\n2: " + monster.getName() + " - " + monster.getHealth());
 
 				break;
 			case 2: // '\002'
-				Alert.info("\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / " + barbarian.getMaxHealth());
-				Alert.info("\n2: " + monster.getName() + " - " + monster.getHealth() + " / " + barbarian.getMaxHealth());
+				Alert.info("\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / "
+					+ barbarian.getMaxHealth());
+				Alert.info("\n2: " + monster.getName() + " - " + monster.getHealth() + " / " + monster.getMaxHealth());
 				break;
 			case 3: // '\003'
 				Alert.info("Barbarian - " + barbarian.getName());
@@ -149,12 +149,13 @@ public class MainLoop {
 				List<Barbarian> barbariansList = new ArrayList<Barbarian>();
 
 				for (int i = 0; i < 100; i++) {
-					barbariansList.add((Barbarian)characterFactory.createCharacter(Constants.BARBARIAN));
+					barbariansList.add((Barbarian) characterFactory.createCharacter(Constants.BARBARIAN));
 				}
 
 				barbariansList.add(barbarian);
 
-				Character victor = CharacterUtils.battleRoyalWithOtherCharacters(barbariansList, barbarian.getUniqueID());
+				Character victor = CharacterUtils.battleRoyalWithOtherCharacters(barbariansList,
+					barbarian.getUniqueID());
 
 				Alert.info("The victor was: ");
 				Alert.info("Barbarian - " + victor.getName());
@@ -162,24 +163,23 @@ public class MainLoop {
 
 				break;
 			case 9:
-					Alert.info("Battling your barbarian with 100 other random barbarians against monsters");
-					List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
+				Alert.info("Battling your barbarian with 100 other random barbarians against monsters");
+				List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
 
-					for (int i = 0; i < 100; i++) {
-						barbariansList2.add((Barbarian)characterFactory.createCharacter("Barbarian"));
-					}
+				for (int i = 0; i < 100; i++) {
+					barbariansList2.add((Barbarian) characterFactory.createCharacter("Barbarian"));
+				}
 
-					barbariansList2.add(barbarian);
+				barbariansList2.add(barbarian);
 
-					Character victor2 = CharacterUtils.battleRoyalWithMonsters(barbariansList2, barbarian.getUniqueID());
+				Character victor2 = CharacterUtils.battleRoyalWithMonsters(barbariansList2, barbarian.getUniqueID());
 
-					Alert.info("The victor was: ");
-					Alert.info("Barbarian - " + victor2.getName());
-					Alert.printStats(victor2);
+				Alert.info("The victor was: ");
+				Alert.info("Barbarian - " + victor2.getName());
+				Alert.printStats(victor2);
 
-					break;
+				break;
 			}
-
 
 		} while (true);
 

@@ -15,7 +15,6 @@ import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
-import CharacterMaker.domain.character.monster.MonsterFactory;
 import CharacterMaker.game.messages.Alert;
 
 import com.google.common.collect.Multiset;
@@ -97,7 +96,7 @@ public class CharacterUtils {
 	public static Character battleRoyalWithMonsters(List<? extends Character> characterList, String idToTrack) {
 		Character victor;
 		MersenneTwister mersenneTwister = new MersenneTwister();
-        CharacterFactory characterFactory = new CharacterFactory();
+		CharacterFactory characterFactory = new CharacterFactory();
 
 		int rounds = 1;
 		int madeItRound = 0;
@@ -107,7 +106,7 @@ public class CharacterUtils {
 			int randomSelection1 = mersenneTwister.nextInt(characterList.size());
 
 			Character character1 = characterList.get(randomSelection1);
-			Monster monster = (Monster)characterFactory.createCharacter(Constants.MONSTER);
+			Monster monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
 
 			if (character1.getLevel() > 1) {
 				for (int i = 0; i < character1.getLevel(); i++) {
@@ -140,7 +139,6 @@ public class CharacterUtils {
 
 		return victor;
 	}
-
 
 	public static boolean equipActionForCharacter(Character character, Action actionToEquip) {
 		// ensure action is not already equipped
@@ -266,8 +264,8 @@ public class CharacterUtils {
 	public static boolean isAtLevelUp(Character character) {
 		boolean levelUp = false;
 
-		// Characters level up on a logarithmic scale to model an increasing
-		// difficulty level
+		// Characters level up on a logarithmic scale - modelling increasing
+		// difficulty
 		Double newLevel = Math.cbrt(character.getExperiencePoints());
 
 		int levelsUp = newLevel.intValue() - character.getLevel();
@@ -306,10 +304,11 @@ public class CharacterUtils {
 				addActionForCharacter(character, shootArrowFromBow);
 				Alert
 					.infoAboutCharacter(character.getName()
-							+ " has just found a bow and arrow! You may equip it to do additional damage in fights.",
-							character);
+						+ " has just found a bow and arrow! You may equip it to do additional damage in fights.",
+						character);
 			}
 		}
+
 	}
 
 	public static void resetHealthForCharacter(Character character) {

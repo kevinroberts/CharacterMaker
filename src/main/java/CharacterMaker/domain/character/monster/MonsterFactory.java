@@ -1,25 +1,31 @@
 package CharacterMaker.domain.character.monster;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterFactory;
+import CharacterMaker.domain.character.actions.Fireball;
 import CharacterMaker.domain.character.actions.Slash;
 import CharacterMaker.domain.character.attributes.*;
 import CharacterMaker.domain.character.naming.CharacterNameService;
+
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
-import java.util.Random;
-
 /**
  * CharacterMaker.domain.character.monster
- *
+ * 
  * @author Kevin Roberts 12/5/13
  */
 public class MonsterFactory extends CharacterFactory {
 
 	/**
-	 * Protected factory for creating new Monsters - should only be accessed from inside the Monster's character class
+	 * Protected factory for creating new Monsters - should only be accessed
+	 * from inside the Monster's character class
+	 * 
 	 * @return new Monster
 	 */
 	protected Monster createCharacters() {
@@ -33,7 +39,7 @@ public class MonsterFactory extends CharacterFactory {
 		Luck luck = new Luck("Luck", "Monster Luck", random.nextInt(4) + 3);
 		Dexterity dexterity = new Dexterity("Dexterity", "Monster dexterity", random.nextInt(5) + 5);
 		Intelligence intelligence = new Intelligence("Intelligence", "Monsters Intelligence", random.nextInt(1) + 3);
-		Stamina stamina = new Stamina("Stamina", "Monster Stamina",  6);
+		Stamina stamina = new Stamina("Stamina", "Monster Stamina", 6);
 		Strength strength = new Strength("Strength", "Monster Strength", random.nextInt(5) + 2);
 
 		Multiset<Attribute> attributes = HashMultiset.create();
@@ -51,8 +57,19 @@ public class MonsterFactory extends CharacterFactory {
 
 		actions.add(new Slash("Slash", monster.getName() + " attacks with a brutal slash", 3, 5 + random.nextInt(5)));
 
+		// Monsters that get fireballs
+		List<String> fireballMonsters = Arrays.asList("Dragon", "Beast of Gévaudan", "Chimera", "Wyvern", "Hydra",
+			"Drake", "THE INFAMOUS BOB SAGET", "Rabid Demon Hound", "Banshee", "Armor Lord", "Frost Dragon",
+			"Giant Worm");
+
+		if (fireballMonsters.contains(monster.getName())) {
+			Fireball fireball = new Fireball("Fireball", "A deadly fireball blast", 5, 11);
+			actions.add(fireball);
+		}
+
 		monster.setActions(actions);
-		monster.setEquippedActions(actions); // set the default action to use in fights
+		monster.setEquippedActions(actions); // set the default action to use in
+												// fights
 
 		return monster;
 
