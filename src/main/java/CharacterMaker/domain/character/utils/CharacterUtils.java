@@ -35,13 +35,13 @@ public class CharacterUtils {
 		List<Character> characterDupes = new ArrayList<Character>();
 
 		for (int i = 0; i < characterList.size(); i++) {
-			Barbarian barbarian1 = (Barbarian) characterList.toArray()[i];
+			Character character1 = (Character) characterList.toArray()[i];
 
 			for (int j = i + 1; j < characterList.size(); j++) {
-				Barbarian barbarian2 = (Barbarian) characterList.toArray()[j];
+				Character character2 = (Character) characterList.toArray()[j];
 
-				if (i != j && barbarian1.getName().equals(barbarian2.getName())) {
-					characterDupes.add(barbarian1);
+				if (i != j && character1.getName().equals(character2.getName())) {
+					characterDupes.add(character1);
 				}
 			}
 
