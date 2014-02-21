@@ -188,8 +188,8 @@ public class CharacterUtils {
 		// give a character a 50/50 chance of hitting opposing character by
 		// default
 		Random random = new Random();
-		MersenneTwister mersenneTwister = new MersenneTwister();
-		Boolean chance = mersenneTwister.nextBoolean();
+        //		MersenneTwister mersenneTwister = new MersenneTwister();
+		Boolean chance = random.nextBoolean();
 
 		for (Attribute attribute : character.getAttributes()) {
 			// use the character's luck attribute as a gauge of how successful
