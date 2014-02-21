@@ -3,8 +3,10 @@ package CharacterMaker.domain.character.naming;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -56,11 +58,12 @@ public class CharacterNameService {
 
 	private void initializeDataSources() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("res/BarbarianFirstNames.txt"));
-			BufferedReader reader2 = new BufferedReader(new FileReader("res/FantasySurnames.txt"));
-			BufferedReader reader3 = new BufferedReader(new FileReader("res/OrkFirstNames.txt"));
-			BufferedReader reader4 = new BufferedReader(new FileReader("res/OrkSurnames.txt"));
-			BufferedReader reader5 = new BufferedReader(new FileReader("res/MonsterNames.txt"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("BarbarianFirstNames.txt")));
+			//LOG.info("location: " + Thread.currentThread().getContextClassLoader().getResource("BarbarianFirstNames.txt").getPath());
+			BufferedReader reader2 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("FantasySurnames.txt")));
+			BufferedReader reader3 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("OrkFirstNames.txt")));
+			BufferedReader reader4 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("OrkSurnames.txt")));
+			BufferedReader reader5 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("MonsterNames.txt")));
 
 			String line = reader.readLine();
 			String line2 = reader2.readLine();
@@ -100,19 +103,19 @@ public class CharacterNameService {
 
 	private String readRandomNameFromResources(Character character) {
 		String name = "No Name Given";
-		MersenneTwister mersenneTwister = new MersenneTwister();
+		Random random = new Random();
 		if (character instanceof Barbarian) {
-			String randomFirstName = barbarianNames.get(mersenneTwister.nextInt(barbarianNames.size()));
-			String randomLastName = fantasySurnames.get(mersenneTwister.nextInt(fantasySurnames.size()));
+			String randomFirstName = barbarianNames.get(random.nextInt(barbarianNames.size()));
+			String randomLastName = fantasySurnames.get(random.nextInt(fantasySurnames.size()));
 
 			name = randomFirstName + " " + randomLastName;
 		} else if (character instanceof Ork) {
-			String randomFirstName = orkFirstNames.get(mersenneTwister.nextInt(orkFirstNames.size()));
-			String randomLastName = orkSurnames.get(mersenneTwister.nextInt(orkSurnames.size()));
+			String randomFirstName = orkFirstNames.get(random.nextInt(orkFirstNames.size()));
+			String randomLastName = orkSurnames.get(random.nextInt(orkSurnames.size()));
 
 			name = randomFirstName + " " + randomLastName;
 		} else if (character instanceof Monster) {
-			name = monsterNames.get(mersenneTwister.nextInt(monsterNames.size()));
+			name = monsterNames.get(random.nextInt(monsterNames.size()));
 		}
 
 		return name;

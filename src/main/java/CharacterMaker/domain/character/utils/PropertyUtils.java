@@ -41,8 +41,7 @@ public class PropertyUtils {
 		InputStream is = null;
 		properties = new Properties();
 		try {
-			File f = new File(propertiesFileLocation);
-			is = new FileInputStream(f);
+			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesFileLocation);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

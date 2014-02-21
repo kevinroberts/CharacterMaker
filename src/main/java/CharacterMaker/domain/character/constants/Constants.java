@@ -18,7 +18,7 @@ public final class Constants {
 	public static final int DEFAULT_CHARACTER_XP = 0;
 	public static final int DEFAULT_BATTLES_FOUGHT = 0;
 	public static final int CHARACTER_LEVEL_DIFFERENCE_FOR_BONUS_XP = 3;
-	public static final String PROPERTIES_FILE_LOCATION = "res/characterMaker.properties";
+	public static final String PROPERTIES_FILE_LOCATION = "characterMaker.properties";
 
 	public static final String MONSTER = "Monster";
 	public static final String BARBARIAN = "Barbarian";
