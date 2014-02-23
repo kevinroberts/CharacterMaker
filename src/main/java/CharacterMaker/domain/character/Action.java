@@ -25,6 +25,7 @@ public abstract class Action {
 
 	/**
 	 * Use action
+	 * 
 	 * @param user - the Character performing this action
 	 * @param victim - the Character getting this action performed on
 	 * @return int - the amount of damage afflicted
