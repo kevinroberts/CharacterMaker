@@ -151,20 +151,25 @@ public class MainLoop {
 				break;
 			case 7:
 				Alert.info("Pick a new name for " + barbarian.getName() + ":");
-				int tries = 0;
-				String newName;
-
+				String newName = StringUtils.EMPTY;
+				boolean invalidName = true;
 				do {
-					newName = console.nextLine();
-					if (StringUtils.isBlank(newName) && tries != 0) {
-						Alert.info("New name must not be blank");
+					if (console.hasNextLine()) {
+
 						newName = console.nextLine();
+
+						if (StringUtils.isBlank(newName)) {
+							Alert.info("New name must not be blank");
+						} else if (!newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$")) {
+							Alert.info("New name is not in a valid format");
+						} else {
+							invalidName = false;
+						}
+					} else {
+						System.out.println("You have entered an invalid input. Try again.");
+						console.nextLine();
 					}
-					if (!newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$") && tries != 0) {
-						Alert.info("New name is not in a valid format");
-						newName = console.nextLine();
-					}
-				} while (StringUtils.isBlank(newName) && !newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$"));
+				} while (invalidName);
 
 				barbarian.setName(newName);
 				Alert.info("Your name is now " + barbarian.getName());
