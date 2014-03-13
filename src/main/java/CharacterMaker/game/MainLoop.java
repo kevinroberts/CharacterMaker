@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.CharacterFactory;
@@ -54,19 +56,21 @@ public class MainLoop {
 		Alert.info("Your chosen barbarian warrior is:\n1: " + barbarian);
 
 		Scanner console = new Scanner(System.in);
-
+		int quitCode = 10;
 		int quit = 1;
 		int monstersKilled = 0;
 		int battlesFought = 0;
 		String oldMonsterID = monster.getUniqueID();
 		do {
 
-			if (quit == 7)
+			if (quit == quitCode)
 				break;
 			Alert.info("\nHere is what I can do for you now:\n " + "1. Battle your barbarian\n "
 				+ "2. Health totals\n " + "3. Character status\n " + "4. Reset total health\n "
 				+ "5. Train Barbarian, " + barbarian.getName() + "\n 6. Equip a new weapon"
-				+ "\n 7. Quit the application");
+				+ "\n 7. Rename your character" + "\n 8. Enter random battle with 100 barbarians vs each other"
+				+ "\n 9. Enter random battle with 100 barbarians vs monsters" + "\n " + quitCode
+				+ ". Quit the application");
 			quit = console.nextInt();
 			switch (quit) {
 			case 1: // '\001'
@@ -142,7 +146,30 @@ public class MainLoop {
 				}
 				break;
 			case 7:
-				Alert.info("Goodbye");
+				Alert.info("Pick a new name for " + barbarian.getName() + ":");
+				int tries = 0;
+				String newName;
+				do {
+					newName = console.nextLine();
+
+					if (StringUtils.isBlank(newName) && tries != 0) {
+						Alert.info("New name must not be blank");
+						newName = console.nextLine();
+					}
+					if (!newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$") && tries != 0) {
+						Alert.info("New name is not in a valid format");
+						newName = console.nextLine();
+					}
+					tries++;
+				} while (StringUtils.isBlank(newName) && !newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$"));
+
+				if (StringUtils.isBlank(newName) && !newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$")) {
+					barbarian.setName(newName);
+					Alert.info("Your name is now " + barbarian.getName());
+				} else {
+					Alert.info("Name was not changed");
+				}
+
 				break;
 			case 8:
 				Alert.info("Battling your barbarian with 100 other random barbarians");
@@ -179,8 +206,10 @@ public class MainLoop {
 				Alert.printStats(victor2);
 
 				break;
+			case 10:
+				Alert.info("Goodbye");
+				break;
 			}
-
 		} while (true);
 
 	}

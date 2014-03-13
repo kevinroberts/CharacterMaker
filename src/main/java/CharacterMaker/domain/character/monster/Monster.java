@@ -1,8 +1,8 @@
 package CharacterMaker.domain.character.monster;
 
 import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.constants.Constants;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 
 /**
  * Monster class
@@ -15,15 +15,17 @@ import CharacterMaker.domain.character.constants.Constants;
 public class Monster extends Character {
 
 	/**
-	 * Initializes a new Monster - used internally from the CharacterFactory.class
+	 * Initializes a new Monster - used internally from the
+	 * CharacterFactory.class
+	 * 
 	 * @return new Monster instance
 	 */
 	protected Character initializeNewCharacter() {
-        MonsterFactory monsterFactory = new MonsterFactory();
-        return monsterFactory.createCharacters();
-    }
+		MonsterFactory monsterFactory = new MonsterFactory();
+		return monsterFactory.createCharacters();
+	}
 
-    @Override
+	@Override
 	public void train() {
 		CharacterUtils.incrementAttributeStats(this);
 		this.setExperiencePoints(this.getExperiencePoints() + Constants.XP_FROM_TRAINING);
@@ -32,8 +34,8 @@ public class Monster extends Character {
 	@Override
 	public String toString() {
 		return "Monster {" + "health=" + this.getHealth() + ", name='" + this.getName() + '\'' + ", attributes="
-				+ this.getAttributes() + ", actions=" + this.getActions() + ", level=" + this.getLevel() + ", battlesWon="
-				+ this.getBattlesWon() + ", experiencePoints=" + this.getExperiencePoints() + '}';
+			+ this.getAttributes() + ", actions=" + this.getActions() + ", level=" + this.getLevel() + ", battlesWon="
+			+ this.getBattlesWon() + ", experiencePoints=" + this.getExperiencePoints() + '}';
 	}
 
 }

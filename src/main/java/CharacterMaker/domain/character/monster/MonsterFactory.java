@@ -1,6 +1,5 @@
 package CharacterMaker.domain.character.monster;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -13,6 +12,7 @@ import CharacterMaker.domain.character.attributes.*;
 import CharacterMaker.domain.character.naming.CharacterNameService;
 
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 
 /**
@@ -58,7 +58,7 @@ public class MonsterFactory extends CharacterFactory {
 		actions.add(new Slash("Slash", monster.getName() + " attacks with a brutal slash", 3, 5 + random.nextInt(5)));
 
 		// Monsters that get fireballs
-		List<String> fireballMonsters = Arrays.asList("Dragon", "Beast of Gévaudan", "Chimera", "Wyvern", "Hydra",
+		List<String> fireballMonsters = Lists.newArrayList("Dragon", "Beast of Gévaudan", "Chimera", "Wyvern", "Hydra",
 			"Drake", "THE INFAMOUS BOB SAGET", "Rabid Demon Hound", "Banshee", "Armor Lord", "Frost Dragon",
 			"Giant Worm");
 

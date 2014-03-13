@@ -1,7 +1,6 @@
 package CharacterMaker.domain.character.naming;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.ork.Ork;
-import CharacterMaker.domain.character.utils.MersenneTwister;
 
 /**
  * Created with IntelliJ IDEA.
@@ -58,12 +56,18 @@ public class CharacterNameService {
 
 	private void initializeDataSources() {
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("BarbarianFirstNames.txt")));
-			//LOG.info("location: " + Thread.currentThread().getContextClassLoader().getResource("BarbarianFirstNames.txt").getPath());
-			BufferedReader reader2 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("FantasySurnames.txt")));
-			BufferedReader reader3 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("OrkFirstNames.txt")));
-			BufferedReader reader4 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("OrkSurnames.txt")));
-			BufferedReader reader5 = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("MonsterNames.txt")));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(Thread.currentThread()
+				.getContextClassLoader().getResourceAsStream("BarbarianFirstNames.txt")));
+			// LOG.info("location: " +
+			// Thread.currentThread().getContextClassLoader().getResource("BarbarianFirstNames.txt").getPath());
+			BufferedReader reader2 = new BufferedReader(new InputStreamReader(Thread.currentThread()
+				.getContextClassLoader().getResourceAsStream("FantasySurnames.txt")));
+			BufferedReader reader3 = new BufferedReader(new InputStreamReader(Thread.currentThread()
+				.getContextClassLoader().getResourceAsStream("OrkFirstNames.txt")));
+			BufferedReader reader4 = new BufferedReader(new InputStreamReader(Thread.currentThread()
+				.getContextClassLoader().getResourceAsStream("OrkSurnames.txt")));
+			BufferedReader reader5 = new BufferedReader(new InputStreamReader(Thread.currentThread()
+				.getContextClassLoader().getResourceAsStream("MonsterNames.txt")));
 
 			String line = reader.readLine();
 			String line2 = reader2.readLine();
