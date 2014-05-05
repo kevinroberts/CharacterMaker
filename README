@@ -1,3 +1,9 @@
 A Fantasy Character Generator built in Java for demonstrating various design patterns.
 
+Set of use cases for
+
+ - Factory pattern for character creation
+ - Singleton for messaging and name creation
+ - facade pattern for logging
+
 @kevin_roberts 2014
