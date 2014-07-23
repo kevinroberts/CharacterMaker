@@ -185,8 +185,8 @@ public class MainLoop {
 
 				barbariansList.add(barbarian);
 
-				Character victor = CharacterUtils.battleRoyalWithOtherCharacters(barbariansList,
-					barbarian.getUniqueID());
+				Character victor = CharacterUtils.battleRoyaleWithOtherCharacters(barbariansList,
+						barbarian.getUniqueID());
 
 				Alert.info("The victor was: ");
 				Alert.info("Barbarian - " + victor.getName());
@@ -203,7 +203,7 @@ public class MainLoop {
 
 				barbariansList2.add(barbarian);
 
-				Character victor2 = CharacterUtils.battleRoyalWithMonsters(barbariansList2, barbarian.getUniqueID());
+				Character victor2 = CharacterUtils.battleRoyaleWithMonsters(barbariansList2, barbarian.getUniqueID());
 
 				Alert.info("The victor was: ");
 				Alert.info("Barbarian - " + victor2.getName());

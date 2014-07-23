@@ -50,7 +50,7 @@ public class CharacterUtils {
 		return characterDupes;
 	}
 
-	public static Character battleRoyalWithOtherCharacters(List<? extends Character> characterList, String idToTrack) {
+	public static Character battleRoyaleWithOtherCharacters(List<? extends Character> characterList, String idToTrack) {
 		Character victor;
 		MersenneTwister mersenneTwister = new MersenneTwister();
 
@@ -93,7 +93,7 @@ public class CharacterUtils {
 		return victor;
 	}
 
-	public static Character battleRoyalWithMonsters(List<? extends Character> characterList, String idToTrack) {
+	public static Character battleRoyaleWithMonsters(List<? extends Character> characterList, String idToTrack) {
 		Character victor;
 		MersenneTwister mersenneTwister = new MersenneTwister();
 		CharacterFactory characterFactory = new CharacterFactory();
@@ -188,7 +188,7 @@ public class CharacterUtils {
 		// give a character a 50/50 chance of hitting opposing character by
 		// default
 		Random random = new Random();
-        //		MersenneTwister mersenneTwister = new MersenneTwister();
+		// MersenneTwister mersenneTwister = new MersenneTwister();
 		Boolean chance = random.nextBoolean();
 
 		for (Attribute attribute : character.getAttributes()) {
@@ -293,9 +293,13 @@ public class CharacterUtils {
 
 		// set character's new max health value
 		character.setMaxHealth(100 + healthBonus.intValue());
+		// don't exceed the characters max health
+		if (character.getHealth() > character.getMaxHealth()) {
+			character.setHealth(character.getMaxHealth());
+		}
 
-		Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel(),
-			character);
+		Alert.infoAboutCharacter(character.getName() + " has just leveled up! Current level: " + character.getLevel()
+			+ " and have been granted " + healthBonus + " bonus points of health.", character);
 
 		// grant new actions on level ups
 		if (character instanceof Barbarian && character.getLevel() > 5) {
