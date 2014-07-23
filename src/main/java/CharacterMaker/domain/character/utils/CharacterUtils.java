@@ -114,7 +114,7 @@ public class CharacterUtils {
 				}
 			}
 			// add extra training for higher levels
-			if (character1.getLevel() > 3) {
+			if (character1.getLevel() > 10) {
 				for (int i = 0; i < character1.getLevel(); i++) {
 					monster.train();
 				}
