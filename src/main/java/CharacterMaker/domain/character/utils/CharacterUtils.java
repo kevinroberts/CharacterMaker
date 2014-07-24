@@ -288,11 +288,14 @@ public class CharacterUtils {
 		character.setLevel(character.getLevel() + 1);
 		CharacterUtils.incrementAttributeStats(character);
 		// restore health and get bonus
-		Double healthBonus = Math.pow(character.getLevel(), 2);
+		Double healthBonus = Math.pow(character.getLevel(), 2) + getStaminaLevelForCharacter(character);
+
 		character.setHealth(character.getHealth() + healthBonus.intValue());
 
 		// set character's new max health value
-		character.setMaxHealth(100 + healthBonus.intValue());
+		// Total HP = (baseHP * (Stamina + 32)) / 32
+		character.setMaxHealth((character.getMaxHealth() * (getStaminaLevelForCharacter(character) + 32)) / 32);
+
 		// don't exceed the characters max health
 		if (character.getHealth() > character.getMaxHealth()) {
 			character.setHealth(character.getMaxHealth());
