@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import CharacterMaker.domain.character.Action;
-import CharacterMaker.domain.character.Attribute;
+import CharacterMaker.domain.character.*;
 import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.ShootArrowFromBow;
 import CharacterMaker.domain.character.attributes.Luck;
 import CharacterMaker.domain.character.attributes.Stamina;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
+import CharacterMaker.domain.character.items.BasicHealthPotion;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.game.messages.Alert;
 
+import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
 
 public class CharacterUtils {
@@ -251,6 +251,21 @@ public class CharacterUtils {
 		return isCriticalHitSuccess;
 	}
 
+	public static void determineLootDrop(Character character) {
+		// determine random success for drop
+		Random randomObj = new Random();
+		if (randomObj.nextBoolean()) {
+			final Integer healthPotionLevel = character.getMaxHealth() / 5;
+			BasicHealthPotion healthPotion = new BasicHealthPotion("Health Potion (size " + healthPotionLevel +")", healthPotionLevel);
+			Alert.infoAboutCharacter("You've found a new " + healthPotion.getName() + " item", character);
+			ConcurrentHashMultiset<Item> items = character.getItems();
+			items.add(healthPotion);
+			character.setItems(items);
+		} else {
+			Alert.infoAboutCharacter("No random items found on dead monster.", character);
+		}
+	}
+
 	public static void incrementAttributeStats(Character character) {
 		for (Attribute attribute : character.getAttributes()) {
 			if (character instanceof Barbarian && attribute instanceof Strength) {
@@ -293,8 +308,8 @@ public class CharacterUtils {
 		character.setHealth(character.getHealth() + healthBonus.intValue());
 
 		// set character's new max health value
-		// Total HP = (baseHP * (Stamina + 32)) / 32
-		character.setMaxHealth((character.getMaxHealth() * (getStaminaLevelForCharacter(character) + 32)) / 32);
+		// Total HP = (baseHP * (Stamina + 40)) / 40
+		character.setMaxHealth((character.getMaxHealth() * (getStaminaLevelForCharacter(character) + 40)) / 40);
 
 		// don't exceed the characters max health
 		if (character.getHealth() > character.getMaxHealth()) {
@@ -314,7 +329,10 @@ public class CharacterUtils {
 						+ " has just found a bow and arrow! You may equip it to do additional damage in fights.",
 						character);
 			}
+
 		}
+
+
 
 	}
 

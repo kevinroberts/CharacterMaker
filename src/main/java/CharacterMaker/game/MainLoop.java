@@ -5,11 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import CharacterMaker.domain.character.*;
+import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.items.BasicHealthPotion;
+import com.google.common.collect.ConcurrentHashMultiset;
+import com.google.common.collect.HashMultiset;
 import org.apache.commons.lang3.StringUtils;
 
-import CharacterMaker.domain.character.Action;
-import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
@@ -53,10 +55,15 @@ public class MainLoop {
 
 		barbarian = (Barbarian) barbarians.toArray()[0];
 
+		BasicHealthPotion healthPotion = new BasicHealthPotion("Health Potion (size 25)", 25);
+		ConcurrentHashMultiset<Item> items = ConcurrentHashMultiset.create();
+		items.add(healthPotion);
+		barbarian.setItems(items);
+
 		Alert.info("Your chosen barbarian warrior is:\n1: " + barbarian);
 
 		Scanner console = new Scanner(System.in);
-		int quitCode = 10;
+		int quitCode = 11;
 		int quit = 1;
 		int monstersKilled = 0;
 		int battlesFought = 0;
@@ -70,8 +77,9 @@ public class MainLoop {
 			Alert.info("\nHere is what I can do for you now:\n " + "1. Battle your barbarian\n "
 				+ "2. Health totals\n " + "3. Character status\n " + "4. Reset total health\n "
 				+ "5. Train Barbarian, " + barbarian.getName() + "\n 6. Equip a new weapon"
-				+ "\n 7. Rename your character" + "\n 8. Enter random battle with 100 barbarians vs each other"
-				+ "\n 9. Enter random battle with 100 barbarians vs monsters" + "\n " + quitCode
+				+ "\n 7. Use an item on your character"
+				+ "\n 8. Rename your character" + "\n 9. Enter random battle with 100 barbarians vs each other"
+				+ "\n 10. Enter random battle with 100 barbarians vs monsters" + "\n " + quitCode
 				+ ". Quit the application");
 
 			quit = console.nextInt();
@@ -92,6 +100,7 @@ public class MainLoop {
 						}
 					}
 					monstersKilled++;
+
 					Alert.info("You've now killed " + monstersKilled + " monsters!");
 				}
 
@@ -100,10 +109,17 @@ public class MainLoop {
 						Alert.info(barbarian.getName() + " attacks the " + monster.getName() + " again");
 				} else {
 					oldMonsterID = monster.getUniqueID();
+
 					Alert.info("A new random bad-ass " + monster.getName() + " appears!");
 				}
 
 				barbarian.fight(monster);
+				// if kills after fighting
+				if (monster.getHealth() <= 0) {
+					// grant random loot
+					CharacterUtils.determineLootDrop(barbarian);
+				}
+
 				battlesFought++;
 				Alert.info("health report is:\n1: " + barbarian.getName() + " - " + barbarian.getHealth() + " / "
 					+ barbarian.getMaxHealth() + "\n2: " + monster.getName() + " - " + monster.getHealth());
@@ -123,15 +139,15 @@ public class MainLoop {
 				Alert.info("Current foe is a level " + monster.getLevel() + " " + monster.getName() + " w/ stats:");
 				Alert.printStats(monster);
 				break;
-			case 4:
+			case 4: // '\004'
 				CharacterUtils.resetHealthForCharacter(barbarian);
 				Alert.info("Health reset - your health is now at: " + barbarian.getHealth());
 				break;
-			case 5:
+			case 5: // '\005'
 				Alert.info("Training Barbarian 1 - " + barbarian.getName());
 				barbarian.train();
 				break;
-			case 6:
+			case 6: // '\006'
 				Alert.info("Pick a new action or weapon to equip:");
 				Alert.printActions(barbarian);
 				int newAction = console.nextInt();
@@ -149,7 +165,29 @@ public class MainLoop {
 					}
 				}
 				break;
-			case 7:
+			case 7: // '\007'
+					if (barbarian.getItems() == null) {
+						Alert.info("You have no items to use.");
+						break;
+					} else if (barbarian.getItems().size() == 0) {
+						Alert.info("You have no items to use.");
+						break;
+					}
+					Alert.info("Pick an item to use:");
+					Alert.printItems(barbarian);
+					int itemToUse = console.nextInt();
+					if (itemToUse > 0) {
+						int step = 1;
+						ConcurrentHashMultiset<Item> items1 = barbarian.getItems();
+						for (Item item : items1) {
+							if (step == itemToUse) {
+								item.use(barbarian);
+							}
+							step++;
+						}
+					}
+					break;
+			case 8: // '\008'
 				Alert.info("Pick a new name for " + barbarian.getName() + ":");
 				String newName = StringUtils.EMPTY;
 				boolean invalidName = true;
@@ -175,7 +213,7 @@ public class MainLoop {
 				Alert.info("Your name is now " + barbarian.getName());
 
 				break;
-			case 8:
+			case 9: // '\009'
 				Alert.info("Battling your barbarian with 100 other random barbarians");
 				List<Barbarian> barbariansList = new ArrayList<Barbarian>();
 
@@ -193,7 +231,7 @@ public class MainLoop {
 				Alert.printStats(victor);
 
 				break;
-			case 9:
+			case 10: // '\010'
 				Alert.info("Battling your barbarian with 100 other random barbarians against monsters");
 				List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
 
@@ -210,7 +248,7 @@ public class MainLoop {
 				Alert.printStats(victor2);
 
 				break;
-			case 10:
+			case 11: // '\010'
 				Alert.info("Goodbye");
 				break;
 			}

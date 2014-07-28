@@ -5,9 +5,16 @@ import java.io.Serializable;
 import CharacterMaker.domain.character.fighting.Fight;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 
+import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
+/**
+ * Character object
+ * Sets up the base model for a Character with attributes that can
+ * be extended by the implementing Character type.
+ * @see Character cannot be instantiated on it's own
+ */
 public abstract class Character implements Serializable {
 
     protected Character() {
@@ -26,8 +33,11 @@ public abstract class Character implements Serializable {
 	/**
 	 * The set of actions this character will use in a fight / is a subset of
 	 * the characters available actions
+	 * @return Multiset equippedActions currently assigned to the character
 	 */
 	private Multiset<Action> equippedActions;
+
+	private ConcurrentHashMultiset<Item> items;
 
 	private Integer level;
 
@@ -152,15 +162,25 @@ public abstract class Character implements Serializable {
 		this.equippedActions = actions;
 	}
 
+
+	public ConcurrentHashMultiset<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(ConcurrentHashMultiset<Item> items) {
+		this.items = items;
+	}
+
 	@Override
 	public String toString() {
-		return "Character {" +
+		return "Character{" +
 				"health=" + health +
 				", maxHealth=" + maxHealth +
 				", name='" + name + '\'' +
 				", attributes=" + attributes +
 				", actions=" + actions +
 				", equippedActions=" + equippedActions +
+				", items=" + items +
 				", level=" + level +
 				", battlesWon=" + battlesWon +
 				", battleFought=" + battleFought +
