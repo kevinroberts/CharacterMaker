@@ -1,9 +1,6 @@
 package CharacterMaker.game;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import CharacterMaker.domain.character.*;
 import CharacterMaker.domain.character.Character;
@@ -36,7 +33,7 @@ public class MainLoop {
 
 	public void runLoop() {
 		Monster monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
-
+		Random random = new Random();
 		List<Barbarian> barbarians = new ArrayList<Barbarian>();
 
 		for (int i = 0; i < 50; i++) {
@@ -91,12 +88,20 @@ public class MainLoop {
 					Alert.info("A random bad-ass " + monster.getName() + " appears!");
 				}
 
+				boolean bonusMonster = false;
 				if (monster.getHealth() <= 0) {
 					// refresh with a new monster if the old one is killed
 					monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
 					if (barbarian.getLevel() > 1) {
 						for (int i = 0; i < barbarian.getLevel(); i++) {
 							monster.train();
+						}
+						// add random beefy monsters
+						if (random.nextBoolean()) {
+							bonusMonster = true;
+							for (int i = 0; i < Math.floor(barbarian.getLevel()/2); i++) {
+								monster.train();
+							}
 						}
 					}
 					monstersKilled++;
@@ -111,6 +116,9 @@ public class MainLoop {
 					oldMonsterID = monster.getUniqueID();
 
 					Alert.info("A new random bad-ass " + monster.getName() + " appears!");
+					if (bonusMonster) {
+						Alert.info("Uh oh - he seems extra pissed.");
+					}
 				}
 
 				barbarian.fight(monster);
