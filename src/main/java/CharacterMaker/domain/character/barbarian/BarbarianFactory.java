@@ -25,7 +25,7 @@ public class BarbarianFactory extends CharacterFactory {
 
 		// Define Base Attributes for a new Barbarian
 		Charisma charisma = new Charisma("Charisma", "Barbarian Charisma", random.nextInt(5) + 2);
-		Luck luck = new Luck("Luck", "Barbarian Luck", random.nextInt(10) + 3);
+		Luck luck = new Luck("Luck", "Barbarian Luck", random.nextInt(10) + 5);
 		Dexterity dexterity = new Dexterity("Dexterity", "Barbarian dexterity", random.nextInt(5) + 5);
 		Intelligence intelligence = new Intelligence(
 				"Intelligence",
