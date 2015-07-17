@@ -1,12 +1,13 @@
 package CharacterMaker.game;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 import CharacterMaker.domain.character.*;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.items.BasicHealthPotion;
 import com.google.common.collect.ConcurrentHashMultiset;
-import com.google.common.collect.HashMultiset;
 import org.apache.commons.lang3.StringUtils;
 
 import CharacterMaker.domain.character.barbarian.Barbarian;
@@ -16,6 +17,9 @@ import CharacterMaker.domain.character.utils.CharacterStrengthSorter;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.game.messages.Alert;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 /**
  * CharacterMaker.game
  * 
@@ -24,20 +28,18 @@ import CharacterMaker.game.messages.Alert;
 
 public class MainLoop {
 
-	private CharacterFactory characterFactory;
 	private Barbarian barbarian;
 
 	public MainLoop() {
-		characterFactory = new CharacterFactory();
 	}
 
 	public void runLoop() {
-		Monster monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
+		Monster monster = (Monster) CharacterFactory.createCharacter(Constants.MONSTER);
 		Random random = new Random();
 		List<Barbarian> barbarians = new ArrayList<Barbarian>();
 
 		for (int i = 0; i < 50; i++) {
-			barbarians.add((Barbarian) characterFactory.createCharacter(Constants.BARBARIAN));
+			barbarians.add((Barbarian) CharacterFactory.createCharacter(Constants.BARBARIAN));
 		}
 
 		List<? extends Character> barbarianDupes = CharacterUtils.findDuplicateNames(barbarians);
@@ -61,13 +63,13 @@ public class MainLoop {
 
 		Scanner console = new Scanner(System.in);
 		int quitCode = 11;
-		int quit = 1;
+		int userInput = 1;
 		int monstersKilled = 0;
 		int battlesFought = 0;
 		String oldMonsterID = monster.getUniqueID();
 		do {
 
-			if (quit == quitCode) {
+			if (userInput == quitCode) {
 				break;
 			}
 
@@ -79,19 +81,20 @@ public class MainLoop {
 				+ "\n 10. Enter random battle with 100 barbarians vs monsters" + "\n " + quitCode
 				+ ". Quit the application");
 
-			quit = console.nextInt();
+			userInput = console.nextInt();
 
-			switch (quit) {
+			switch (userInput) {
 			case 1: // '\001'
 
 				if (battlesFought == 0) {
 					Alert.info("A random bad-ass " + monster.getName() + " appears!");
 				}
 
+
 				boolean bonusMonster = false;
 				if (monster.getHealth() <= 0) {
 					// refresh with a new monster if the old one is killed
-					monster = (Monster) characterFactory.createCharacter(Constants.MONSTER);
+					monster = (Monster) CharacterFactory.createCharacter(Constants.MONSTER);
 					if (barbarian.getLevel() > 1) {
 						for (int i = 0; i < barbarian.getLevel(); i++) {
 							monster.train();
@@ -206,13 +209,13 @@ public class MainLoop {
 
 						if (StringUtils.isBlank(newName)) {
 							Alert.info("New name must not be blank");
-						} else if (!newName.matches("^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$")) {
+						} else if (!newName.matches(Constants.VALID_NAME_REGEX)) {
 							Alert.info("New name is not in a valid format");
 						} else {
 							invalidName = false;
 						}
 					} else {
-						System.out.println("You have entered an invalid input. Try again.");
+						Alert.info("You have entered an invalid input. Try again.");
 						console.nextLine();
 					}
 				} while (invalidName);
@@ -226,7 +229,7 @@ public class MainLoop {
 				List<Barbarian> barbariansList = new ArrayList<Barbarian>();
 
 				for (int i = 0; i < 100; i++) {
-					barbariansList.add((Barbarian) characterFactory.createCharacter(Constants.BARBARIAN));
+					barbariansList.add((Barbarian) CharacterFactory.createCharacter(Constants.BARBARIAN));
 				}
 
 				barbariansList.add(barbarian);
@@ -244,7 +247,7 @@ public class MainLoop {
 				List<Barbarian> barbariansList2 = new ArrayList<Barbarian>();
 
 				for (int i = 0; i < 100; i++) {
-					barbariansList2.add((Barbarian) characterFactory.createCharacter("Barbarian"));
+					barbariansList2.add((Barbarian) CharacterFactory.createCharacter("Barbarian"));
 				}
 
 				barbariansList2.add(barbarian);

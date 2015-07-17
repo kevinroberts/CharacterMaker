@@ -116,6 +116,7 @@ public abstract class Fight {
 				Alert.info(character.getName() + " collapses and dies from its injuries.");
 			} else {
 				Alert.info(character.getName() + " collapses and dies from his injuries.");
+				Alert.playSound("death.wav");
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package CharacterMaker.domain.character.utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,6 +19,9 @@ import CharacterMaker.game.messages.Alert;
 
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class CharacterUtils {
 
@@ -244,6 +248,7 @@ public class CharacterUtils {
 		if (random <= critical) {
 			isCriticalHitSuccess = true;
 			Alert.info(" landing a critical hit ");
+			Alert.playSound("crtihit.wav");
 
 		}
 		// LOG.debug("random: " + random + " | critical: " + critical);

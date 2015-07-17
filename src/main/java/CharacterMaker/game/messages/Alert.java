@@ -1,5 +1,8 @@
 package CharacterMaker.game.messages;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.NumberFormat;
 
 import CharacterMaker.domain.character.Action;
@@ -9,6 +12,9 @@ import CharacterMaker.domain.character.Item;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.utils.PropertyUtils;
+
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 /**
  * CharacterMaker.game.messages
@@ -131,6 +137,34 @@ public class Alert {
 				}
 				consolePrint(action.getDamage() + "\n");
 			}
+		}
+
+	}
+
+	public static synchronized void playSound(final String soundFile) {
+		//URL url = new URL(
+		//		"http://wavs.unclebubby.com/wav/Mechwarrior/crtihit.wav");
+		//URL url = this.getClass().getResource("/com/path/to/file.txt");
+		try {
+			Clip clip = AudioSystem.getClip();
+			// getAudioInputStream() also accepts a File or InputStream
+			AudioInputStream ais = AudioSystem.
+					getAudioInputStream( Thread.currentThread().getContextClassLoader().getResource(soundFile) );
+			clip.open(ais);
+			clip.start();
+//			SwingUtilities.invokeLater(new Runnable() {
+//				public void run() {
+//					// A GUI element to prevent the Clip's daemon Thread
+//					// from terminating at the end of the main()
+//					JOptionPane.showMessageDialog(null, "Close to exit!");
+//				}
+//			});
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}

@@ -24,6 +24,8 @@ public final class Constants {
 	public static final String BARBARIAN = "Barbarian";
 	public static final String ORK = "Ork";
 
+	public static String VALID_NAME_REGEX = "^([ \\u00c0-\\u01ffa-zA-Z'\\-]){1,50}$";
+
 	private Constants() {
 		//this prevents even the native class from
 		throw new AssertionError();
