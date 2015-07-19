@@ -1,15 +1,17 @@
 package CharacterMaker.domain.character;
 
+import java.util.Map;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.ork.Ork;
-import com.google.common.collect.ImmutableMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.UUID;
+import com.google.common.collect.ImmutableMap;
 
 public class CharacterFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(CharacterFactory.class);

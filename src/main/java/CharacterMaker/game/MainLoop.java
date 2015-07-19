@@ -1,24 +1,22 @@
 package CharacterMaker.game;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
-import CharacterMaker.domain.character.*;
-import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.items.BasicHealthPotion;
-import com.google.common.collect.ConcurrentHashMultiset;
 import org.apache.commons.lang3.StringUtils;
 
+import CharacterMaker.domain.character.Action;
+import CharacterMaker.domain.character.Character;
+import CharacterMaker.domain.character.CharacterFactory;
+import CharacterMaker.domain.character.Item;
 import CharacterMaker.domain.character.barbarian.Barbarian;
 import CharacterMaker.domain.character.constants.Constants;
+import CharacterMaker.domain.character.items.BasicHealthPotion;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.utils.CharacterStrengthSorter;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.game.messages.Alert;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import com.google.common.collect.ConcurrentHashMultiset;
 
 /**
  * CharacterMaker.game
@@ -76,8 +74,8 @@ public class MainLoop {
 			Alert.info("\nHere is what I can do for you now:\n " + "1. Battle your barbarian\n "
 				+ "2. Health totals\n " + "3. Character status\n " + "4. Reset total health\n "
 				+ "5. Train Barbarian, " + barbarian.getName() + "\n 6. Equip a new weapon"
-				+ "\n 7. Use an item on your character"
-				+ "\n 8. Rename your character" + "\n 9. Enter random battle with 100 barbarians vs each other"
+				+ "\n 7. Use an item on your character" + "\n 8. Rename your character"
+				+ "\n 9. Enter random battle with 100 barbarians vs each other"
 				+ "\n 10. Enter random battle with 100 barbarians vs monsters" + "\n " + quitCode
 				+ ". Quit the application");
 
@@ -90,7 +88,6 @@ public class MainLoop {
 					Alert.info("A random bad-ass " + monster.getName() + " appears!");
 				}
 
-
 				boolean bonusMonster = false;
 				if (monster.getHealth() <= 0) {
 					// refresh with a new monster if the old one is killed
@@ -102,7 +99,7 @@ public class MainLoop {
 						// add random beefy monsters
 						if (random.nextBoolean()) {
 							bonusMonster = true;
-							for (int i = 0; i < Math.floor(barbarian.getLevel()/2); i++) {
+							for (int i = 0; i < Math.floor(barbarian.getLevel() / 2); i++) {
 								monster.train();
 							}
 						}
@@ -177,27 +174,27 @@ public class MainLoop {
 				}
 				break;
 			case 7: // '\007'
-					if (barbarian.getItems() == null) {
-						Alert.info("You have no items to use.");
-						break;
-					} else if (barbarian.getItems().size() == 0) {
-						Alert.info("You have no items to use.");
-						break;
-					}
-					Alert.info("Pick an item to use:");
-					Alert.printItems(barbarian);
-					int itemToUse = console.nextInt();
-					if (itemToUse > 0) {
-						int step = 1;
-						ConcurrentHashMultiset<Item> items1 = barbarian.getItems();
-						for (Item item : items1) {
-							if (step == itemToUse) {
-								item.use(barbarian);
-							}
-							step++;
-						}
-					}
+				if (barbarian.getItems() == null) {
+					Alert.info("You have no items to use.");
 					break;
+				} else if (barbarian.getItems().size() == 0) {
+					Alert.info("You have no items to use.");
+					break;
+				}
+				Alert.info("Pick an item to use:");
+				Alert.printItems(barbarian);
+				int itemToUse = console.nextInt();
+				if (itemToUse > 0) {
+					int step = 1;
+					ConcurrentHashMultiset<Item> items1 = barbarian.getItems();
+					for (Item item : items1) {
+						if (step == itemToUse) {
+							item.use(barbarian);
+						}
+						step++;
+					}
+				}
+				break;
 			case 8: // '\008'
 				Alert.info("Pick a new name for " + barbarian.getName() + ":");
 				String newName = StringUtils.EMPTY;
@@ -235,7 +232,7 @@ public class MainLoop {
 				barbariansList.add(barbarian);
 
 				Character victor = CharacterUtils.battleRoyaleWithOtherCharacters(barbariansList,
-						barbarian.getUniqueID());
+					barbarian.getUniqueID());
 
 				Alert.info("The victor was: ");
 				Alert.info("Barbarian - " + victor.getName());

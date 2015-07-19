@@ -1,6 +1,6 @@
 package CharacterMaker.domain.character.actions;
 
-import CharacterMaker.domain.character.*;
+import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.fighting.Fight;
 import CharacterMaker.domain.character.utils.CharacterUtils;

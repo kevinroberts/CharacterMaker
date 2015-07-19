@@ -1,12 +1,16 @@
 package CharacterMaker.domain.character.utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
-import CharacterMaker.domain.character.constants.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import CharacterMaker.domain.character.constants.Constants;
 
 /**
  * A generic Properties Utility class - follows the Singleton pattern for instantiation

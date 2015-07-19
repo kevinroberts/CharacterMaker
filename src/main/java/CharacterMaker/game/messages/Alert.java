@@ -1,9 +1,9 @@
 package CharacterMaker.game.messages;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.NumberFormat;
+
+import javax.sound.sampled.*;
 
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
@@ -12,9 +12,6 @@ import CharacterMaker.domain.character.Item;
 import CharacterMaker.domain.character.monster.Monster;
 import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.utils.PropertyUtils;
-
-import javax.sound.sampled.*;
-import javax.swing.*;
 
 /**
  * CharacterMaker.game.messages

@@ -1,15 +1,16 @@
 package CharacterMaker.domain.character.barbarian;
 
+import java.util.Random;
+
 import CharacterMaker.domain.character.Action;
 import CharacterMaker.domain.character.Attribute;
 import CharacterMaker.domain.character.CharacterFactory;
 import CharacterMaker.domain.character.actions.SwingSword;
 import CharacterMaker.domain.character.attributes.*;
 import CharacterMaker.domain.character.naming.CharacterNameService;
+
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-
-import java.util.Random;
 
 public class BarbarianFactory extends CharacterFactory {
 

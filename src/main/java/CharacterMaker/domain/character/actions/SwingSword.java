@@ -1,8 +1,8 @@
 package CharacterMaker.domain.character.actions;
 
 import CharacterMaker.domain.character.Action;
-import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.Attribute;
+import CharacterMaker.domain.character.Character;
 import CharacterMaker.domain.character.attributes.Dexterity;
 import CharacterMaker.domain.character.attributes.Strength;
 import CharacterMaker.domain.character.fighting.Fight;

@@ -1,8 +1,8 @@
 package CharacterMaker.domain.character.ork;
 
 import CharacterMaker.domain.character.Character;
-import CharacterMaker.domain.character.utils.CharacterUtils;
 import CharacterMaker.domain.character.constants.Constants;
+import CharacterMaker.domain.character.utils.CharacterUtils;
 
 /**
  * Ork class
