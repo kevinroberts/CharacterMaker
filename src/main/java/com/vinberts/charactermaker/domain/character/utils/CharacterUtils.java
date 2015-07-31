@@ -252,20 +252,37 @@ public class CharacterUtils {
 		return isCriticalHitSuccess;
 	}
 
-	public static void determineLootDrop(Character character) {
-		// determine random success for drop
-		Random randomObj = new Random();
-		if (randomObj.nextBoolean()) {
-			final Integer healthPotionLevel = character.getMaxHealth() / 5;
-			BasicHealthPotion healthPotion = new BasicHealthPotion("Health Potion (size " + healthPotionLevel +")", healthPotionLevel);
-			Alert.infoAboutCharacter("You've found a new " + healthPotion.getName() + " item", character);
-			ConcurrentHashMultiset<Item> items = character.getItems();
-			items.add(healthPotion);
-			character.setItems(items);
-		} else {
-			Alert.infoAboutCharacter("No random items found on dead monster.", character);
-		}
-	}
+    public static void determineLootDrop(Character character) {
+        // determine random success for drop
+        Random randomObj = new Random();
+        // create loot drop
+        final Integer healthPotionLevel = character.getMaxHealth() / 5;
+        BasicHealthPotion healthPotion = new BasicHealthPotion("Health Potion (size " + healthPotionLevel +")", healthPotionLevel);
+
+        if (character.getLevel() < 5) {
+            if (randomObj.nextBoolean()) {
+                Alert.infoAboutCharacter("You've found a new " + healthPotion.getName() + " item", character);
+                ConcurrentHashMultiset<Item> items = character.getItems();
+                items.add(healthPotion);
+                character.setItems(items);
+            } else {
+                Alert.infoAboutCharacter("No random items found on dead monster.", character);
+            }
+        } else {
+            // for higher level characters drops are more rare
+            double d = randomObj.nextDouble();
+            if (d < .7) {
+                // 20% chance
+                Alert.infoAboutCharacter("You've found a new " + healthPotion.getName() + " item", character);
+                ConcurrentHashMultiset<Item> items = character.getItems();
+                items.add(healthPotion);
+                character.setItems(items);
+            } else {
+                Alert.infoAboutCharacter("No random items found on dead monster.", character);
+            }
+
+        }
+    }
 
 	public static void incrementAttributeStats(Character character) {
 		for (Attribute attribute : character.getAttributes()) {
