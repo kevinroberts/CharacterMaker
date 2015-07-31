@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>CharacterMaker</groupId>
-    <artifactId>CharacterMaker</artifactId>
+    <groupId>com.vinberts</groupId>
+    <artifactId>charactermaker</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -18,6 +18,17 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>kevin-roberts-releases</id>
+            <url>http://kevinroberts.us:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>kevin-roberts-snapshots</id>
+            <url>http://kevinroberts.us:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -60,7 +71,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>CharacterMaker.App</mainClass>
+                            <mainClass>com.vinberts.charactermaker.App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -94,6 +105,45 @@
                         <phase>package</phase>
                         <goals>
                             <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
                         </goals>
                     </execution>
                 </executions>
