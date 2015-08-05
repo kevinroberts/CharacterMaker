@@ -85,8 +85,6 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -110,6 +108,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <attach>false</attach>
                 </configuration>
                 <executions>
                     <execution>
