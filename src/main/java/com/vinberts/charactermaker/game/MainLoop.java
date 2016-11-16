@@ -79,7 +79,12 @@ public class MainLoop {
 				+ "\n 10. Enter random battle with 100 barbarians vs monsters" + "\n " + quitCode
 				+ ". Quit the application");
 
-			userInput = console.nextInt();
+			try {
+				userInput = console.nextInt();
+			} catch (InputMismatchException ex) {
+				Alert.info("Sorry that was not an acceptable input.");
+				break;
+			}
 
 			switch (userInput) {
 			case 1: // '\001'
